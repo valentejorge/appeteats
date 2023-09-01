@@ -1,0 +1,101 @@
+:root {
+    --std-red: #ff0000;
+    --std-dark-red: #cc0000;
+    --std-spacegray: #eeeeee65;
+}
+
+/*
+.std-input-box {
+    width: 100%;
+}
+*/
+textarea {
+    resize: none;
+}
+
+.std-input-box input, select, textarea {
+    width: 100%;
+    margin: 0.5rem 0 1rem 0;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid var(--std-spacegray);
+    outline: 1px solid var(--std-spacegray);
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px #0000001c;
+    font-size: 0.8rem;
+}
+
+.std-input-box input:hover, select:hover {
+    background-color: var(--std-spacegray);
+    transition: ease 0.3s;
+}
+
+.std-input-box input:focus-visible, select:focus-visible {
+    outline: 1px solid var(--std-red);
+    transition: ease 0.3s;
+}
+
+.std-input-box input::placeholder select::placeholder {
+    color: #000000be;
+}
+
+.std-input-box input[type="color"] {
+    width: 100%;
+    padding: 1.4rem 1.2rem;
+    background-color: #fff;
+}
+
+.std-input-box input[type="color"]:hover {
+    background-color: var(--std-spacegray);
+    transition: ease 0.3s;
+}
+
+.std-input-box select {
+    padding: 0.9rem;
+    background-color: #fff;
+}
+
+.std-input-box select:hover {
+    background-color: var(--std-spacegray);
+    transition: ease 0.3s;
+}
+
+.std-button {
+    width: 100%;
+    border: none;
+    background-color: var(--std-red);
+    padding: 0.62rem;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.std-button:hover {
+    transition: ease-in-out 0.3s;
+    background-color: var(--std-dark-red);
+    color: #fff;
+}
+
+.form-header {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.form-header h1::after {
+    content: '';
+    display: block;
+    width: 5rem;
+    height: 0.3rem;
+    background-color: #ff0000;
+    margin: 0 auto;
+    position: absolute;
+    border-radius: 10px;
+}
+
+#image-form {
+    display: none;
+}
+
+canvas {
+    display: none; 
+    max-height: 250px;
+}

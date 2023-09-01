@@ -1,0 +1,86 @@
+{% extends "admin/admin.html" %}
+
+{% block title %}Add{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.css">
+{% endblock %}
+
+{% block main %}
+
+<form method="post" action="/admin/settings/edit-menu/{{ product.id }}" enctype="multipart/form-data">
+    <div class="form-header">
+        <div class="title mt-5 text-center">
+            <h1>Edit product</h1>
+        </div>
+    </div>
+
+    <div class="input-box">
+        <div class="row">
+            <div class="col-md-6 std-input-box">
+                <label for="name">Product name: </label>
+                <input id="name" name="name" class="std-input required" type="text" placeholder="e.g., hamburger, macaroni..." value="{{ product.name }}"required>
+            </div>
+
+            <div class="col-md-6 std-input-box">
+                <label for="price">Price: </label>
+                <input id="price" name="price" class="std-input required" type="text" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="std-input-box">
+                <label for="description">Description: </label>
+                <textarea id="description" name="description" class="std-input required" type="text" rows="3" placeholder="A perfect blend of succulent flavors, irresistible textures, and special touches..." required>{{ product.description }}</textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="std-input-box">
+                <label for="category">Category</label>
+                <select class="" id="category" name="category" required>
+                    <option value="" disabled>Select a category</option>
+                    <option value="{{ current_category.id }}" selected>{{ current_category.category_name}}</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.category_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="std-input-box">
+                <label for="barcode">Barcode: </label>
+                <input id="barcode" name="barcode" class="std-input required" type="text" inputmode="numeric" placeholder="e.g., 108745..." value="{{ product.barcode }}" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="std-input-box">
+                <div class="std-input-box">
+                    <label for="file" class="form-label">Dish image</label>
+                    <input class="form-control" type="file" id="image" name="image">
+                    <div class="invalid-feedback">
+                        Insert a valid image.
+                    </div>
+                </div>
+                <div id="image-form">
+                    <canvas id="canvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <button class="std-button mt-3" type="submit">Edit product</button>
+    </div>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.js"></script>
+
+<script src="/static/js/add/crop-image.js"></script>
+<script src="/static/js/add/format-price.js"></script>
+<script>
+    valuePriceField({{ product.price }})
+</script>
+{% endblock %}
+
+{% block edit %}{% endblock %}

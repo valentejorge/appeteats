@@ -1,0 +1,39 @@
+{% extends "admin/admin.html" %}
+
+{% block title %}Edit menu{% endblock %}
+{% block head %}
+{% endblock %}
+
+{% block main %}
+
+<div>
+    <div class="form-header">
+        <div class="title mt-5 text-center">
+            <h1>Edit menu</h1>
+        </div>
+    </div>
+
+    <table class="mt-4">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>$ {{ "%0.2f" | format(product.price) }}</td>
+                <td>
+                    <a href="/admin/settings/edit-menu/{{product.id}}">edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block edit %}{% endblock %}

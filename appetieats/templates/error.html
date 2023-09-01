@@ -1,0 +1,21 @@
+{% extends "/auth/layout-login-form.html" %}
+{% block img %}
+<img src="/static/assets/img/undraw_void_-3-ggu.svg" alt="cooking image">
+{% endblock %}
+
+{% block form %}
+<div class="form">
+        <div class="form-header">
+            <div class="title">
+                <h1>Error {{ error_code }} &#128560;</h1>
+            </div>
+
+        </div>
+
+        <div class="input-g">
+            <h4>{{ error_description }}</h4>
+        </div>
+        <div class="login-button">
+            <a href="javascript:history.back()">Back</a>
+        </div>
+{% endblock %}
