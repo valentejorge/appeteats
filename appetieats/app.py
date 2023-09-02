@@ -10,7 +10,6 @@ from appetieats.routes.admin.settings import settings_bp
 from appetieats.ext import commands
 from appetieats.ext import configuration
 from appetieats.ext import error
-from appetieats.routes import restapi
 
 app = Flask(__name__)
 
@@ -19,7 +18,6 @@ sesssion.init_app(app)
 configuration.init_app(app)
 database.init_app(app)
 error.init_app(app)
-restapi.init_app(app)
 
 app.register_blueprint(main_bp)
 app.register_blueprint(auth_bp)
