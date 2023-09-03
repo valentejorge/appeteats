@@ -21,13 +21,18 @@ def index(restaurant_user):
             Users, Products.user_id == Users.id
             ).filter(Users.username == restaurant_user).all()
 
+    return render_template("menu/menu-shell.html",
+                           restaurant_info=restaurant_info,
+                           categories=categories,
+                           products=products)
+
     return render_template("menu/menu.html",
                            restaurant_info=restaurant_info,
                            categories=categories,
                            products=products)
 
 
-@menu_bp.route("/<restaurant_user>/products")
+@menu_bp.route("/<restaurant_user>/data")
 def products(restaurant_user):
     """json of products"""
 
@@ -35,14 +40,28 @@ def products(restaurant_user):
                 Users, Products.user_id == Users.id
             ).join(
                 ProductImages, Products.id == ProductImages.product_id
+            ).join(
+                Categories, Users.id == Categories.user_id
             ).filter(
                 Users.username == restaurant_user
             ).with_entities(
                 Products.id, Products.name, Products.price,
-                Categories.category_name, Products.description,
-                ProductImages.image_path
-            ).all()
-    return jsonify({"products": ([dict(product) for product in products])})
+                Products.category_id,
+                Products.description, ProductImages.image_path
+            ).distinct().all()
+
+    categories = Categories.query.join(
+                Users, Categories.user_id == Users.id
+            ).filter(
+                Users.username == restaurant_user
+            ).with_entities(
+                Categories.category_name, Categories.id
+            ).distinct().all()
+    print(products)
+    return jsonify(
+            {"products": ([dict(product) for product in products])},
+            {"categories": ([dict(category) for category in categories])}
+    )
 
     products = Products.query.join(
             Users, Products.user_id == Users.id
