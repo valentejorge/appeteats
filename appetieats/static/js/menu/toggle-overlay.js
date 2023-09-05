@@ -14,19 +14,29 @@ viewAllButtons.forEach(button => {
 });
 */
 
+/*
+const newCartView = document.querySelector('#new-cart-view');
 
-const viewAllButtons = document.querySelectorAll('.view-all-button');
-const backButtons = document.querySelectorAll('.back-button');
-const overlayContainers = document.querySelectorAll('.overlay');
+newCartView.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target.classList.contains('view-all-button')) {
+        const categoryId = target.getAttribute('category');
+        const overlay = document.querySelector(`[data-category="${categoryId}"]`);
+        overlay.classList.add('active');
+    }
+    else if (target.classList.contains('back-button')) {
+        const overlay = target.closest('.overlay');
 
-viewAllButtons.forEach((button, index) => {
-    button.addEventListener('click', () => {
-        overlayContainers[index].classList.add('active');
-    });
+        overlay.classList.remove('active');
+    }
 });
+*/
 
-backButtons.forEach((button, index) => {
-    button.addEventListener('click', () => {
-        overlayContainers[index].classList.remove('active');
-    });
-});
+function showOverlay(overlayId) {
+    const overlay = document.querySelector(`[data-category="${overlayId}"]`)
+    overlay.classList.add('active');
+}
+function hideOverlay(overlayId) {
+    const overlay = document.querySelector(`[data-category="${overlayId}"]`)
+    overlay.classList.remove('active');
+}
