@@ -17,7 +17,7 @@ async function buildMenu() {
 
         for (const product of data[0].products) {
             if (product.category_id == category.id) {
-                html += productConstructor(product.name, product.price)
+                html += productConstructor(product.id, product.name, product.price)
             }
         }
         html += '</div>'
@@ -25,7 +25,7 @@ async function buildMenu() {
 
         for (const product of data[0].products) {
             if (product.category_id == category.id) {
-                html += productConstructor(product.name, product.price)
+                html += productConstructor(product.id, product.name, product.price)
             }
         }
         html += `
@@ -51,11 +51,14 @@ function categoryConstructor(categoryName, categoryId) {
     return div;
 }
 
-function productConstructor(productName, productPrice) {
+function productConstructor(productId, productName, productPrice) {
     const div = `
         <div class="product-width">
             <div class="card">
                 <img src="/static/assets/img/macaroni.jpg" class="card-img-top mt-0" alt="${productName}">
+                <button onclick="addToCart(${productId})" class="add-to-cart-button">
+                    <span class="material-icons nav_icons">add</span>
+                </button>
                 <div class="card-body p-2 d-flex flex-column align-items-start">
                     <h6 class="p-title mb-2">${productName}</h6>
                     <h6 class="price mt-auto mb-0">$ ${productPrice.toFixed(2)}</h6>
