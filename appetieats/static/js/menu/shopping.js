@@ -1,21 +1,39 @@
+let restaurantData = null;
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let products; 
+let categories; 
+
 async function takeData() {
     const currentURL = window.location.pathname;
 
     const productsURL = currentURL + '/data';
 
     const response = await fetch(productsURL);
-    const products = await response.json();
+    const data = await response.json();
 
-    console.log(products);
-    return products
+    restaurantData = data;
+    products = data[0].products;
+    categories = data[1].categories;
+    return data
 }
-async function buildMenu() {
+
+async function init() {
     const data = await takeData();
+
+    if (data) {
+        const products = data[0];
+        const categories = data[1];
+
+        buildMenu(products, categories)
+    }
+}
+
+function buildMenu(productsData, categoriesData) {
     let html = '';
-    for (const category of data[1].categories) {
+    for (const category of categoriesData.categories) {
         html += categoryConstructor(category.category_name, category.id);
 
-        for (const product of data[0].products) {
+        for (const product of productsData.products) {
             if (product.category_id == category.id) {
                 html += productConstructor(product.id, product.name, product.price)
             }
@@ -23,7 +41,7 @@ async function buildMenu() {
         html += '</div>'
         html += overlayConstructor(category.id);
 
-        for (const product of data[0].products) {
+        for (const product of productsData.products) {
             if (product.category_id == category.id) {
                 html += productConstructor(product.id, product.name, product.price)
             }
@@ -84,4 +102,26 @@ function overlayConstructor(categoryId) {
     return div
 }
 
-buildMenu();
+function addToCart(productId) {
+    const cartDiv = document.querySelector('#cart-list');
+    console.log(cartDiv);
+    const product = products.find(p => p.id === productId);
+    if (!product) {
+        console.error('Product not found.');
+        return
+    }
+    
+    const item = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image_path
+    }
+
+    console.log(item)
+    const html = `eita meu`
+    cartDiv.insertAdjacentHTML('beforeend', html)
+    return
+}
+
+init();
