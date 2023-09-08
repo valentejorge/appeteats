@@ -103,8 +103,6 @@ function overlayConstructor(categoryId) {
 }
 
 function addToCart(productId) {
-    const cartDiv = document.querySelector('#cart-list');
-    console.log(cartDiv);
     const product = products.find(p => p.id === productId);
     if (!product) {
         console.error('Product not found.');
@@ -119,9 +117,56 @@ function addToCart(productId) {
     }
 
     console.log(item)
-    const html = `eita meu`
-    cartDiv.insertAdjacentHTML('beforeend', html)
+    cart.push(item);
+    updateCartDisplay();
+    updateCartStorage();
     return
 }
+
+function updateCartDisplay() {
+    const cartDiv = document.querySelector('#cart-list');
+    cartDiv.innerHTML = '';
+    console.log(cartDiv)
+
+    cart.forEach(item => {
+        const html = `
+            <li class="list-group-item cart-list">
+                <img src="/static/assets/img/macaroni.jpg" class="cart-img">
+                <h6 class="p-title">${item.name}</h6>
+                <div class="qty-group">
+                    <button onclick="decrementQty(this)" class="qty-button">
+                        <span class="material-icons nav_icons decrement">remove</span>
+                    </button>
+                    <input type="number" min="1" class="qty-input text-center" value="1" disabled>
+                    <button onclick="incrementQty(this)" class="qty-button increment">
+                        <span class="material-icons nav_icons">add</span>
+                    </button>
+                </div>
+                <button class="remove-button" onclick="removeFromCart(${item.id})">
+                    <span class="material-icons nav_icons">remove_circle_outline</span>
+                </button>
+            </li>
+        `
+        cartDiv.insertAdjacentHTML('beforeend', html)
+    })
+}
+
+function updateCartStorage() {
+    localStorage.setItem('cart', JSON.stringify(cart))
+}
+
+function removeFromCart(item) {
+    const index = cart.findIndex(cartItem => cartItem.id === item);
+    console.log(index)
+    if (index !== -1) {
+        cart.splice(index, 1);
+        updateCartStorage();
+        updateCartDisplay();
+    }
+    updateCartStorage();
+    updateCartDisplay();
+}
+
+updateCartDisplay();
 
 init();
