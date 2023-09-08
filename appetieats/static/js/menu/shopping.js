@@ -142,6 +142,7 @@ function updateCartDisplay() {
                         <span class="material-icons nav_icons">add</span>
                     </button>
                 </div>
+                <h6 class="p-title">$ ${(item.price).toFixed(2)}</h6>
                 <button class="remove-button" onclick="removeFromCart(${item.id})">
                     <span class="material-icons nav_icons">remove_circle_outline</span>
                 </button>
