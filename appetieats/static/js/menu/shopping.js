@@ -134,11 +134,11 @@ function updateCartDisplay() {
                 <img src="/static/assets/img/macaroni.jpg" class="cart-img">
                 <h6 class="p-title">${item.name}</h6>
                 <div class="qty-group">
-                    <button onclick="decrementQty(this)" class="qty-button">
+                    <button onclick="updateQty(this, ${item.id})" class="qty-button decrement">
                         <span class="material-icons nav_icons decrement">remove</span>
                     </button>
                     <input type="number" min="1" class="qty-input text-center" value="1" disabled>
-                    <button onclick="incrementQty(this)" class="qty-button increment">
+                    <button onclick="updateQty(this, ${item.id})" class="qty-button increment">
                         <span class="material-icons nav_icons">add</span>
                     </button>
                 </div>
@@ -154,6 +154,22 @@ function updateCartDisplay() {
 
 function updateCartStorage() {
     localStorage.setItem('cart', JSON.stringify(cart))
+}
+
+function updateQty(button, id) {
+    const qtyGroup = button.closest(".qty-group");
+    const quantityInput = qtyGroup.querySelector(".qty-input");
+    const currentValue = parseInt(quantityInput.value);
+    
+    if (!isNaN(currentValue) && button.classList.contains('increment')) {
+        quantityInput.value = currentValue + 1;
+    }
+    else if (!isNaN(currentValue) && button.classList.contains('decrement') && currentValue == 1) {
+        removeFromCart(id);
+    }
+    else if (!isNaN(currentValue) && button.classList.contains('decrement')) {
+        quantityInput.value = currentValue - 1;
+    }
 }
 
 function removeFromCart(item) {
