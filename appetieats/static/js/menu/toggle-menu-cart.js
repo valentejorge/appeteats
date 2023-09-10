@@ -1,31 +1,5 @@
 /*
 document.addEventListener("DOMContentLoaded", function() {
-    const navLinks = document.querySelectorAll(".nav_link");
-    const menuDiv = document.querySelector(".menu");
-    const cartDiv = document.querySelector(".cart");
-
-    navLinks.forEach(link => {
-        link.addEventListener("click", function(event) {
-            event.preventDefault();
-            const target = this.getAttribute("href");
-
-            if (target === "#menu") {
-                menuDiv.style.transform = "translateX(0)";
-                cartDiv.style.transform = "translateX(100%)";
-                navLinks[0].classList.add("active");
-                navLinks[1].classList.remove("active");
-            } else if (target === "#cart") {
-                menuDiv.style.transform = "translateX(-100%)";
-                cartDiv.style.transform = "translateX(0)";
-                navLinks[1].classList.remove("active");
-                navLinks[0].classList.add("active");
-            }
-        });
-    });
-});
-*/
-
-document.addEventListener("DOMContentLoaded", function() {
     const menu = document.querySelector('.menu');
     const cart = document.querySelector('.cart');
 
@@ -45,5 +19,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
     console.log(menuBtn);
     console.log(cartBtn);
-
 });
+*/
+document.addEventListener("DOMContentLoaded", function() {
+const menuNav = document.querySelector('#menuBtn')
+const cartNav = document.querySelector('#cartBtn')
+    function checkHashUrl() {
+        const menu = document.querySelector('.menu');
+        const cart = document.querySelector('.cart');
+
+
+        const hash = window.location.hash;
+        if (hash == "#cart") {
+            cart.classList.add('active');
+            menu.classList.remove('active');
+
+            cartNav.classList.add('nav_link--active')
+            menuNav.classList.remove('nav_link--active')
+        }
+        else if (hash == "#menu") {
+            menu.classList.add('active');
+            cart.classList.remove('active');
+
+            cartNav.classList.remove('nav_link--active')
+            menuNav.classList.add('nav_link--active')
+        }
+    }
+    window.addEventListener("hashchange", checkHashUrl);
+    checkHashUrl();
+});
+

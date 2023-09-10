@@ -108,18 +108,24 @@ function addToCart(productId) {
         console.error('Product not found.');
         return
     }
-    
-    const item = {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image_path
+    const productInCart = cart.find(p => p.id === productId);
+    if (productInCart) {
+        productInCart.quantity += 1;
+        productInCart.subtotal = productInCart.price * productInCart.quantity;
     }
-
-    console.log(item)
-    cart.push(item);
-    updateCartDisplay();
-    updateCartStorage();
+    else {
+        const item = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            subtotal: product.price,
+            quantity: 1,
+            image: product.image_path
+        }
+        cart.push(item);
+    }
+    
+    updateCart();
     return
 }
 
@@ -132,20 +138,17 @@ function updateCartDisplay() {
         const html = `
             <li class="list-group-item cart-list">
                 <img src="/static/assets/img/macaroni.jpg" class="cart-img">
-                <h6 class="p-title">${item.name}</h6>
+                <h6 class="mb-0">${item.name}</h6>
                 <div class="qty-group">
                     <button onclick="updateQty(this, ${item.id})" class="qty-button decrement">
                         <span class="material-icons nav_icons decrement">remove</span>
                     </button>
-                    <input type="number" min="1" class="qty-input text-center" value="1" disabled>
+                    <input type="number" min="1" class="qty-input text-center" value="${item.quantity}" disabled>
                     <button onclick="updateQty(this, ${item.id})" class="qty-button increment">
                         <span class="material-icons nav_icons">add</span>
                     </button>
                 </div>
-                <h6 class="p-title">$ ${(item.price).toFixed(2)}</h6>
-                <button class="remove-button" onclick="removeFromCart(${item.id})">
-                    <span class="material-icons nav_icons">remove_circle_outline</span>
-                </button>
+                <h6 class="mb-0">$ ${(item.subtotal).toFixed(2)}</h6>
             </li>
         `
         cartDiv.insertAdjacentHTML('beforeend', html)
@@ -160,15 +163,20 @@ function updateQty(button, id) {
     const qtyGroup = button.closest(".qty-group");
     const quantityInput = qtyGroup.querySelector(".qty-input");
     const currentValue = parseInt(quantityInput.value);
+    const product = cart.find(p => p.id === id);
     
     if (!isNaN(currentValue) && button.classList.contains('increment')) {
-        quantityInput.value = currentValue + 1;
+        product.quantity += 1;
+        product.subtotal= product.price * product.quantity;
+        updateCart();
     }
     else if (!isNaN(currentValue) && button.classList.contains('decrement') && currentValue == 1) {
         removeFromCart(id);
     }
     else if (!isNaN(currentValue) && button.classList.contains('decrement')) {
-        quantityInput.value = currentValue - 1;
+        product.quantity -= 1;
+        product.subtotal = product.price * product.quantity;
+        updateCart();
     }
 }
 
@@ -177,9 +185,12 @@ function removeFromCart(item) {
     console.log(index)
     if (index !== -1) {
         cart.splice(index, 1);
-        updateCartStorage();
-        updateCartDisplay();
+        updateCart();
     }
+    updateCart();
+}
+
+function updateCart() {
     updateCartStorage();
     updateCartDisplay();
 }
