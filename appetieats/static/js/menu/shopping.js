@@ -35,7 +35,7 @@ function buildMenu(productsData, categoriesData) {
 
         for (const product of productsData.products) {
             if (product.category_id == category.id) {
-                html += productConstructor(product.id, product.name, product.price)
+                html += productConstructor(product.id, product.name, product.price, product.image_path)
             }
         }
         html += '</div>'
@@ -43,7 +43,7 @@ function buildMenu(productsData, categoriesData) {
 
         for (const product of productsData.products) {
             if (product.category_id == category.id) {
-                html += productConstructor(product.id, product.name, product.price)
+                html += productConstructor(product.id, product.name, product.price, product.image_path)
             }
         }
         html += `
@@ -69,11 +69,11 @@ function categoryConstructor(categoryName, categoryId) {
     return div;
 }
 
-function productConstructor(productId, productName, productPrice) {
+function productConstructor(productId, productName, productPrice, productImage) {
     const div = `
         <div class="product-width">
             <div class="card">
-                <img src="/static/assets/img/macaroni.jpg" class="card-img-top mt-0" alt="${productName}">
+                <img src="/static/cache/${productImage}" class="card-img-top mt-0" alt="${productName}">
                 <button onclick="addToCart(${productId})" class="add-to-cart-button">
                     <span class="material-icons nav_icons">add</span>
                 </button>
@@ -137,7 +137,7 @@ function updateCartDisplay() {
     cart.forEach(item => {
         const html = `
             <li class="list-group-item cart-list">
-                <img src="/static/assets/img/macaroni.jpg" class="cart-img">
+                <img src="/static/cache/${item.image}" class="cart-img">
                 <h6 class="mb-0">${item.name}</h6>
                 <div class="qty-group">
                     <button onclick="updateQty(this, ${item.id})" class="qty-button decrement">

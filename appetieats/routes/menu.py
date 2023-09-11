@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, jsonify
 from appetieats.models import (RestaurantsData, Users, Categories, Products,
                                ProductImages)
+import os
 
 menu_bp = Blueprint('menu', __name__)
 
@@ -35,6 +36,13 @@ def index(restaurant_user):
 @menu_bp.route("/<restaurant_user>/data")
 def products(restaurant_user):
     """json of products"""
+    def get_image(image_name, image_id):
+        CACHE_DIR = "appetieats/static/cache"
+        cache_filepath = os.path.join(CACHE_DIR, image_name)
+        if not os.path.exists(cache_filepath):
+            image_data = ProductImages.query.get(image_id).image_data
+            with open(cache_filepath, "wb") as f:
+                f.write(image_data)
 
     products = Products.query.join(
                 Users, Products.user_id == Users.id
@@ -46,8 +54,8 @@ def products(restaurant_user):
                 Users.username == restaurant_user
             ).with_entities(
                 Products.id, Products.name, Products.price,
-                Products.category_id,
-                Products.description, ProductImages.image_path
+                Products.category_id, Products.description,
+                ProductImages.id, ProductImages.image_path
             ).distinct().all()
 
     categories = Categories.query.join(
@@ -57,6 +65,11 @@ def products(restaurant_user):
             ).with_entities(
                 Categories.category_name, Categories.id
             ).distinct().all()
+
+    for product in products:
+        get_image(product.image_path, product[5])
+        print(product, product[5])
+
     print(products)
     return jsonify(
             {"products": ([dict(product) for product in products])},
