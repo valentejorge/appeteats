@@ -19,11 +19,12 @@ def add():
     if request.method == "POST":
         product_data = get_product_data_from_request()
         product_image = get_product_image("image")
+        product_image_cropped = get_product_image("image-cropped")
 
         validate_product_data(product_data)
         validate_product_image(product_image)
 
-        add_new_product(product_data, product_image)
+        add_new_product(product_data, product_image_cropped)
 
         flash("Added", "success")
         return redirect("/admin/settings/add")

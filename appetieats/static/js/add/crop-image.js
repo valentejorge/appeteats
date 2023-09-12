@@ -1,14 +1,14 @@
-var canvas = $("#canvas"),
+const canvas = $("#canvas"),
     context = canvas.get(0).getContext("2d"),
-    $form = $('#product-form'),
+    /*$form = $('#product-form'),*/
     image = $('#image-form');
 
 $('#image').on('change', function() {
     if (this.files && this.files[0]) {
         if (this.files[0].type.match(/^image\//)) {
-            var reader = new FileReader();
+            const reader = new FileReader();
             reader.onload = function(evt) {
-                var img = new Image();
+                const img = new Image();
                 img.onload = function() {
                     console.log(canvas)
                     console.log(image)
@@ -20,7 +20,7 @@ $('#image').on('change', function() {
                     if (canvas.data('cropper')) {
                         canvas.cropper('destroy');
                     }
-                    var cropper = canvas.cropper({
+                    const cropper = canvas.cropper({
                         aspectRatio: 1 / 1
                     });
                 };
@@ -38,13 +38,13 @@ $('#image').on('change', function() {
 document.querySelector('#product-form').addEventListener('submit', function(event) {
     event.preventDefault();
     if (canvas) {
-        var croppedImageDataURL = canvas.cropper('getCroppedCanvas').toDataURL("image/png");
-        var croppedImageBlob = dataURLToBlob(croppedImageDataURL);
+        const croppedImageDataURL = canvas.cropper('getCroppedCanvas').toDataURL("image/png");
+        const croppedImageBlob = dataURLToBlob(croppedImageDataURL);
 
-        let croppedInput = document.createElement('input');
+        const croppedInput = document.createElement('input');
         croppedInput.type = 'file';
-        croppedInput.name = 'crop-img';
-        croppedInput.id = 'crop-img';
+        croppedInput.name = 'image-cropped';
+        croppedInput.id = 'image-cropped';
 
         const file = new File([croppedImageBlob], 'image.png')
 
@@ -59,20 +59,20 @@ document.querySelector('#product-form').addEventListener('submit', function(even
         // oldInput.remove()
 
         event.target.submit();
-    };
+    }
 });
 
 // Function to convert URL data in a blob
 function dataURLToBlob(dataURL) {
-    var parts = dataURL.split(';base64,');
-    var contentType = parts[0].split(':')[1];
-    var byteCharacters = atob(parts[1]);
-    var byteArrays = [];
+    const parts = dataURL.split(';base64,');
+    const contentType = parts[0].split(':')[1];
+    const byteCharacters = atob(parts[1]);
+    const byteArrays = [];
 
-    for (var i = 0; i < byteCharacters.length; i++) {
+    for (let i = 0; i < byteCharacters.length; i++) {
         byteArrays.push(byteCharacters.charCodeAt(i));
     }
 
-    var blob = new Blob([new Uint8Array(byteArrays)], { type: contentType });
+    const blob = new Blob([new Uint8Array(byteArrays)], { type: contentType });
     return blob;
 }
