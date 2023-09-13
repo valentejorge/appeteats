@@ -24,10 +24,12 @@ async function takeData() {
 async function init() {
     const data = await takeData();
 
+
     if (data) {
         const products = data[0];
         const categories = data[1];
 
+        updateCart();
         buildMenu(products, categories)
     }
 }
@@ -138,7 +140,7 @@ function updateCartDisplay() {
     const cartDiv = document.querySelector('#cart-list');
     cartDiv.innerHTML = '';
 
-    const cartItemsCurrentRestaurant = cart.filter(item => item.restaurant_id === restaurantID);
+    const cartItemsCurrentRestaurant = cart.filter(item => item.restaurant_id == restaurantID);
 
     cartItemsCurrentRestaurant.forEach(item => {
         const html = `
@@ -200,7 +202,5 @@ function updateCart() {
     updateCartStorage();
     updateCartDisplay();
 }
-
-updateCartDisplay();
 
 init();
