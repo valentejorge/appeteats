@@ -14,23 +14,8 @@ def index(restaurant_user):
             Users, RestaurantsData.user_id == Users.id
             ).filter(Users.username == restaurant_user).first()
 
-    categories = Categories.query.join(
-            Users, Categories.user_id == Users.id
-            ).filter(Users.username == restaurant_user).all()
-
-    products = Products.query.join(
-            Users, Products.user_id == Users.id
-            ).filter(Users.username == restaurant_user).all()
-
-    return render_template("menu/menu-shell.html",
-                           restaurant_info=restaurant_info,
-                           categories=categories,
-                           products=products)
-
     return render_template("menu/menu.html",
-                           restaurant_info=restaurant_info,
-                           categories=categories,
-                           products=products)
+                           restaurant_info=restaurant_info)
 
 
 @menu_bp.route("/<restaurant_user>/data")
