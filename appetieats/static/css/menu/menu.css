@@ -150,6 +150,7 @@
 
 .cart-img {
     max-width: 100px;
+    margin-right: 3%;
 }
 
 .input-group{
@@ -159,6 +160,8 @@
 
 .qty-group {
     display: flex;
+    align-items: center;
+
 }
 
 .qty-input {
@@ -203,7 +206,14 @@
     align-items: center;
     justify-content: center;
 }
-
+.price-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 15%;
+    max-width: 60px;
+    flex: 1;
+}
 
 @media screen and (max-width: 992px) {
     .product-width {
@@ -221,5 +231,20 @@
 @media screen and (max-width: 576px) {
     .product-width {
         width: 45% !important;
+    }
+@media screen and (max-width: 480px) {
+    .product-width {
+        width: 45% !important;
+    }
+    .qty-input {
+        max-width: 22px;
+        max-height: 22px;
+    }
+    .qty-button {
+        max-width: 22px;
+        min-height: 22px;
+    }
+    .material-icons {
+        font-size: 18px;
     }
 }

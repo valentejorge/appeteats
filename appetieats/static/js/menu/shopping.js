@@ -145,18 +145,25 @@ function updateCartDisplay() {
     cartItemsCurrentRestaurant.forEach(item => {
         const html = `
             <li class="list-group-item cart-list">
-                <img src="/static/cache/${item.image}" class="cart-img">
-                <h6 class="mb-0">${item.name}</h6>
-                <div class="qty-group">
-                    <button onclick="updateQty(this, ${item.id})" class="qty-button decrement">
-                        <span class="material-icons nav_icons decrement">remove</span>
-                    </button>
-                    <input type="number" min="1" class="qty-input text-center" value="${item.quantity}" disabled>
-                    <button onclick="updateQty(this, ${item.id})" class="qty-button increment">
-                        <span class="material-icons nav_icons">add</span>
-                    </button>
+                <div class="d-flex align-items-center justify-content-start w-50">
+                    <img src="/static/cache/${item.image}" class="cart-img">
+                    <h6 class="p-title mb-0">${item.name}</h6>
                 </div>
-                <h6 class="mb-0">$ ${(item.subtotal).toFixed(2)}</h6>
+                <div class="d-flex align-items-center justify-content-between w-50">
+                    <div class="qty-group">
+                        <button onclick="updateQty(this, ${item.id})" class="qty-button decrement">
+                            <span class="material-icons nav_icons decrement">remove</span>
+                        </button>
+                        <input type="number" min="1" class="qty-input text-center" value="${item.quantity}" disabled>
+                        <button onclick="updateQty(this, ${item.id})" class="qty-button increment">
+                            <span class="material-icons nav_icons">add</span>
+                        </button>
+                    </div>
+                    <div class="price-section">
+                        <h6 class="mb-0">$</h6>
+                        <h6 class="mb-0">${(item.subtotal).toFixed(2)}</h6>
+                    </div>
+                </div>
             </li>
         `
         cartDiv.insertAdjacentHTML('beforeend', html)
