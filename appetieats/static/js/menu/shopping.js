@@ -168,6 +168,14 @@ function updateCartDisplay() {
         `
         cartDiv.insertAdjacentHTML('beforeend', html)
     })
+    let total = 0;
+    cartItemsCurrentRestaurant.forEach(item => {
+        total += item.subtotal;
+        console.log(typeof(item.subtotal))
+    })
+    const totalDiv = document.querySelector('#total');
+    const totalHtml = `<h6>Total: $ ${(total).toFixed(2)}</h6>`
+    totalDiv.innerHTML = totalHtml
 }
 
 function updateCartStorage() {

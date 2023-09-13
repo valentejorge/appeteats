@@ -214,6 +214,9 @@
     max-width: 60px;
     flex: 1;
 }
+.total {
+    margin-right: 1rem;
+}
 
 @media screen and (max-width: 992px) {
     .product-width {
