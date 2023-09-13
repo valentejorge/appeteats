@@ -1,6 +1,7 @@
 let restaurantData = null;
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let products; 
+let restaurantID;
 let categories; 
 
 async function takeData() {
@@ -14,6 +15,9 @@ async function takeData() {
     restaurantData = data;
     products = data[0].products;
     categories = data[1].categories;
+    if (data[0].products[0]) {
+        restaurantID = data[0].products[0].user_id;
+    }
     return data
 }
 
@@ -120,7 +124,8 @@ function addToCart(productId) {
             price: product.price,
             subtotal: product.price,
             quantity: 1,
-            image: product.image_path
+            image: product.image_path,
+            restaurant_id: product.user_id
         }
         cart.push(item);
     }
@@ -132,9 +137,10 @@ function addToCart(productId) {
 function updateCartDisplay() {
     const cartDiv = document.querySelector('#cart-list');
     cartDiv.innerHTML = '';
-    console.log(cartDiv)
 
-    cart.forEach(item => {
+    const cartItemsCurrentRestaurant = cart.filter(item => item.restaurant_id === restaurantID);
+
+    cartItemsCurrentRestaurant.forEach(item => {
         const html = `
             <li class="list-group-item cart-list">
                 <img src="/static/cache/${item.image}" class="cart-img">

@@ -55,7 +55,8 @@ def products(restaurant_user):
             ).with_entities(
                 Products.id, Products.name, Products.price,
                 Products.category_id, Products.description,
-                ProductImages.id, ProductImages.image_path
+                ProductImages.id, ProductImages.image_path,
+                Products.user_id
             ).distinct().all()
 
     categories = Categories.query.join(
