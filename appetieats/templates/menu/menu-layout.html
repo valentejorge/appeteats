@@ -30,7 +30,7 @@
     <header>
         {% for category, message in messages %}
         <div class="alert alert-{{ category }} mb-0 text-center" role="alert">
-            {{ message }}
+            {{ message | safe }}
         </div>
         {% endfor %}
     </header>

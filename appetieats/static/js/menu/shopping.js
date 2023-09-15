@@ -216,6 +216,26 @@ function removeFromCart(item) {
 function updateCart() {
     updateCartStorage();
     updateCartDisplay();
+    updateCartDiv();
+}
+
+function updateCartDiv() {
+    const currentURL = window.location.pathname;
+    const cartForm = document.querySelector('#cart-form');
+    const cartItems = cart.filter(item => item.restaurant_id == restaurantID);
+
+    const cartDataToSend = cartItems.map(item => ({
+        id: item.id,
+        quantity: item.quantity,
+        restaurant_id: item.restaurant_id
+    }))
+    console.log(JSON.stringify(cartDataToSend));
+
+    const cartDiv = document.querySelector('#cart-data')
+
+    cartDiv.value = JSON.stringify(cartDataToSend);
+
+    cartForm.setAttribute('action', currentURL);
 }
 
 init();
