@@ -30,7 +30,11 @@
         <ul class="list-group" id="cart-list">
         </ul>
         <div id="total" class="total mt-3 text-end"></div>
-        <button class="mt-1 std-button" onclick="">Order</button>
+        <form id="cart-form" action="" method="post">
+            <input name="cart-data" id="cart-data" type="hidden" value="">
+            <input type="submit" class="mt-1 std-button" value="Order">
+        </form>
+
     </div>
 </div>
 
