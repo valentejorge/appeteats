@@ -1,5 +1,5 @@
 from flask import (Blueprint, render_template, jsonify, request, flash,
-                   redirect)
+                   redirect, session)
 from appetieats.models import (RestaurantsData, Users, Categories, Products,
                                ProductImages)
 from appetieats.ext.helper.cache_images import get_image
@@ -35,10 +35,19 @@ def index(restaurant_user):
                 flash("Check your order and try again", "danger")
                 return redirect(f'/{restaurant_user}#cart')
 
+        if not session.get("costumer_id"):
+            flash(
+                "Error: To place an order, please " +
+                "<a href='/register'>Register</a> or " +
+                "<a href='/login'>Login</a>",
+                "warning"
+            )
+            return redirect(f'/{restaurant_user}#cart')
+
         link = 'https://google.com'
 
         flash(f"Success: check your <a href='{link}'>order</a>", "success")
-        return redirect(f'/{restaurant_user}#cart')
+        return redirect(f"/{restaurant_user}#cart")
 
     else:
         restaurant_info = RestaurantsData.query.join(
