@@ -96,28 +96,3 @@ def data(restaurant_user):
             {"products": ([dict(product) for product in products])},
             {"categories": ([dict(category) for category in categories])}
     )
-
-
-@menu_bp.route("/<restaurant_user>/order", methods=['GET', 'POST'])
-def order(restaurant_user):
-    """registry a order"""
-    products = Products.query.join(
-                Users, Products.user_id == Users.id
-            ).filter(
-                Users.username == restaurant_user
-            ).with_entities(
-                Products.id, Products.name, Products.price,
-                Products.user_id
-            ).distinct().all()
-
-    products_ids = {product.id for product in products}
-    restaurant_id = products[0].user_id
-
-    cart_data = request.get_json()
-    for item in cart_data:
-        if item['id'] not in products_ids or item['restaurant_id'] != restaurant_id:
-            print("não está")
-        print(item)
-        print(item['restaurant_id'])
-    return flash("eita")
-    return jsonify({"message": "Cart updated successfully"})
