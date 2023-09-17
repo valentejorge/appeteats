@@ -38,8 +38,8 @@ def index(restaurant_user):
         if not session.get("costumer_id"):
             flash(
                 "Error: To place an order, please " +
-                "<a href='/register'>Register</a> or " +
-                "<a href='/login'>Login</a>",
+                "<a href='/customer/register'>Register</a> or " +
+                "<a href='/customer/login'>Login</a>",
                 "warning"
             )
             return redirect(f'/{restaurant_user}#cart')
