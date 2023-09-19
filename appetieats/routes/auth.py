@@ -45,6 +45,20 @@ def login():
         return render_template("auth/login.html")
 
 
+@auth_bp.route("/costumer/login", methods=["GET", "POST"])
+def costumer_login():
+    """Login user"""
+    session.clear()
+    if request.method == "POST":
+
+        # TODO: log costumer account
+        return
+    else:
+
+        # TODO: render_template to login user
+        return
+
+
 @auth_bp.route("/logout")
 def logout():
     """Log user out"""
