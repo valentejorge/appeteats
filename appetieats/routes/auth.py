@@ -47,7 +47,7 @@ def login():
 
 @auth_bp.route("/costumer/login", methods=["GET", "POST"])
 def costumer_login():
-    """Login user"""
+    """Login costumer user"""
     session.clear()
     if request.method == "POST":
 
@@ -56,6 +56,20 @@ def costumer_login():
     else:
 
         # TODO: render_template to login user
+        return
+
+
+@auth_bp.route("/costumer/register", methods=["GET", "POST"])
+def costumer_register():
+    """Register costumer user"""
+    session.clear()
+    if request.method == "POST":
+
+        # TODO: register costumer account
+        return
+    else:
+
+        # TODO: render_template to register user
         return
 
 
