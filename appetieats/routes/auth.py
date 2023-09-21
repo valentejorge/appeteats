@@ -59,18 +59,17 @@ def costumer_login():
         return
 
 
-@auth_bp.route("/costumer/register", methods=["GET", "POST"])
+@auth_bp.route("/customer/register", methods=["GET", "POST"])
 def costumer_register():
     """Register costumer user"""
     session.clear()
     if request.method == "POST":
 
         # TODO: register costumer account
-        return
+        print(request.form)
+        return redirect("/customer/register")
     else:
-
-        # TODO: render_template to register user
-        return
+        return render_template("auth/customer-register.html")
 
 
 @auth_bp.route("/logout")
