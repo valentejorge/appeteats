@@ -1,0 +1,173 @@
+{% extends "/auth/layout-login-form.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block head %}
+<link href="/static/css/progress.css" rel="stylesheet">
+<style>
+.input-b {width: 49%;}
+.w-49 {width: 49%;}
+
+</style>
+<script src="/static/js/steps.js"></script>
+{% endblock %}
+
+{% block img %}
+<img src="/static/assets/img/undraw_cooking_p7m1.svg" alt="cooking image">
+{% endblock %}
+
+{% block form %}
+<div class="form">
+    <form method="post" action="/customer/register" >
+        <div class="form-header">
+
+            <div class="title">
+                <h1>Register</h1>
+            </div>
+            <div class="login-button">
+                <a href="/login">Login</a>
+            </div>
+        </div>
+        <div class="step-forms">
+            <section class="step-wizard">
+                <ul class="step-wizard-list">
+                    <li class="step-wizard-item current-item">
+                        <span class="progress-count">1</span>
+                        <span class="progress-label">Personal Info</span>
+                    </li>
+                    <li class="step-wizard-item">
+                        <span class="progress-count">2</span>
+                        <span class="progress-label">Address Info</span>
+                    </li>
+                    <li class="step-wizard-item">
+                        <span class="progress-count">3</span>
+                        <span class="progress-label">Login Info</span>
+                    </li>
+                    <li class="step-wizard-item">
+                        <span class="progress-count">4</span>
+                        <span class="progress-label">Agree Terms</span>
+                    </li>
+                </ul>
+            </section>
+
+            <div id="firstStep">
+                <div class="input-g">
+                    <div class="input-b">
+                        <label for="first-name" class="">First name: </label>
+                        <input id="first-name" name="first-name" class="std-input required" type="text" placeholder="Type your first name" required>
+                    </div>
+
+                    <div class="input-b">
+                        <label for="last-name" class="">Last name: </label>
+                        <input id="last-name" name="last-name" class="required" type="text" placeholder="Type your last name" required>
+                    </div>
+
+                    <div class="input-b w-100">
+                        <label for="number" class="">Phone number: </label>
+                        <input id="number" name="phone" class="required" type="text" placeholder="Type your phone number" required>
+                    </div>
+
+                </div>
+                <button type="button" class="button button-sm" onclick="goPage(2)">Next</button>
+            </div>
+            <div id="secondStep" style="display: none;">
+                <div class="input-g">
+                    <div class="input-b w-100">
+                        <label for="address" class="">Full Address: </label>
+                        <input id="address" name="address" class="required" type="text" placeholder="Type your address (123 Main St, Apt 4B)" required>
+                    </div>
+
+                    <div class="input-b">
+                        <label for="city" class="">ZIP Code: </label>
+                        <input id="zip" name="zip" class="std-input required" type="text" placeholder="Type your zip code (12345)" required>
+                    </div>
+
+                    <div class="input-b">
+                        <label for="references" class="">Reference: </label>
+                        <input id="address" name="address" class="required" type="text" placeholder="Type a reference (Nearby landmark)" required>
+                    </div>
+
+                </div>
+
+                <button type="button" class="button button-sm w-49" onclick="goPage(1)">Back</button>
+                <button type="button" class="button button-sm w-49" onclick="goPage(3)">Next</button>
+            </div>
+            <div id="thirdStep" style="display: none;">
+                <div class="input-g">
+                    <div class="input-b w-100">
+                        <label for="username" class="">Username: </label>
+                        <input id="username" name="username" class="required" type="text" placeholder="Type your username" required>
+                    </div>
+
+                    <div class="input-b">
+                        <label for="password" class="">Password: </label>
+                        <input id="password" name="password" class="required" type="password" placeholder="Type your password" required>
+                    </div>
+
+                    <div class="input-b">
+                        <label for="confirm" class="">Confirm password: </label>
+                        <input id="confirm" name="confirm" class="required" type="password" placeholder="Confirm your password" required>
+                    </div>
+                </div>
+                <button type="button" class="button button-sm w-49" onclick="goPage(2)">Back</button>
+                <button type="button" class="button button-sm w-49" onclick="goPage(4)">Next</button>
+            </div>
+            <div id="fourthStep" style="display: none;">
+                <div class="input-t-g t-justify">
+                    <h6 class="text-center mx-auto"> 
+                        Terms of Use:
+                    </h6>
+                    <p> 
+                    By using this system, the user agrees to the terms and conditions set forth herein. This is a college project for educational purposes and is not intended to be a commercial product. The system is provided "as is," without warranties of any kind, express or implied.
+                    </p> 
+
+                    <p> 
+                    1. Data Collection:
+                    The user understands and agrees that, for the proper functioning of the system, some personal data may be collected. This information will be used solely for academic purposes and will not be shared with third parties without the user's express consent.
+                    </p> 
+
+                    <p> 
+                    2. Liability:
+                    The developer of this system is not liable for any damages, losses, or issues arising from the use of the system. The user agrees to use the system at their own risk.
+                    </p> 
+
+                    <p> 
+                    3. Proper Use:
+                    The user agrees to use the system solely for academic purposes and not for any commercial or illegal purposes. Any misuse of the system is strictly prohibited.
+                    </p> 
+
+                    <p> 
+                    4. Privacy and Security:
+                    The developer will make reasonable efforts to protect the privacy and security of user data. However, due to the nature of the project and the academic environment, we cannot guarantee the total security of the data.
+                    </p> 
+
+                    <p> 
+                    5. Termination of Access:
+                    The developer reserves the right to terminate the user's access to the system at any time without prior notice if abuses or violations of the terms of use are identified.
+                    </p> 
+
+                    <p> 
+                    6. Intellectual Property:
+                    The user acknowledges that the system is an academic creation and agrees to respect all copyrights and intellectual property rights related to the project.
+                    </p> 
+
+                    <p> 
+                    7. Modifications to the Terms:
+                    The developer reserves the right to change these terms of use at any time with prior notice to the user or by updating this system.
+                    </p> 
+
+                    <p> 
+                    By clicking the acceptance button or continuing to use the system, the user agrees to be legally bound by these terms of use.
+                    </p>
+                    <div>
+                        <input class="form-check-input" id="agree" name="agree" type="checkbox" required>
+                        <label for="agree" class="form-check-label">I Agree Terms</label>
+                    </div>
+
+                </div>
+                <button type="button" class="button button-sm w-49" onclick="goPage(3)">Back</button>
+                <button class="button button-sm w-49" type="submit">Register</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
