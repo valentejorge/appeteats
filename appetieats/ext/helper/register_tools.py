@@ -1,8 +1,8 @@
 from functools import wraps
-from flask import redirect, session, abort, request
+from flask import redirect, session, abort
 from appetieats.models import Users, RestaurantsData, RestaurantOpeningHours
 from appetieats.ext.database import db
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import generate_password_hash
 from datetime import datetime
 
 
@@ -51,45 +51,6 @@ def register_user(user_data, weekdays):
                     )
             db.session.add(opening_hours)
             db.session.commit()
-
-
-def verify_user_register_data(username, password, confirm):
-    if not username:
-        return abort(403, "You must provide a username")
-
-    elif not password:
-        return abort(403, "You must provide a password")
-
-    elif not confirm:
-        return abort(403, "You must confirm your password")
-
-    elif password != confirm:
-        return abort(403, "The passwords dont match")
-
-    elif Users.query.filter_by(username=username).first() is not None:
-        return abort(403, "The username already exists")
-
-    else:
-        return
-
-
-def check_credentials(username, password):
-    user = Users.query.filter_by(username=username).first()
-
-    if not username:
-        return abort(403, "must provide username")
-
-    elif not password:
-        return abort(403, "must provide password")
-
-    elif not user:
-        return abort(403, "invalid user")
-
-    elif not check_password_hash(user.hash, str(password)):
-        return abort(403, "wrong password")
-
-    else:
-        return
 
 
 def log_user(username):

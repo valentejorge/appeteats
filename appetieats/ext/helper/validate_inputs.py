@@ -1,5 +1,6 @@
 from flask import abort, session
-from appetieats.models import Categories
+from appetieats.models import Categories, Users
+from werkzeug.security import check_password_hash
 
 
 def validate_product_data(product_data):
@@ -32,5 +33,44 @@ def validate_product_data(product_data):
 def validate_product_image(product_image):
     if not product_image:
         return abort(403, "You must provide a product image")
+    else:
+        return
+
+
+def validate_user_register_data(username, password, confirm):
+    if not username:
+        return abort(403, "You must provide a username")
+
+    elif not password:
+        return abort(403, "You must provide a password")
+
+    elif not confirm:
+        return abort(403, "You must confirm your password")
+
+    elif password != confirm:
+        return abort(403, "The passwords dont match")
+
+    elif Users.query.filter_by(username=username).first() is not None:
+        return abort(403, "The username already exists")
+
+    else:
+        return
+
+
+def validate_credentials(username, password):
+    user = Users.query.filter_by(username=username).first()
+
+    if not username:
+        return abort(403, "must provide username")
+
+    elif not password:
+        return abort(403, "must provide password")
+
+    elif not user:
+        return abort(403, "invalid user")
+
+    elif not check_password_hash(user.hash, str(password)):
+        return abort(403, "wrong password")
+
     else:
         return
