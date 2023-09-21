@@ -1,12 +1,16 @@
-from flask import Blueprint, render_template, request, redirect, flash, session, abort
+from flask import (
+        Blueprint, render_template, request, redirect, flash, session, abort
+)
 from appetieats.models import Categories, Products
 from appetieats.ext.database import db
 
-from appetieats.ext.helpers import login_required
-from appetieats.ext.helper.get_inputs import (get_product_data_from_request,
-                                              get_product_image)
-from appetieats.ext.helper.validate_inputs import (validate_product_data,
-                                                   validate_product_image)
+from appetieats.ext.helper.register_tools import login_required
+from appetieats.ext.helper.get_inputs import (
+        get_product_data_from_request, get_product_image
+)
+from appetieats.ext.helper.validate_inputs import (
+        validate_product_data, validate_product_image
+)
 from appetieats.ext.helper.db_tools import add_new_product, update_product_data
 
 settings_bp = Blueprint('settings', __name__)

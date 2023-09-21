@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from appetieats.ext.helpers import login_required
+from appetieats.ext.helper.register_tools import login_required
 
 admin_bp = Blueprint('admin', __name__)
 

@@ -4,7 +4,7 @@
 
 {% block head %}
 <link href="/static/css/progress.css" rel="stylesheet">
-<style>
+    <style>
 .input-b {width: 49%;}
 .w-49 {width: 49%;}
 
@@ -18,7 +18,7 @@
 
 {% block form %}
 <div class="form">
-    <form method="post" action="/customer/register" >
+    <form method="post" action="/register" >
         <div class="form-header">
 
             <div class="title">
@@ -33,11 +33,11 @@
                 <ul class="step-wizard-list">
                     <li class="step-wizard-item current-item">
                         <span class="progress-count">1</span>
-                        <span class="progress-label">Personal Info</span>
+                        <span class="progress-label">Restaurant info</span>
                     </li>
                     <li class="step-wizard-item">
                         <span class="progress-count">2</span>
-                        <span class="progress-label">Address Info</span>
+                        <span class="progress-label">Opening Hours</span>
                     </li>
                     <li class="step-wizard-item">
                         <span class="progress-count">3</span>
@@ -53,42 +53,113 @@
             <div id="firstStep">
                 <div class="input-g">
                     <div class="input-b">
-                        <label for="first-name" class="">First name: </label>
-                        <input id="first-name" name="first-name" class="std-input required" type="text" placeholder="Type your first name" required>
+                        <label for="name" class="">Restaurant name: </label>
+                        <input id="name" name="name" class="std-input required" type="text" placeholder="Type the name of your restaurant" required>
                     </div>
 
                     <div class="input-b">
-                        <label for="last-name" class="">Last name: </label>
-                        <input id="last-name" name="last-name" class="required" type="text" placeholder="Type your last name" required>
+                        <label for="address" class="">Address: </label>
+                        <input id="address" name="address" class="required" type="text" placeholder="Type the address of your restaurant" required>
                     </div>
 
-                    <div class="input-b w-100">
+                    <div class="input-b">
+                        <label for="color" class="">Color theme: </label>
+                        <input id="color" name="color" class="required" type="color" required>
+                    </div>
+
+                    <div class="input-b">
                         <label for="number" class="">Phone number: </label>
-                        <input id="number" name="phone" class="required" type="text" placeholder="Type your phone number" required>
+                        <input id="number" name="phone" class="required" type="text" placeholder="Type the phone number of restaurant" required>
                     </div>
 
                 </div>
                 <button type="button" class="button button-sm" onclick="goPage(2)">Next</button>
             </div>
             <div id="secondStep" style="display: none;">
-                <div class="input-g">
-                    <div class="input-b w-100">
-                        <label for="address" class="">Full Address: </label>
-                        <input id="address" name="address" class="required" type="text" placeholder="Type your address (123 Main St, Apt 4B)" required>
+                <div class="input-t-g">
+                    <div class="time-row mb-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input mr-1vw" type="checkbox" id="everyday" name="everyday" checked>
+                            <label class="form-check-label mt-1 mb-2" for="everyday">Same everyday</label>
+                        </div>
+                        <div class="input-t d-flex" id="everyday-input">
+                            <input class="w-100 time" type="text" name="open_everyday" placeholder="Opening Time">
+                            <input class="w-100 time" type="text" name="close_everyday" placeholder="Closing Time">
+                        </div>
                     </div>
-
-                    <div class="input-b">
-                        <label for="city" class="">ZIP Code: </label>
-                        <input id="zip" name="zip" class="std-input required" type="text" placeholder="Type your zip code (12345)" required>
+                    <div id="weekdays">
+                    <div class="time-row d-flex align-items-center justify-content-between mb-2">
+                        <div class="form-check form-switch day-container">
+                            <input class="form-check-input mr-1vw" type="checkbox" id="monday" name="monday">
+                            <label class="form-check-label mt-1" for="monday">Mon</label>
+                        </div>
+                        <div class="input-t d-flex">
+                            <input class="w-100 time" type="text" name="open_monday" placeholder="Opening Time">
+                            <input class="w-100 time" type="text" name="close_monday" placeholder="Closing Time">
+                        </div>
                     </div>
-
-                    <div class="input-b">
-                        <label for="references" class="">Reference: </label>
-                        <input id="address" name="address" class="required" type="text" placeholder="Type a reference (Nearby landmark)" required>
+                    <div class="time-row d-flex align-items-center mb-2">
+                        <div class="form-check form-switch day-container">
+                            <input class="form-check-input mr-1vw" type="checkbox" id="tuesday" name="tuesday">
+                            <label class="form-check-label mt-1" for="tuesday">Tue</label>
+                        </div>
+                        <div class="input-t d-flex">
+                            <input class="w-100 time" type="text" name="open_tuesday" placeholder="Opening Time">
+                            <input class="w-100 time" type="text" name="close_tuesday" placeholder="Closing Time">
+                        </div>
                     </div>
-
+                    <div class="time-row d-flex align-items-center mb-2">
+                        <div class="form-check form-switch day-container">
+                            <input class="form-check-input mr-1vw" type="checkbox" id="wednesday" name="wednesday">
+                            <label class="form-check-label mt-1" for="wednesday">Wed</label>
+                        </div>
+                        <div class="input-t d-flex">
+                            <input class="w-100 time" type="text" name="open_wednesday" placeholder="Opening Time">
+                            <input class="w-100 time" type="text" name="close_wednesday" placeholder="Closing Time">
+                        </div>
+                    </div>
+                    <div class="time-row d-flex align-items-center mb-2">
+                        <div class="form-check form-switch day-container">
+                            <input class="form-check-input mr-1vw" type="checkbox" id="thursday" name="thursday">
+                            <label class="form-check-label mt-1" for="thursday">Thu</label>
+                        </div>
+                        <div class="input-t d-flex">
+                            <input class="w-100 time" type="text" name="open_thursday" placeholder="Opening Time">
+                            <input class="w-100 time" type="text" name="close_thursday" placeholder="Closing Time">
+                        </div>
+                    </div>
+                    <div class="time-row d-flex align-items-center mb-2">
+                        <div class="form-check form-switch day-container">
+                            <input class="form-check-input mr-1vw" type="checkbox" id="friday" name="friday">
+                            <label class="form-check-label mt-1" for="friday">Fri</label>
+                        </div>
+                        <div class="input-t d-flex">
+                            <input class="w-100 time" type="text" name="open_friday" placeholder="Opening Time">
+                            <input class="w-100 time" type="text" name="close_friday" placeholder="Closing Time">
+                        </div>
+                    </div>
+                    <div class="time-row d-flex align-items-center mb-2">
+                        <div class="form-check form-switch day-container">
+                            <input class="form-check-input mr-1vw" type="checkbox" id="saturday" name="saturday">
+                            <label class="form-check-label mt-1" for="saturday">Sat</label>
+                        </div>
+                        <div class="input-t d-flex">
+                            <input class="w-100 time" type="text" name="open_saturday" placeholder="Opening Time">
+                            <input class="w-100 time" type="text" name="close_saturday" placeholder="Closing Time">
+                        </div>
+                    </div>
+                    <div class="time-row d-flex align-items-center mb-2">
+                        <div class="form-check form-switch day-container">
+                            <input class="form-check-input mr-1vw" type="checkbox" id="sunday" name="sunday">
+                            <label class="form-check-label mt-1" for="sunday">Sun</label>
+                        </div>
+                        <div class="input-t d-flex">
+                            <input class="w-100 time" type="text" name="open_sunday" placeholder="Opening Time">
+                            <input class="w-100 time" type="text" name="close_sunday" placeholder="Closing Time">
+                        </div>
+                    </div>
+                    </div>
                 </div>
-
                 <button type="button" class="button button-sm w-49" onclick="goPage(1)">Back</button>
                 <button type="button" class="button button-sm w-49" onclick="goPage(3)">Next</button>
             </div>
@@ -170,4 +241,6 @@
             </div>
         </div>
     </form>
+<script src="/static/js/weekdays-hide.js"></script>
+<script src="/static/js/open-hour-format.js"></script>
 {% endblock %}

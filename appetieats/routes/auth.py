@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, session
-from appetieats.ext.helpers import (verify_user_register_data, register_user,
-                                    check_credentials, log_user)
-from appetieats.ext.register_tools import take_user_data, take_opening_hours
+from appetieats.ext.helper.register_tools import register_user, log_user
+from appetieats.ext.helper.get_inputs import get_user_data, get_opening_hours
+from appetieats.ext.helper.validate_inputs import (validate_user_register_data,
+                                                   validate_credentials)
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -11,11 +12,12 @@ def register():
     """Register a new restaurant"""
     if request.method == "POST":
 
-        user_data = take_user_data()
-        week_opening_time = take_opening_hours(user_data["is_open_everyday"])
+        user_data = get_user_data()
+        week_opening_time = get_opening_hours(user_data["is_open_everyday"])
 
-        verify_user_register_data(user_data["username"], user_data["password"],
-                                  user_data["confirm"])
+        validate_user_register_data(user_data["username"],
+                                    user_data["password"],
+                                    user_data["confirm"])
 
         register_user(user_data, week_opening_time)
 
@@ -37,7 +39,7 @@ def login():
                 request.form.get("username", type=str),
                 request.form.get("password", type=str)
         )
-        check_credentials(username, password)
+        validate_credentials(username, password)
         log_user(username)
         print(session.get("user_id"))
         return redirect("/admin/dashboard")
