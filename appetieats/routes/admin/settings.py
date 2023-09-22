@@ -107,3 +107,7 @@ def edit_product(product_id):
         return render_template(
                 "admin/settings/edit-menu-form.html", product=product,
                 current_category=current_category, categories=categories)
+
+
+def init_app(app):
+    app.register_blueprint(settings_bp)

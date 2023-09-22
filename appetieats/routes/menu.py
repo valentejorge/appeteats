@@ -96,3 +96,7 @@ def data(restaurant_user):
             {"products": ([dict(product) for product in products])},
             {"categories": ([dict(category) for category in categories])}
     )
+
+
+def init_app(app):
+    app.register_blueprint(menu_bp)

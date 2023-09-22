@@ -1,2 +1,13 @@
 [default]
-SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
+EXTENSIONS = [
+    "appetieats.ext.sesssion",
+    "appetieats.ext.database",
+    "appetieats.ext.commands",
+    "appetieats.ext.error",
+    "appetieats.routes.main",
+    "appetieats.routes.menu",
+    "appetieats.routes.auth",
+    "appetieats.routes.admin.admin",
+    "appetieats.routes.admin.settings"
+]

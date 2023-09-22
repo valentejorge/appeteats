@@ -21,3 +21,7 @@ def dashboard():
 @login_required
 def settings():
     return render_template("admin/settings.html")
+
+
+def init_app(app):
+    app.register_blueprint(admin_bp)

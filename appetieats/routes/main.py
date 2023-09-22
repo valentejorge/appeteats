@@ -16,3 +16,7 @@ def error():
     if not a:
         abort(404, "Error page is working! :)")
     return render_template("error.html")
+
+
+def init_app(app):
+    app.register_blueprint(main_bp)

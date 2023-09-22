@@ -47,23 +47,22 @@ def login():
         return render_template("auth/login.html")
 
 
-@auth_bp.route("/costumer/login", methods=["GET", "POST"])
+@auth_bp.route("/customer/login", methods=["GET", "POST"])
 def costumer_login():
-    """Login costumer user"""
+    """Login customer user"""
     session.clear()
     if request.method == "POST":
 
         # TODO: log costumer account
-        return
+        return redirect("/customer/register")
     else:
-
         # TODO: render_template to login user
-        return
+        return render_template("auth/login.html")
 
 
 @auth_bp.route("/customer/register", methods=["GET", "POST"])
 def costumer_register():
-    """Register costumer user"""
+    """Register customer user"""
     session.clear()
     if request.method == "POST":
 
@@ -81,3 +80,7 @@ def logout():
     session.clear()
 
     return redirect("/")
+
+
+def init_app(app):
+    app.register_blueprint(auth_bp)
