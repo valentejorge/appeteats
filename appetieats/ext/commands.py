@@ -20,16 +20,18 @@ def populate_users():
                 id=1,
                 username="dev",
                 hash=generate_password_hash("dev"),
-                ),
+                role="restaurant"
+            ),
             RestaurantsData(
                 id=1,
                 name="devrest",
                 address="3street",
                 phone="555-000-000",
                 color="#ff0000",
+                url="dev",
                 user_id=1
-                )
-            ]
+            )
+    ]
     db.session.bulk_save_objects(data)
     db.session.commit()
     return Users.query.all()

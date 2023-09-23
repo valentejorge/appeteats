@@ -6,6 +6,7 @@ class Users(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(200), nullable=False, unique=True)
     hash = db.Column(db.String(120), nullable=False)
+    role = db.Column(db.String(10), nullable=False)
 
 
 class Products(db.Model, SerializerMixin):
@@ -39,6 +40,7 @@ class RestaurantsData(db.Model, SerializerMixin):
     address = db.Column(db.String(200), nullable=False)
     phone = db.Column(db.String(20), nullable=False)
     color = db.Column(db.String(8), nullable=False)
+    url = db.Column(db.String(100), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
 
