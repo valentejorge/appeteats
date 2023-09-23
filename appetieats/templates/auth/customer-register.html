@@ -18,7 +18,7 @@
 
 {% block form %}
 <div class="form">
-    <form method="post" action="/register" >
+    <form method="post" action="/customer/register" >
         <div class="form-header">
 
             <div class="title">
@@ -63,8 +63,8 @@
                     </div>
 
                     <div class="input-b w-100">
-                        <label for="number" class="">Phone number: </label>
-                        <input id="number" name="number" class="required" type="text" required>
+                        <label for="phone" class="">Phone number: </label>
+                        <input id="phone" name="phone" class="required" type="text" required>
                     </div>
 
                 </div>
@@ -78,13 +78,13 @@
                     </div>
 
                     <div class="input-b">
-                        <label for="city" class="">ZIP Code: </label>
-                        <input id="zip" name="zip" class="std-input required" type="text" placeholder="Type your zip code (12345)" required>
+                        <label for="zip-code" class="">ZIP Code: </label>
+                        <input id="zip-code" name="zip-code" class="std-input required" type="text" placeholder="Type your zip code (12345)" required>
                     </div>
 
                     <div class="input-b">
-                        <label for="references" class="">Reference: </label>
-                        <input id="address" name="address" class="required" type="text" placeholder="Type a reference (Nearby landmark)" required>
+                        <label for="reference" class="">Reference: </label>
+                        <input id="reference" name="reference" class="required" type="text" placeholder="Type a reference (Nearby landmark)" required>
                     </div>
 
                 </div>

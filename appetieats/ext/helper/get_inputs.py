@@ -23,7 +23,7 @@ def get_product_image(name):
     return image
 
 
-def get_user_data():
+def get_restaurant_user_data():
     form_data = {}
 
     fields = {
@@ -31,10 +31,33 @@ def get_user_data():
         "address": str,
         "phone": str,
         "color": str,
+        "url": str,
         "username": str,
         "password": str,
         "confirm": str,
         "is_open_everyday": bool,
+        "agree": bool
+    }
+
+    for field, data_type in fields.items():
+        form_data[field] = request.form.get(field, type=data_type)
+
+    return form_data
+
+
+def get_customer_user_data():
+    form_data = {}
+
+    fields = {
+        "first-name": str,
+        "last-name": str,
+        "phone": str,
+        "address": str,
+        "zip-code": str,
+        "reference": str,
+        "username": str,
+        "password": str,
+        "confirm": str,
         "agree": bool
     }
 

@@ -57,20 +57,44 @@ def validate_user_register_data(username, password, confirm):
         return
 
 
-def validate_credentials(username, password):
+def validate_credentials(username, password, account_type):
     user = Users.query.filter_by(username=username).first()
 
-    if not username:
-        return abort(403, "must provide username")
-
-    elif not password:
-        return abort(403, "must provide password")
+    if not username or not password:
+        return abort(403, "Must provide username/password")
 
     elif not user:
-        return abort(403, "invalid user")
+        return abort(403, "Invalid user")
+
+    elif user.role != account_type:
+        if account_type == "restaurant":
+            return abort(
+                    403,
+                    "Your account is of customer type. "
+                    "Please log in with a restaurant account"
+            )
+        elif account_type == "customer":
+            return abort(
+                    403,
+                    "Your account is of restaurant type. "
+                    "Please log in with a customer account"
+            )
 
     elif not check_password_hash(user.hash, str(password)):
-        return abort(403, "wrong password")
+        return abort(403, "Wrong password")
 
     else:
         return
+
+
+def validate_user_data(user_data):
+    for field, value in user_data.items():
+        print(field)
+        print(user_data)
+        if not value:
+            return abort(
+                    403,
+                    "You are attempting to register a restaurant account in "
+                    "the customer route or vice versa."
+            )
+    return
