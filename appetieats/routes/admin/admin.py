@@ -6,19 +6,19 @@ admin_bp = Blueprint('admin', __name__)
 
 
 @admin_bp.route("/admin")
-@login_required
+@login_required("restaurant")
 def admin():
     return render_template("admin/admin.html")
 
 
 @admin_bp.route("/admin/dashboard")
-@login_required
+@login_required("restaurant")
 def dashboard():
     return render_template("admin/dashboard.html")
 
 
 @admin_bp.route("/admin/settings")
-@login_required
+@login_required("restaurant")
 def settings():
     return render_template("admin/settings.html")
 

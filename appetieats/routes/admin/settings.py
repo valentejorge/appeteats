@@ -17,7 +17,7 @@ settings_bp = Blueprint('settings', __name__)
 
 
 @settings_bp.route("/admin/settings/add", methods=["GET", "POST"])
-@login_required
+@login_required("restaurant")
 def add():
     """Add new product"""
     if request.method == "POST":
@@ -39,7 +39,7 @@ def add():
 
 
 @settings_bp.route("/admin/settings/manage-categories", methods=["GET", "POST"])
-@login_required
+@login_required("restaurant")
 def manage_categories():
     """Manage categories"""
     if request.method == "POST":
@@ -58,7 +58,7 @@ def manage_categories():
 
 
 @settings_bp.route("/admin/settings/manage-categories/delete", methods=["POST"])
-@login_required
+@login_required("restaurant")
 def delete_category():
     """Delete a category"""
     id = request.form.get("id")
@@ -71,7 +71,7 @@ def delete_category():
 
 
 @settings_bp.route("/admin/settings/edit-menu")
-@login_required
+@login_required("restaurant")
 def edit_menu():
     """edit menu"""
     products = Products.query.filter_by(user_id=session.get("user_id")).all()
@@ -80,7 +80,7 @@ def edit_menu():
 
 
 @settings_bp.route("/admin/settings/edit-menu/<product_id>", methods=["GET", "POST"])
-@login_required
+@login_required("restaurant")
 def edit_product(product_id):
     """edit a product of menu"""
     if request.method == "POST":
