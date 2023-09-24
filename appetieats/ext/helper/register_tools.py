@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import redirect, session, abort
+from flask import session, abort
 from appetieats.models import (
         Users, RestaurantsData, RestaurantOpeningHours, CustomersData
 )
