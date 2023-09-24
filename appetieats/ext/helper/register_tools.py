@@ -8,18 +8,39 @@ from werkzeug.security import generate_password_hash
 from datetime import datetime
 
 
-def login_required(f):
+def login_required(role=None):
     """
-    Decorate routes to require login.
+    Decorate routes to require login and optionally a specific role.
 
     https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
     """
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if session.get("user_id") is None:
-            return redirect("/login")
-        return f(*args, **kwargs)
-    return decorated_function
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            user_role = session.get("role")
+
+            if user_role is None:
+                return abort(403, "You must login to access this page")
+
+            if role is not None and user_role != role:
+                if role == "restaurant":
+                    return abort(
+                            403,
+                            "Restricted Access: This page is exclusive for "
+                            "restaurants. Please login with a restaurant "
+                            "account to access it."
+                    )
+                if role == "customer":
+                    return abort(
+                            403,
+                            "Restricted Access: This page is exclusive for "
+                            "customers. Please login with a customer "
+                            "account to access it."
+                    )
+
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
 
 
 def register_restaurant_user(user_data, weekdays):
@@ -85,4 +106,4 @@ def log_user(username):
     user = Users.query.filter_by(username=username).first() or abort(
             403, "fatal error")
     session["user_id"] = user.id
-    session["account_type"] = user.role
+    session["role"] = user.role
