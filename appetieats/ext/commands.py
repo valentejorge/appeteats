@@ -14,7 +14,7 @@ def drop_db():
 
 
 def populate_users():
-    """populate db users with default acconts"""
+    """populate db users with default accounts"""
     data = [
             Users(
                 id=1,
@@ -24,13 +24,14 @@ def populate_users():
             ),
             RestaurantsData(
                 id=1,
-                name="devrest",
-                address="3street",
-                phone="555-000-000",
-                color="#ff0000",
-                url="dev",
+                name="Python Pizza",
+                address="123 Snake St, Pythonville, PY 31415",
+                phone="555-PY-314",
+                color="#4B8BBE",
+                url="python-pizza",
                 user_id=1
             )
+            # TODO: add products
     ]
     db.session.bulk_save_objects(data)
     db.session.commit()
