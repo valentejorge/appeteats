@@ -1,21 +1,28 @@
 from flask import (Blueprint, render_template, jsonify, request, flash,
-                   redirect, session)
-from appetieats.models import (RestaurantsData, Users, Categories, Products,
-                               ProductImages)
+                   redirect, session, abort)
+from appetieats.models import (
+        RestaurantsData, Users, Categories, Products, ProductImages
+)
 from appetieats.ext.helper.cache_images import get_image
 import json
 
 menu_bp = Blueprint('menu', __name__)
 
 
-@menu_bp.route("/<restaurant_user>", methods=['GET', 'POST'])
-def index(restaurant_user):
+@menu_bp.route("/<restaurant_url>", methods=['GET', 'POST'])
+def index(restaurant_url):
     """Show the restaurant menu's page"""
+    restaurant = RestaurantsData.query.filter_by(url=restaurant_url).first()
+
+    if not restaurant:
+        return abort(404, "restaurant not found, check the url")
+
     if request.method == "POST":
+
         products = Products.query.join(
                     Users, Products.user_id == Users.id
                 ).filter(
-                    Users.username == restaurant_user
+                    Users.id == restaurant.user_id
                 ).with_entities(
                     Products.id, Products.name, Products.price,
                     Products.user_id
@@ -25,7 +32,7 @@ def index(restaurant_user):
         cart_dict = json.loads(cart_data)
 
         products_ids = {product.id for product in products}
-        restaurant_id = products[0].user_id
+        restaurant_id = restaurant.user_id
 
         for item in cart_dict:
             if (
@@ -33,7 +40,7 @@ def index(restaurant_user):
                 item['restaurant_id'] != restaurant_id
             ):
                 flash("Check your order and try again", "danger")
-                return redirect(f'/{restaurant_user}#cart')
+                return redirect(f'/{restaurant_url}#cart')
 
         if not session.get("costumer_id"):
             flash(
@@ -42,29 +49,34 @@ def index(restaurant_user):
                 "<a href='/customer/login'>Login</a>",
                 "warning"
             )
-            return redirect(f'/{restaurant_user}#cart')
+            return redirect(f'/{restaurant_url}#cart')
 
         link = 'https://google.com'
 
         flash(f"Success: check your <a href='{link}'>order</a>", "success")
-        return redirect(f"/{restaurant_user}#cart")
+        return redirect(f"/{restaurant_url}#cart")
 
     else:
         restaurant_info = RestaurantsData.query.join(
                 Users, RestaurantsData.user_id == Users.id
-                ).filter(Users.username == restaurant_user).first()
+                ).filter(Users.id == restaurant.user_id).first()
         """
         for value in restaurant_info.to_dict():
             print(f'{value}')
         """
 
-        return render_template("menu/menu.html",
-                               restaurant_info=restaurant_info)
+        return render_template(
+                "menu/menu.html", restaurant_info=restaurant_info
+        )
 
 
-@menu_bp.route("/<restaurant_user>/data")
-def data(restaurant_user):
+@menu_bp.route("/<restaurant_url>/data")
+def data(restaurant_url):
     """Products data"""
+    restaurant = RestaurantsData.query.filter_by(url=restaurant_url).first()
+
+    if not restaurant:
+        return abort(404, "restaurant not found, check the url")
 
     products = Products.query.join(
                 Users, Products.user_id == Users.id
@@ -73,7 +85,7 @@ def data(restaurant_user):
             ).join(
                 Categories, Users.id == Categories.user_id
             ).filter(
-                Users.username == restaurant_user
+                Users.id == restaurant.user_id
             ).with_entities(
                 Products.id, Products.name, Products.price,
                 Products.category_id, Products.description,
@@ -84,7 +96,7 @@ def data(restaurant_user):
     categories = Categories.query.join(
                 Users, Categories.user_id == Users.id
             ).filter(
-                Users.username == restaurant_user
+                Users.id == restaurant.user_id
             ).with_entities(
                 Categories.category_name, Categories.id
             ).distinct().all()
