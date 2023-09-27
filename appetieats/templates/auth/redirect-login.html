@@ -1,0 +1,47 @@
+{% extends "/auth/layout-login-form.html" %}
+
+{% block title %}Login{% endblock %}
+{% block head %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style> .form {display: block;} </style>
+{% endblock %}
+
+{% block img %}
+<img src="/static/assets/img/undraw_pizza_sharing_wxop.svg" alt="cooking image">
+{% endblock %}
+
+{% block form %}
+<div class="form">
+    <form>
+        <div class="form-header">
+            <div class="title">
+                <h1>Login as:</h1>
+            </div>
+
+            <div class="login-button">
+                <a href="/register">Register</a>
+            </div>
+        </div>
+
+        <div class="input-g">
+            <div class="input-b">
+                <a href="/login/customer">
+                    <div class="button-s btn w-100 mb-3">
+                        <span class="material-icons nav_icons mx-1">restaurant</span>
+                        <p>Customer account</p>
+                    </div>
+                </a>
+            </div>
+            <div class="input-b">
+                <a href="/login/restaurant">
+                    <div class="button-s btn w-100">
+                        <span class="material-icons nav_icons mx-1">storefront</span>
+                        <p>Restaurant account</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

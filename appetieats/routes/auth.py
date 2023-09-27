@@ -12,8 +12,20 @@ from appetieats.ext.helper.validate_inputs import (
 auth_bp = Blueprint('auth', __name__)
 
 
-@auth_bp.route("/register", methods=["GET", "POST"])
+@auth_bp.route("/login")
+def login():
+    """Redirect user for especific login page"""
+    return render_template("auth/redirect-login.html")
+
+
+@auth_bp.route("/register")
 def register():
+    """Redirect user for especific register page"""
+    return render_template("auth/redirect-register.html")
+
+
+@auth_bp.route("/register/restaurant", methods=["GET", "POST"])
+def restaurant_register():
     """Register a new restaurant"""
     if request.method == "POST":
 
@@ -33,11 +45,11 @@ def register():
 
         return redirect("/admin/dashboard")
     else:
-        return render_template("auth/register.html")
+        return render_template("auth/restaurant-register.html")
 
 
-@auth_bp.route("/login", methods=["GET", "POST"])
-def login():
+@auth_bp.route("/login/restaurant", methods=["GET", "POST"])
+def restaurant_login():
     """Login user"""
     session.clear()
 
@@ -54,37 +66,10 @@ def login():
         print(session.get("user_id"), session.get("account_type"))
         return redirect("/admin/dashboard")
     else:
-        return render_template("auth/login.html")
+        return render_template("auth/restaurant-login.html")
 
 
-@auth_bp.route("/customer/login", methods=["GET", "POST"])
-def costumer_login():
-    """Login customer user"""
-    if request.method == "POST":
-
-        username, password = (
-                request.form.get("username", type=str),
-                request.form.get("password", type=str)
-        )
-
-        account_type = "customer"
-
-        validate_credentials(username, password, account_type)
-
-        last_restaurant = session.get("last_restaurant")
-        session.clear()
-
-        log_user(username)
-        if last_restaurant:
-            return redirect(f"/{last_restaurant}#cart")
-        else:
-            return redirect(f"/{last_restaurant}#cart")
-
-    else:
-        return render_template("auth/customer-login.html")
-
-
-@auth_bp.route("/customer/register", methods=["GET", "POST"])
+@auth_bp.route("/register/customer", methods=["GET", "POST"])
 def costumer_register():
     """Register customer user"""
     session.clear()
@@ -106,9 +91,36 @@ def costumer_register():
         print(session.get("user_id"), session.get("account_type"))
 
         return redirect("/admin/dashboard")
-        return redirect("/customer/register")
     else:
         return render_template("auth/customer-register.html")
+
+
+@auth_bp.route("/login/customer", methods=["GET", "POST"])
+def costumer_login():
+    """Login customer user"""
+    if request.method == "POST":
+
+        username, password = (
+                request.form.get("username", type=str),
+                request.form.get("password", type=str)
+        )
+
+        account_type = "customer"
+
+        validate_credentials(username, password, account_type)
+
+        last_restaurant = session.get("last_restaurant")
+        session.clear()
+
+        log_user(username)
+        if last_restaurant:
+            return redirect(f"/{last_restaurant}#cart")
+        else:
+            # TODO: redirect to customer dashboard
+            return redirect(f"/{last_restaurant}#cart")
+
+    else:
+        return render_template("auth/customer-login.html")
 
 
 @auth_bp.route("/logout")
