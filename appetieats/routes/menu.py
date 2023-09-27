@@ -104,7 +104,8 @@ def data(restaurant_url):
             ).distinct().all()
 
     for product in products:
-        get_image(product.image_path, product[5])
+        product_id = product[5]
+        get_image(product.image_path, product_id)
 
     return jsonify(
             {"products": ([dict(product) for product in products])},
