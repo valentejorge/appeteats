@@ -60,21 +60,27 @@ def login():
 @auth_bp.route("/customer/login", methods=["GET", "POST"])
 def costumer_login():
     """Login customer user"""
-    session.clear()
     if request.method == "POST":
 
         username, password = (
                 request.form.get("username", type=str),
                 request.form.get("password", type=str)
         )
+
         account_type = "customer"
 
         validate_credentials(username, password, account_type)
-        log_user(username)
 
-        return redirect("/customer/login")
+        last_restaurant = session.get("last_restaurant")
+        session.clear()
+
+        log_user(username)
+        if last_restaurant:
+            return redirect(f"/{last_restaurant}#cart")
+        else:
+            return redirect(f"/{last_restaurant}#cart")
+
     else:
-        # TODO: render_template to login user
         return render_template("auth/customer-login.html")
 
 

@@ -1,4 +1,4 @@
-from flask import abort, session
+from flask import abort, session, flash, redirect
 from appetieats.models import Categories, Users
 from werkzeug.security import check_password_hash
 
@@ -98,3 +98,26 @@ def validate_user_data(user_data):
                     "the customer route or vice versa."
             )
     return
+
+
+def validate_cart(products, cart_dict, restaurant_id):
+    print(cart_dict)
+    products_ids = {product.id for product in products}
+    if len(cart_dict) == 0:
+        return False
+    for item in cart_dict:
+        if item["id"] not in products_ids:
+            return False
+
+        elif item["restaurant_id"] != restaurant_id:
+            return False
+
+    return True
+
+
+def validate_user_account():
+    if not session.get("user_id"):
+        return False
+    if not session.get("role") == "customer":
+        return False
+    return True

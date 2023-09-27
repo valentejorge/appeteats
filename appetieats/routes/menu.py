@@ -1,9 +1,14 @@
-from flask import (Blueprint, render_template, jsonify, request, flash,
-                   redirect, session, abort)
+from flask import (
+        Blueprint, render_template, jsonify, request, flash, redirect,
+        session, abort
+)
 from appetieats.models import (
         RestaurantsData, Users, Categories, Products, ProductImages
 )
 from appetieats.ext.helper.cache_images import get_image
+from appetieats.ext.helper.validate_inputs import (
+        validate_cart, validate_user_account
+)
 import json
 
 menu_bp = Blueprint('menu', __name__)
@@ -16,6 +21,8 @@ def index(restaurant_url):
 
     if not restaurant:
         return abort(404, "restaurant not found, check the url")
+
+    session["last_restaurant"] = restaurant_url
 
     if request.method == "POST":
 
@@ -31,29 +38,24 @@ def index(restaurant_url):
         cart_data = request.form.get('cart-data')
         cart_dict = json.loads(cart_data)
 
-        products_ids = {product.id for product in products}
-        restaurant_id = restaurant.user_id
+        if not validate_cart(products, cart_dict, restaurant.user_id):
+            flash("Check your order and try again", "danger")
+            return redirect(f'/{restaurant_url}#cart')
 
-        for item in cart_dict:
-            if (
-                item['id'] not in products_ids or
-                item['restaurant_id'] != restaurant_id
-            ):
-                flash("Check your order and try again", "danger")
-                return redirect(f'/{restaurant_url}#cart')
-
-        if not session.get("costumer_id"):
+        if not validate_user_account():
             flash(
                 "Error: To place an order, please " +
                 "<a href='/customer/register'>Register</a> or " +
-                "<a href='/customer/login'>Login</a>",
-                "warning"
+                "<a href='/customer/login'>Login</a>", "warning"
             )
             return redirect(f'/{restaurant_url}#cart')
 
-        link = 'https://google.com'
+        # TODO: add the new order in database
 
-        flash(f"Success: check your <a href='{link}'>order</a>", "success")
+        flash(
+            "Success: check your <a href='/customer/orders'>orders</a>",
+            "success"
+        )
         return redirect(f"/{restaurant_url}#cart")
 
     else:
