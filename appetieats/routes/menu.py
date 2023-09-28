@@ -5,10 +5,11 @@ from flask import (
 from appetieats.models import (
         RestaurantsData, Users, Categories, Products, ProductImages
 )
-from appetieats.ext.helper.cache_images import get_image
 from appetieats.ext.helper.validate_inputs import (
         validate_cart, validate_user_account
 )
+from appetieats.ext.helper.cache_images import get_image
+from appetieats.ext.helper.db_tools import add_new_oder
 import json
 
 menu_bp = Blueprint('menu', __name__)
@@ -38,7 +39,19 @@ def index(restaurant_url):
         cart_data = request.form.get('cart-data')
         cart_dict = json.loads(cart_data)
 
-        if not validate_cart(products, cart_dict, restaurant.user_id):
+        product_price_dict = {
+                product.id: product.price for product in products
+        }
+
+        total = 0
+        for item in cart_dict:
+            item["price"] = product_price_dict.get(item["id"])
+            item["sub_total"] = item["price"]*item["quantity"]
+            total += item["sub_total"]
+
+        restaurant_id = restaurant.user_id
+
+        if not validate_cart(products, cart_dict, restaurant_id):
             flash("Check your order and try again", "danger")
             return redirect(f'/{restaurant_url}#cart')
 
@@ -51,6 +64,8 @@ def index(restaurant_url):
             return redirect(f'/{restaurant_url}#cart')
 
         # TODO: add the new order in database
+        customer_id = session.get("user_id")
+        add_new_oder(customer_id, restaurant_id, total, cart_dict)
 
         flash(
             "Success: check your <a href='/customer/orders'>orders</a>",

@@ -61,3 +61,21 @@ class CustomersData(db.Model, SerializerMixin):
     zip_code = db.Column(db.String(20), nullable=False)
     reference = db.Column(db.String(200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+
+class Orders(db.Model, SerializerMixin):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    data = db.Column(db.String(23), nullable=False)
+    status = db.Column(db.String(30), nullable=False)
+    total_price = db.Column(db.Float, nullable=False)
+
+
+class OrderItems(db.Model, SerializerMixin):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    item_price = db.Column(db.Float, nullable=False)
+    sub_total = db.Column(db.Float, nullable=False)

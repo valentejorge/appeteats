@@ -1,7 +1,8 @@
-from appetieats.models import Products, ProductImages
+from appetieats.models import Products, ProductImages, Orders, OrderItems
 from werkzeug.utils import secure_filename
 from appetieats.ext.database import db
 from flask import session
+import datetime
 
 
 def add_new_product(product_data, product_image):
@@ -50,5 +51,31 @@ def update_product_data(product_data, id):
     product.category_id = product_data["category"]
 
     db.session.commit()
+
+    return
+
+
+def add_new_oder(customer_id, restaurant_id, total_price, order_items):
+    new_order = Orders(
+            customer_id=customer_id,
+            restaurant_id=restaurant_id,
+            data=datetime.datetime.now().isoformat(),
+            status="procecing",
+            total_price=total_price
+    )
+    db.session.add(new_order)
+    db.session.commit()
+    print(order_items)
+
+    for item in order_items:
+        new_item = OrderItems(
+                order_id=new_order.id,
+                product_id=item["id"],
+                quantity=item["quantity"],
+                item_price=item["price"],
+                sub_total=item["sub_total"]
+        )
+        db.session.add(new_item)
+        db.session.commit()
 
     return
