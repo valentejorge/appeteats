@@ -1,5 +1,5 @@
 from flask import abort, session, flash, redirect
-from appetieats.models import Categories, Users
+from appetieats.models import Categories, Users, RestaurantsData
 from werkzeug.security import check_password_hash
 
 
@@ -89,8 +89,6 @@ def validate_credentials(username, password, account_type):
 
 def validate_user_data(user_data):
     for field, value in user_data.items():
-        print(field)
-        print(user_data)
         if not value:
             return abort(
                     403,
@@ -101,7 +99,6 @@ def validate_user_data(user_data):
 
 
 def validate_cart(products, cart_dict, restaurant_id):
-    print(cart_dict)
     products_ids = {product.id for product in products}
     if len(cart_dict) == 0:
         return False
@@ -121,3 +118,11 @@ def validate_user_account():
     if not session.get("role") == "customer":
         return False
     return True
+
+
+def validate_user_url(user_url):
+    url = RestaurantsData.query.filter_by(url=user_url).first()
+
+    if url:
+        return abort(403, "the url exists, try another")
+    return

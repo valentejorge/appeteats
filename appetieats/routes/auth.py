@@ -6,7 +6,8 @@ from appetieats.ext.helper.get_inputs import (
         get_restaurant_user_data, get_opening_hours, get_customer_user_data
 )
 from appetieats.ext.helper.validate_inputs import (
-        validate_user_register_data, validate_credentials, validate_user_data
+        validate_user_register_data, validate_credentials, validate_user_data,
+        validate_user_url
 )
 
 auth_bp = Blueprint('auth', __name__)
@@ -30,18 +31,21 @@ def restaurant_register():
     if request.method == "POST":
 
         user_data = get_restaurant_user_data()
-        week_opening_time = get_opening_hours(user_data["is_open_everyday"])
+        week_opening_time = get_opening_hours(user_data["everyday"])
+
+        validate_user_url(user_data["url"])
 
         validate_user_data(user_data)
 
-        validate_user_register_data(user_data["username"],
-                                    user_data["password"],
-                                    user_data["confirm"])
+        validate_user_register_data(
+                user_data["username"],
+                user_data["password"],
+                user_data["confirm"]
+        )
 
         register_restaurant_user(user_data, week_opening_time)
 
         log_user(user_data["username"])
-        print(user_data["username"])
 
         return redirect("/admin/dashboard")
     else:
