@@ -59,7 +59,7 @@ def add_new_oder(customer_id, restaurant_id, total_price, order_items):
     new_order = Orders(
             customer_id=customer_id,
             restaurant_id=restaurant_id,
-            data=datetime.datetime.now().isoformat(),
+            date=datetime.datetime.now().isoformat(),
             status="procecing",
             total_price=total_price
     )
