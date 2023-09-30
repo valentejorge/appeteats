@@ -9,20 +9,19 @@
 {% block main %}
 <div class="menu-cart-container">
     <div class="menu active" id="menu">
-        <div class="top-app">
-            <h3> </h3>
-            <span class="material-icons nav_icon">account_circle</span>
-        </div>
-        <div class="mx-auto search">
-            <div class="input-group mb-2 mt-2">
-                <span class="input-group-text bg-white border_right_none border_left_round">
-                    <span class="material-icons nav_icon">search</span>
-                </span>
-                <input type="text" class="form-control border_left_none border_right_none" placeholder="Search" id="search">
-                <span class="input-group-text bg-white border_left_none border_right_round">
-                </span>
-            </div>
-        </div>
+        {% for order in order_data %}
+            <p># {{ order.id }}</p>
+            <p>{{ order.status }}</p>
+
+            {% for item in order['items'] %}
+                <p>{{ item.product_name }}</p>
+                <p>{{ item.item_price }}</p>
+                <p>{{ item.quantity }}</p>
+                <p>{{ item.sub_total }}</p>
+            {% endfor %}
+
+            <p>$ {{ order.total_price }}</p>
+        {% endfor %}
     </div>
 
     <div class="cart" id="cart">
@@ -40,7 +39,7 @@
                     </span>
                     <span class="material-icons nav_icons">chevron_right</span>
                 </a>
-                <a href="/change-password" class="list-group-item list-group-item-action d-flex align-items-start justify-content-start">
+                <a href="/customer/change-password" class="list-group-item list-group-item-action d-flex align-items-start justify-content-start">
                     <span class="material-icons nav_icons mx-1">lock_reset</span>
                     <span class="flex-grow-1 text-start">
                         Change password

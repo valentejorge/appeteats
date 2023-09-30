@@ -68,7 +68,7 @@ def index(restaurant_url):
         add_new_oder(customer_id, restaurant_id, total, cart_dict)
 
         flash(
-            "Success: check your <a href='/customer/orders'>orders</a>",
+            "Success: check your <a href='/customer'>orders</a>",
             "success"
         )
         return redirect(f"/{restaurant_url}#cart")

@@ -11,7 +11,9 @@ def index():
 
     user_id = session.get("user_id")
 
-    orders = Orders.query.filter(Orders.customer_id == user_id).all()
+    # orders = Orders.query.filter(Orders.customer_id == user_id).all()
+    orders = Orders.query.filter(Orders.customer_id == user_id).order_by(
+            Orders.date.desc()).all()
 
     for order in orders:
         order_dict = {
@@ -41,8 +43,12 @@ def index():
 
         order_data.append(order_dict)
 
-    return (jsonify(order_data))
-    return render_template("customer/customer.html")
+    for order in order_data:
+        for item in order['items']:
+            print(item)
+
+    # return (jsonify(order_data))
+    return render_template("customer/customer.html", order_data=order_data)
 
 
 def init_app(app):
