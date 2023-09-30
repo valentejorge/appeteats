@@ -9,5 +9,6 @@ EXTENSIONS = [
     "appetieats.routes.menu",
     "appetieats.routes.auth",
     "appetieats.routes.admin.admin",
-    "appetieats.routes.admin.settings"
+    "appetieats.routes.admin.settings",
+    "appetieats.routes.customer"
 ]
