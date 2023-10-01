@@ -3,6 +3,7 @@
 {% block title %}Orders{% endblock %}
 {% block head %}
 <link href="/static/css/menu/menu.css" rel="stylesheet">
+<link href="/static/css/customer/orders.css" rel="stylesheet">
 
 {% endblock %}
 
@@ -10,34 +11,49 @@
 <div class="menu-cart-container">
     <div class="menu active" id="menu">
         {% for order in order_data %}
-        <div class="order-header text-center mt-4">
-            Order ID: {{ order.id }} | Status: {{ order.status }}
-        </div>
+        <div class="order-card">
+            <div class="order-header text-center mt-4">
+                Order ID: {{ order.id }} | Status: {{ order.status }}
+            </div>
+
             {% for item in order['items'] %}
+
             <ul class="list-group">
                 <li class="list-group-item cart-list">
                     <div class="d-flex align-items-center justify-content-start w-50">
                         <img src="/static/cache/{{ item.image_path }}" class="cart-img">
                         <h6 class="p-title mb-0">{{ item.product_name }}</h6>
                     </div>
-                        <div>
-                            x
-                        </div>
-                        <input type="number" class="qty-input text-center" value="{{ item.quantity }}" disabled>
-                        <div>
-                            =
-                        </div>
-                        <div class="price-section">
-                            <h6 class="mb-0">$</h6>
-                            <h6 class="mb-0">{{ item.sub_total }}</h6>
-                        </div>
+                    <div>
+                        x
+                    </div>
+                    <input type="number" class="qty-input text-center" value="{{ item.quantity }}" disabled>
+                    <div>
+                        =
+                    </div>
+                    <div class="price-section">
+                        <h6 class="mb-0">$</h6>
+                        <h6 class="mb-0">{{ item.sub_total }}</h6>
+                    </div>
                 </li>
             </ul>
-            {% endfor %}
-        <div id="total" class="total mt-3 text-end">
-            <h6>Total: $ {{ order.total_price }}</h6>
-        </div>
 
+            {% endfor %}
+
+            <!-- 
+            <div class="total text-end">
+                <h6 class="mb-0">Total: $ {{ order.total_price }}</h6>
+            </div>
+            -->
+            <li class="list-group-item order-footer">
+                <h6 class="p-title mb-0 total-text">Total: </h6>
+                <div class="price-section">
+                    <h6 class="mb-0">$</h6>
+                    <h6 class="mb-0">{{ order.total_price }}</h6>
+                </div>
+            </li>
+
+        </div>
 
         {% endfor %}
 
