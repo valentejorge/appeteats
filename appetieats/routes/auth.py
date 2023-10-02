@@ -120,8 +120,7 @@ def costumer_login():
         if last_restaurant:
             return redirect(f"/{last_restaurant}#cart")
         else:
-            # TODO: redirect to customer dashboard
-            return redirect(f"/{last_restaurant}#cart")
+            return redirect("/customer")
 
     else:
         return render_template("auth/customer-login.html")
