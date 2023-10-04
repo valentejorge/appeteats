@@ -60,7 +60,7 @@ def add_new_oder(customer_id, restaurant_id, total_price, order_items):
             customer_id=customer_id,
             restaurant_id=restaurant_id,
             date=datetime.datetime.now().isoformat(),
-            status="procecing",
+            status="processing",
             total_price=total_price
     )
     db.session.add(new_order)
