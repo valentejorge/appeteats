@@ -23,3 +23,7 @@
 .qty-input {
     color: black;
 }
+.spinner-border {
+    animation-duration: 1.5s;
+    margin-left: .5rem;
+}

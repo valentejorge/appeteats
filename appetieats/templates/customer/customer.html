@@ -11,17 +11,14 @@
 <div class="menu-cart-container">
     <div class="menu active" id="menu">
         {% for order in order_data %}
-        <div class="order-card">
-            <div class="order-header text-center mt-4">
-                {% if order.status == "processing" %}
-                
-                <div class="progress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="33%" aria-valuemin="0" aria-valuemax="100" style="width: 33%"></div>
-                </div>
-                {% endif %}
-                <p class="">
+        <div class="order-card shadow">
+            <div class="d-flex justify-content-center align-items-center order-header text-center mt-4">
+                <h6 class="mb-0">
                 Status: {{ order.status }}
-                </p>
+                </h6>
+                {% if order.status == "processing" %}
+                <div class="spinner-border spinner-border-sm" role="status"></div>
+                {% endif %}
             </div>
 
             {% for item in order['items'] %}
