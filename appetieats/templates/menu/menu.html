@@ -9,12 +9,18 @@
 {% block main %}
 <div class="menu-cart-container">
     <div class="menu active" id="menu">
-        <div class="top-app">
-            <h3> {{restaurant_info.name}} </h3>
-            <span class="material-icons nav_icon">account_circle</span>
+        <div class="top-app mt-3 mb-3">
+            <div class="form-header">
+                <div class="title">
+                    <h1 class="mb-0"> {{restaurant_info.name}} </h1>
+                </div>
+            </div>
+            <a class="mb-0" href="/customer">
+                <span class="material-icons nav_icon">account_circle</span>
+            </a>
         </div>
         <div class="mx-auto search">
-            <div class="input-group mb-2 mt-2">
+            <div class="input-group mb-4 mt-2">
                 <span class="input-group-text bg-white border_right_none border_left_round">
                     <span class="material-icons nav_icon">search</span>
                 </span>
@@ -27,7 +33,7 @@
 
     <div class="cart" id="cart">
         <div class="form-header">
-            <div class="title mt-5 text-center">
+            <div class="title mt-3 text-center">
                 <h1>Cart</h1>
             </div>
         </div>

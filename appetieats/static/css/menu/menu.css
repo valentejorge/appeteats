@@ -1,3 +1,14 @@
+.top-app {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.top-app a {
+    color: #ff0000;
+}
+.top-app a span {
+    font-size: 30px;
+}
 .products-line {
     display: flex;
     overflow-x: auto;
