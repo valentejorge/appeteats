@@ -58,8 +58,8 @@ def index(restaurant_url):
         if not validate_user_account():
             flash(
                 "Error: To place an order, please " +
-                "<a href='/customer/register'>Register</a> or " +
-                "<a href='/customer/login'>Login</a>", "warning"
+                "<a href='/register/customer'>Register</a> or " +
+                "<a href='/login/customer'>Login</a>", "warning"
             )
             return redirect(f'/{restaurant_url}#cart')
 
