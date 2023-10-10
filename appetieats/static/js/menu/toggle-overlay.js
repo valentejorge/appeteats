@@ -36,7 +36,20 @@ function showOverlay(overlayId) {
     const overlay = document.querySelector(`[data-category="${overlayId}"]`)
     overlay.classList.add('active');
 }
+
 function hideOverlay(overlayId) {
     const overlay = document.querySelector(`[data-category="${overlayId}"]`)
+    overlay.classList.remove('active');
+}
+
+function showProductDetails(productDiv) {
+    event.stopPropagation();
+    const productOverlay = document.querySelector('#product-details')
+    productOverlay.innerHTML = productDiv;
+    const overlay = document.querySelector('#product-overlay')
+    overlay.classList.add('active');
+}
+function hideProductDetails() {
+    const overlay = document.querySelector('#product-overlay')
     overlay.classList.remove('active');
 }
