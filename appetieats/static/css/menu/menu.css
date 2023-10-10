@@ -22,6 +22,11 @@
     display: none; /* Chrome, Safari and Opera */
 }
 
+.button-click:active {
+    transform: scale(0.80);
+    transition: all 0.3s;
+}
+
 .product-overlay {
     position: fixed;
     top: 0;

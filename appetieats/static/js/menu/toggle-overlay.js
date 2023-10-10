@@ -42,10 +42,27 @@ function hideOverlay(overlayId) {
     overlay.classList.remove('active');
 }
 
-function showProductDetails(productDiv) {
+function showProductDetails(productId) {
     event.stopPropagation();
+    const product = products.find(p => p.id === productId)
+    const div = `
+            <div class="" style="width: 50vh;">
+                <div class="product-details" >
+                    <div class="" style="border: none;">
+                        <img src="/static/cache/${product.image_path}" class="card-img-top mt-0" alt="${product.name}">
+                        <div class="card-body p-2 d-flex flex-column align-items-start">
+                            <h4 class="p-title mb-2">${product.name}</h4>
+                            <p class="mb-2">${product.description}</p>
+                            <h5 class="price mt-auto mb-3">$ ${product.price.toFixed(2)}</h5>
+                            <button onclick="addToCart(${productId})" class="std-button button-click">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+
     const productOverlay = document.querySelector('#product-details')
-    productOverlay.innerHTML = productDiv;
+    productOverlay.innerHTML = div;
     const overlay = document.querySelector('#product-overlay')
     overlay.classList.add('active');
 }
