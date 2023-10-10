@@ -78,14 +78,16 @@ function categoryConstructor(categoryName, categoryId) {
 function productConstructor(productId, productName, productPrice, productImage) {
     const div = `
         <div class="product-width">
-            <div class="card">
-                <img src="/static/cache/${productImage}" class="card-img-top mt-0" alt="${productName}">
-                <button onclick="addToCart(${productId})" class="add-to-cart-button">
-                    <span class="material-icons nav_icons">add</span>
-                </button>
-                <div class="card-body p-2 d-flex flex-column align-items-start">
-                    <h6 class="p-title mb-2">${productName}</h6>
-                    <h6 class="price mt-auto mb-0">$ ${productPrice.toFixed(2)}</h6>
+            <div class="product-details" >
+                <div class="card" onclick=showProductDetails(${productId})>
+                    <img src="/static/cache/${productImage}" class="card-img-top mt-0" alt="${productName}">
+                    <div onclick="addToCart(${productId})" class="add-to-cart-button">
+                        <span class="material-icons nav_icons">add</span>
+                    </div>
+                    <div class="card-body p-2 d-flex flex-column align-items-start">
+                        <h6 class="p-title mb-2">${productName}</h6>
+                        <h6 class="price mt-auto mb-0">$ ${productPrice.toFixed(2)}</h6>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,6 +111,7 @@ function overlayConstructor(categoryId) {
 }
 
 function addToCart(productId) {
+    event.stopPropagation(); // for not showProductDetails too
     const product = products.find(p => p.id === productId);
     if (!product) {
         console.error('Product not found.');
