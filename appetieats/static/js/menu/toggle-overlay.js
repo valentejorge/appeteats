@@ -46,8 +46,8 @@ function showProductDetails(productId) {
     event.stopPropagation();
     const product = products.find(p => p.id === productId)
     const div = `
-            <div class="" style="width: 50vh;">
-                <div class="product-details" >
+            <div class="d-flex justify-content-center" style="width: 80vw; max-width: 650px; max-height: 100vh;">
+                <div class="product-details" style="cursor: default;" >
                     <div class="" style="border: none;">
                         <img src="/static/cache/${product.image_path}" class="card-img-top mt-0" alt="${product.name}">
                         <div class="card-body p-2 d-flex flex-column align-items-start">

@@ -98,7 +98,7 @@ function productConstructor(productId, productName, productPrice, productImage) 
 function overlayConstructor(categoryId) {
     const div = `
         <div class="overlay" data-category="${categoryId}">
-            <button class="back-button d-flex align-items-start justify-content-start" onclick="hideOverlay(${categoryId})">
+            <button class="back-button d-flex align-items-center justify-content-start" onclick="hideOverlay(${categoryId})">
                 <span class="material-icons nav_icons">chevron_left</span>
                 <span class="flex-grow-1 text-start">
                     Back
