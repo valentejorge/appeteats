@@ -1,10 +1,12 @@
-from flask import Blueprint, jsonify, render_template, session
+from flask import Blueprint, render_template, session
 from appetieats.models import Orders, OrderItems, Products, ProductImages
+from appetieats.ext.helper.register_tools import login_required
 
 customer_bp = Blueprint('customer', __name__)
 
 
 @customer_bp.route("/customer")
+@login_required("customer")
 def index():
     """Show the landing page"""
     order_data = []

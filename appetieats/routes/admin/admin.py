@@ -1,6 +1,8 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session, jsonify
 
 from appetieats.ext.helper.register_tools import login_required
+from appetieats.models import Orders, OrderItems, Products, ProductImages
+from appetieats.ext.helper.db_tools import get_orders, orders_to_dict
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -14,7 +16,55 @@ def admin():
 @admin_bp.route("/admin/dashboard")
 @login_required("restaurant")
 def dashboard():
-    return render_template("admin/dashboard.html")
+    """show dashboard page"""
+    order_data = {
+            "processing": [],
+            "cooking": [],
+            "done": []
+    }
+
+    user_id = session.get("user_id")
+
+    processing, cooking, done = (
+            get_orders(user_id, "processing"),
+            get_orders(user_id, "cooking"),
+            get_orders(user_id, "done")
+    )
+
+    order_data["processing"], order_data["cooking"], order_data["done"] = (
+            orders_to_dict(processing),
+            orders_to_dict(cooking),
+            orders_to_dict(done)
+    )
+    print(order_data)
+
+    return render_template("admin/dashboard.html", order_data=order_data)
+
+
+@admin_bp.route("/admin/dashboard/data")
+@login_required("restaurant")
+def orders_data():
+    order_data = {
+            "processing": [],
+            "cooking": [],
+            "done": []
+    }
+
+    user_id = session.get("user_id")
+
+    processing, cooking, done = (
+            get_orders(user_id, "processing"),
+            get_orders(user_id, "cooking"),
+            get_orders(user_id, "done")
+    )
+
+    order_data["processing"], order_data["cooking"], order_data["done"] = (
+            orders_to_dict(processing),
+            orders_to_dict(cooking),
+            orders_to_dict(done)
+    )
+    print(order_data)
+    return jsonify(order_data)
 
 
 @admin_bp.route("/admin/settings")

@@ -1,9 +1,71 @@
 {% extends "admin/admin.html" %}
 
+{% block head %}
+<link href="/static/css/admin/dashboard.css" rel="stylesheet">
+<link href="/static/css/menu/menu.css" rel="stylesheet">
+<link href="/static/css/customer/orders.css" rel="stylesheet">
+{% endblock %}
 {% block title %}Dashboard{% endblock %}
 
 {% block main %}
-<p>A great dashboard</p>
+<div class="kanban-container shadow">
+    <div class="kanban-head">
+        <button class="top-button top-button-left active">Processing</button>
+        <button class="top-button">Cooking</button>
+        <button class="top-button top-button-right">Done</button>
+    </div>
+    <div class="kanban-body">
+        {% for item in order_data %}
+        <div class="kanban-page" id="{{ item }}">
+            {% for order in order_data[item] %}
+            <div class="order-card">
+                <div class="d-flex justify-content-center align-items-center order-header text-center mt-4">
+                    <h6 class="mb-0">
+                        Order ID: {{ order.id }}
+                    </h6>
+                </div>
+
+                {% for item in order['items'] %}
+
+                <ul class="list-group">
+                    <li class="list-group-item cart-list">
+                        <div class="d-flex align-items-center justify-content-start w-50">
+                            <img src="/static/cache/{{ item.image_path }}" class="cart-img" style="max-width: 30px;">
+                            <h6 class="p-title mb-0">{{ item.product_name }}</h6>
+                        </div>
+                        <div>
+                            x
+                        </div>
+                        <input type="number" class="qty-input text-center" value="{{ item.quantity }}" disabled>
+                        <div>
+                            =
+                        </div>
+                        <div class="price-section">
+                            <h6 class="mb-0">$</h6>
+                            <h6 class="mb-0">{{ item.sub_total }}</h6>
+                        </div>
+                    </li>
+                </ul>
+
+                {% endfor %}
+
+                <li class="list-group-item order-footer">
+                    <h6 class="p-title mb-0 total-text">Total: </h6>
+                    <div class="price-section">
+                        <h6 class="mb-0">$</h6>
+                        <h6 class="mb-0">{{ order.total_price }}</h6>
+                    </div>
+                </li>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
 {% endblock %}
 
 {% block dashboard %}nav_link--active{% endblock %}
