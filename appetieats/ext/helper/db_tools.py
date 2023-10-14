@@ -97,11 +97,14 @@ def get_orders(restaurant_id, status):
 def orders_to_dict(orders):
     order_data = []
     for order in orders:
-        customer_data = CustomersData.query.filter(
+        customer = CustomersData.query.filter(
                 CustomersData.user_id == order.customer_id).first()
         order_dict = {
             "id": order.id,
-            "customer_name": f"{customer_data.first_name} {customer_data.last_name}",
+            "customer_name": f"{customer.first_name} {customer.last_name}",
+            "customer_address": f"{customer.address}, {customer.reference} - \
+                                {customer.zip_code}",
+            "customer_phone": {customer.phone},
             "date": order.date,
             "status": order.status,
             "total_price": order.total_price,
