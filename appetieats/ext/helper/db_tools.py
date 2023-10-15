@@ -102,9 +102,9 @@ def orders_to_dict(orders):
         order_dict = {
             "id": order.id,
             "customer_name": f"{customer.first_name} {customer.last_name}",
-            "customer_address": f"{customer.address}, {customer.reference} - \
-                                {customer.zip_code}",
-            "customer_phone": {customer.phone},
+            "customer_address": f"{customer.address} - {customer.zip_code}",
+            "customer_reference": customer.reference,
+            "customer_phone": customer.phone,
             "date": order.date,
             "status": order.status,
             "total_price": order.total_price,
