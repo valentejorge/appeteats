@@ -76,10 +76,14 @@
                         <h6 class="mb-0">{{ order.total_price }}</h6>
                     </div>
                 </li>
-                <div class="d-flex align-items-center justify-content-end std-button p-1" style="border-radius: 0 0 10px 10px;">
-                    <span class="">Next Step</span>
-                    <span class="material-icons nav_icons">chevron_right</span>
-                </div>
+                <form action="/admin/dashboard/update-status" method="post">
+                    <input name="id" type="hidden" value="{{ order.id }}">
+                    <input name="status" type="hidden" value="{{ order.status }}">
+                    <button type="submit" class="d-flex align-items-center justify-content-end std-button p-1 bottom-button">
+                        <span class="">Next Step</span>
+                        <span class="material-icons nav_icons">chevron_right</span>
+                    </button>
+                </form>
 
             </div>
 

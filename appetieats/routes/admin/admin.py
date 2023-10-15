@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, jsonify
+from flask import Blueprint, render_template, session, jsonify, request
 
 from appetieats.ext.helper.register_tools import login_required
 from appetieats.models import Orders, OrderItems, Products, ProductImages
@@ -39,6 +39,28 @@ def dashboard():
     print(order_data)
 
     return render_template("admin/dashboard.html", order_data=order_data)
+
+
+@admin_bp.route("/admin/dashboard/update-status", methods=["POST"])
+@login_required("restaurant")
+def update_status():
+    """Update status of produtcs"""
+    if request.method == "POST":
+        restaurant_id = session.get("user_id")
+        id = request.form.get("id", type=int)
+        status = request.form.get("status", type=str)
+        product = Orders.query.filter_by(id=id).filter_by(
+                status=status).filter_by(restaurant_id=restaurant_id).first()
+        print(product)
+        if product:
+            # TODO: Update product status
+            print()
+        else:
+            # TODO: abort message
+            print()
+
+        a = (id, status, restaurant_id)
+        return jsonify(a)
 
 
 @admin_bp.route("/admin/dashboard/data")

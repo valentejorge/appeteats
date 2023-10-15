@@ -1,3 +1,6 @@
+.main_content {
+    padding-bottom: 0px;
+}
 .kanban-container {
     height: 85vh;
     width: 100%;
@@ -8,22 +11,25 @@
 .kanban-head {
     display: flex;
     justify-content: space-between;
+    height: 5%;
 }
 
 .kanban-body {
     display: flex;
     justify-content: space-between;
+    height: 95%;
 }
 
 .kanban-page {
     width: 33.33%;
-    height: 100%;
     border-top: none;
+    overflow-y: auto;
+    margin: 1px;
 }
 
 .top-button {
     width: 33.33%;
-    height: 3rem;
+    height: 100%;
     background-color: white;
     border: solid 1px #f00;
     border-bottom: solid 3px #cc0000;
@@ -59,4 +65,14 @@
 
 .top-button-right {
     border-radius: 0 20px 0 0;
+}
+
+.bottom-button {
+    border-radius: 0 0 10px 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .kanban-page {
+        width: 100%;
+    }
 }
