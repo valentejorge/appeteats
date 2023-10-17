@@ -24,7 +24,11 @@
     width: 33.33%;
     border-top: none;
     overflow-y: auto;
+<<<<<<< HEAD
     margin: 1px;
+=======
+    
+>>>>>>> refs/remotes/origin/develop
 }
 
 .top-button {
@@ -67,10 +71,13 @@
     border-radius: 0 20px 0 0;
 }
 
+<<<<<<< HEAD
 .bottom-button {
     border-radius: 0 0 10px 10px;
 }
 
+=======
+>>>>>>> refs/remotes/origin/develop
 @media screen and (max-width: 768px) {
     .kanban-page {
         width: 100%;
