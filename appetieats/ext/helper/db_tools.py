@@ -89,7 +89,7 @@ def get_orders(restaurant_id, status):
             ).filter(
                     Orders.status == status
             ).order_by(
-                    Orders.date.desc()
+                    Orders.date.asc()
             ).all()
     return orders
 
@@ -129,3 +129,20 @@ def orders_to_dict(orders):
 
         order_data.append(order_dict)
     return order_data
+
+
+def update_product_status(product, operation):
+    match product.status, operation:
+        case "processing", "next":
+            product.status = "cooking"
+
+        case "cooking", "next":
+            product.status = "done"
+
+        case "cooking", "previous":
+            product.status = "processing"
+
+        case "done", "previous":
+            product.status = "cooking"
+
+    db.session.commit()

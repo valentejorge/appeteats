@@ -1,8 +1,10 @@
-from flask import Blueprint, render_template, session, jsonify, request
+from flask import Blueprint, render_template, session, jsonify, request, abort
 
 from appetieats.ext.helper.register_tools import login_required
 from appetieats.models import Orders, OrderItems, Products, ProductImages
-from appetieats.ext.helper.db_tools import get_orders, orders_to_dict
+from appetieats.ext.helper.db_tools import (
+    get_orders, orders_to_dict, update_product_status
+)
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -21,13 +23,14 @@ def dashboard():
         restaurant_id = session.get("user_id")
         id = request.form.get("id", type=int)
         status = request.form.get("status", type=str)
+        operation = request.form.get("operation", type=str)
         product = Orders.query.filter_by(id=id).filter_by(
                 status=status).filter_by(restaurant_id=restaurant_id).first()
         print(product)
         if not product:
-            # TODO: abort message
-            a = (id, status, restaurant_id)
-            print(a)
+            abort(403, "Fatal Error: Product not found")
+
+        update_product_status(product, operation)
 
     order_data = {
             "processing": [],
@@ -49,28 +52,6 @@ def dashboard():
             orders_to_dict(done)
     )
     return render_template("admin/dashboard.html", order_data=order_data)
-
-
-@admin_bp.route("/admin/dashboard/update-status", methods=["POST"])
-@login_required("restaurant")
-def update_status():
-    """Update status of produtcs"""
-    if request.method == "POST":
-        restaurant_id = session.get("user_id")
-        id = request.form.get("id", type=int)
-        status = request.form.get("status", type=str)
-        product = Orders.query.filter_by(id=id).filter_by(
-                status=status).filter_by(restaurant_id=restaurant_id).first()
-        print(product)
-        if product:
-            # TODO: Update product status
-            print()
-        else:
-            # TODO: abort message
-            print()
-
-        a = (id, status, restaurant_id)
-        return jsonify(a)
 
 
 @admin_bp.route("/admin/dashboard/data")
