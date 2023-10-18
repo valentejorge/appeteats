@@ -48,19 +48,6 @@
     color: white;
 }
 
-.top-button:active {
-    color: white;
-    background-color: #cc0000;
-    transform: scale(0.95);
-    transition: all 0.3s;
-}
-
-.top-button.active {
-    color: #ff0000;
-    background-color: white;
-    border: solid 1px #f00;
-    border-bottom: 0px !important;
-}
 
 .top-button-left {
     border-radius: 20px 0 0 0;
@@ -87,7 +74,27 @@
     height: 100%;
 }
 @media screen and (max-width: 768px) {
-    .kanban-page {
+
+    .kanban-page.active {
         width: 100%;
+        display: block;
+    }
+
+    .kanban-page {
+        display: none;
+    }
+
+    .top-button:active {
+        color: white;
+        background-color: #cc0000;
+        transform: scale(0.95);
+        transition: all 0.3s;
+    }
+
+    .top-button.active {
+        color: #ff0000;
+        background-color: white;
+        border: solid 1px #f00;
+        border-bottom: 0px !important;
     }
 }

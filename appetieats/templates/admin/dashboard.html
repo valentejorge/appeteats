@@ -10,9 +10,9 @@
 {% block main %}
 <div class="kanban-container shadow">
     <div class="kanban-head">
-        <button class="top-button top-button-left active">Processing</button>
-        <button class="top-button">Cooking</button>
-        <button class="top-button top-button-right">Done</button>
+        <button name="processing" class="top-button top-button-left active">Processing</button>
+        <button name="cooking" class="top-button">Cooking</button>
+        <button name="done" class="top-button top-button-right">Done</button>
     </div>
     <div class="kanban-body">
         {% for item in order_data %}
@@ -130,6 +130,7 @@
     </div>
 
 </div>
+<script src="/static/js/admin/dashboard.js"></script>
 {% endblock %}
 
 {% block dashboard %}nav_link--active{% endblock %}
