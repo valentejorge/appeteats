@@ -13,10 +13,22 @@ def admin():
     return render_template("admin/admin.html")
 
 
-@admin_bp.route("/admin/dashboard")
+@admin_bp.route("/admin/dashboard", methods=["GET", "POST"])
 @login_required("restaurant")
 def dashboard():
     """show dashboard page"""
+    if request.method == "POST":
+        restaurant_id = session.get("user_id")
+        id = request.form.get("id", type=int)
+        status = request.form.get("status", type=str)
+        product = Orders.query.filter_by(id=id).filter_by(
+                status=status).filter_by(restaurant_id=restaurant_id).first()
+        print(product)
+        if not product:
+            # TODO: abort message
+            a = (id, status, restaurant_id)
+            print(a)
+
     order_data = {
             "processing": [],
             "cooking": [],
@@ -36,8 +48,6 @@ def dashboard():
             orders_to_dict(cooking),
             orders_to_dict(done)
     )
-    print(order_data)
-
     return render_template("admin/dashboard.html", order_data=order_data)
 
 

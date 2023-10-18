@@ -76,7 +76,7 @@
                         <h6 class="mb-0">{{ order.total_price }}</h6>
                     </div>
                 </li>
-                <form action="/admin/dashboard/update-status" method="post">
+                <form action="/admin/dashboard" method="post">
                     <input name="id" type="hidden" value="{{ order.id }}">
                     <input name="status" type="hidden" value="{{ order.status }}">
                     <button type="submit" class="d-flex align-items-center justify-content-end std-button p-1 bottom-button">
