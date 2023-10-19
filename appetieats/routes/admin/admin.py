@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, session, jsonify, request, abort
+from flask import (
+        Blueprint, render_template, session, jsonify, request, abort, redirect
+)
 
 from appetieats.ext.helper.register_tools import login_required
 from appetieats.models import Orders, OrderItems, Products, ProductImages
@@ -19,6 +21,8 @@ def admin():
 @login_required("restaurant")
 def dashboard():
     """show dashboard page"""
+    status = None
+
     if request.method == "POST":
         restaurant_id = session.get("user_id")
         id = request.form.get("id", type=int)
@@ -26,7 +30,6 @@ def dashboard():
         operation = request.form.get("operation", type=str)
         product = Orders.query.filter_by(id=id).filter_by(
                 status=status).filter_by(restaurant_id=restaurant_id).first()
-        print(product)
         if not product:
             abort(403, "Fatal Error: Product not found")
 
@@ -51,6 +54,9 @@ def dashboard():
             orders_to_dict(cooking),
             orders_to_dict(done)
     )
+    if status:
+        return redirect(f"/admin/dashboard#{status}")
+
     return render_template("admin/dashboard.html", order_data=order_data)
 
 
@@ -76,7 +82,6 @@ def orders_data():
             orders_to_dict(cooking),
             orders_to_dict(done)
     )
-    print(order_data)
     return jsonify(order_data)
 
 
