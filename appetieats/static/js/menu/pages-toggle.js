@@ -1,30 +1,30 @@
-const buttons = document.querySelectorAll('.top-button')
-const pages = document.querySelectorAll('.kanban-page')
-pages[0].classList.add('active');
+const buttons = document.querySelectorAll('.nav_link')
+const pages = document.querySelectorAll(`[name="page"]`)
+console.log(buttons)
+console.log(pages)
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        window.location.hash = button.name;
-        buttons.forEach((button) => button.classList.remove('active'));
-        button.classList.add('active');
 
         pages.forEach((page) => {
             page.classList.remove('active');
-        })
+        });
 
         const page = document.querySelector(`#${button.name}`)
+        console.log(page)
         page.classList.add('active');
     });
 });
 
-document.addEventListener("DOMContentLoaded", clickHash);
-
 function clickHash() {
     const buttonHash = window.location.hash;
     const buttonName = buttonHash.slice(1);
+    console.log(buttonName)
     if (buttonHash) {
-        const button = document.querySelector(`[name=${buttonName}]`);
+        const button = document.querySelector(`[name="${buttonName}"]`);
         button.click();
     }
 }
+
+document.addEventListener("DOMContentLoaded", clickHash);
 window.addEventListener("hashchange", clickHash);

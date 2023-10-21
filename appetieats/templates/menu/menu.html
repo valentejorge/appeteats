@@ -8,7 +8,7 @@
 
 {% block main %}
 <div class="menu-cart-container">
-    <div class="menu active" id="menu">
+    <div name="page" class="menu active" id="menu">
         <div class="top-app mt-3 mb-3">
             <div class="form-header">
                 <div class="title">
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="cart" id="cart">
+    <div name="page" class="cart" id="cart">
         <div class="form-header">
             <div class="title mt-3 text-center">
                 <h1>Cart</h1>
@@ -59,7 +59,6 @@
 
 <script src="/static/js/menu/shopping.js"></script>
 <script src="/static/js/menu/toggle-overlay.js"></script>
-<script src="/static/js/menu/toggle-menu-cart.js"></script>
 {% endblock %}
 
 {% block edit %}{% endblock %}
