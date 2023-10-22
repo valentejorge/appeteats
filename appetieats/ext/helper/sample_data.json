@@ -80,17 +80,17 @@
         {
             "id": 1,
             "product_id": 1,
-            "image_path": "product1.png"
+            "image_path": "cheese.png"
         },
         {
             "id": 2,
             "product_id": 2,
-            "image_path": "product2.png"
+            "image_path": "pepperoni.png"
         },
         {
             "id": 3,
             "product_id": 3,
-            "image_path": "product3.png"
+            "image_path": "pineapple.png"
         }
     ]
 }
