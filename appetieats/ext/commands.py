@@ -1,3 +1,5 @@
+import json
+import os
 from appetieats.ext.database import db
 from appetieats.models import (
         Users, RestaurantsData, Categories, ProductImages, Products,
@@ -14,6 +16,51 @@ def create_db():
 def drop_db():
     """drop sql database"""
     db.drop_all()
+
+
+def populate_database_from_json():
+    json_file = 'appetieats/ext/helper/sample_data.json'
+    print(os.path.abspath(json_file))
+
+    with open(json_file, 'r') as file:
+        data = json.load(file)
+
+        for user_data in data['users']:
+            user_data['hash'] = generate_password_hash(user_data['hash'])
+            user = Users(**user_data)
+            db.session.add(user)
+
+        for restaurant_data in data['restaurants']:
+            restaurant = RestaurantsData(**restaurant_data)
+            db.session.add(restaurant)
+
+        for categories_data in data['categories']:
+            category = Categories(**categories_data)
+            db.session.add(category)
+
+        for customer_data in data['customers']:
+            customer = CustomersData(**customer_data)
+            db.session.add(customer)
+
+        for product_data in data['products']:
+            product = Products(**product_data)
+            db.session.add(product)
+
+        for image_data in data['product_images']:
+            image_path = image_data['image_path']
+            product_id = image_data['product_id']
+
+            product_image = ProductImages(
+                product_id=product_id,
+                image_path=image_path,
+                # TODO: change image path to a real path
+                image_data=open(
+                    "appetieats/static/assets/img/pizza.png", "rb"
+                    ).read()
+            )
+            db.session.add(product_image)
+
+        db.session.commit()
 
 
 def populate_users():
@@ -129,7 +176,8 @@ def restart_db():
     """restart database"""
     drop_db()
     create_db()
-    populate_users()
+    populate_database_from_json()
+    # populate_users()
 
 
 def init_app(app):

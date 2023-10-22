@@ -1,0 +1,96 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "dev",
+            "hash": "dev",
+            "role": "restaurant"
+        },
+        {
+            "id": 2,
+            "username": "wanteat",
+            "hash": "wanteat",
+            "role": "customer"
+        }
+    ],
+    "restaurants": [
+        {
+            "id": 1,
+            "name": "Python Pizza",
+            "address": "123 Snake St, Pythonville, PY 31415",
+            "phone": "555-PY-314",
+            "color": "#4B8BBE",
+            "url": "python-pizza",
+            "user_id": 1
+        }
+    ],
+    "customers": [
+        {
+            "id": 1,
+            "first_name": "Hunger",
+            "last_name": "Jhonson",
+            "phone": "555-hungry",
+            "address": "789, Craving St",
+            "zip_code": "98765",
+            "reference": "near to rumbling belly",
+            "user_id": 2
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "category_name": "Pizza"
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Flask 'n' Cheese Pizza",
+            "description": "A classic pizza with tomato sauce and melted cheese.",
+            "price": 10.99,
+            "barcode": 1,
+            "available": "True",
+            "category_id": 1,
+            "user_id": 1
+        },
+        {
+            "id": 2,
+            "name": "Python Pepperoni Powerhouse",
+            "description": "A pepperoni lover's dream with generous slices of pepperoni and cheese.",
+            "price": 14.99,
+            "barcode": 2,
+            "available": "True",
+            "category_id": 1,
+            "user_id": 1
+        },
+        {
+            "id": 3,
+            "name": "Pythonic Pineapple Paradise",
+            "description": "A sweet and savory blend of pineapple and Pythonic sauce.",
+            "price": 13.99,
+            "barcode": 3,
+            "available": "True",
+            "category_id": 1,
+            "user_id": 1
+        }
+
+    ],
+    "product_images": [
+        {
+            "id": 1,
+            "product_id": 1,
+            "image_path": "product1.png"
+        },
+        {
+            "id": 2,
+            "product_id": 2,
+            "image_path": "product2.png"
+        },
+        {
+            "id": 3,
+            "product_id": 3,
+            "image_path": "product3.png"
+        }
+    ]
+}
