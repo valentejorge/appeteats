@@ -41,6 +41,11 @@
             "id": 1,
             "user_id": 1,
             "category_name": "Pizza"
+        },
+        {
+            "id": 2,
+            "user_id": 1,
+            "category_name": "Drinks"
         }
     ],
     "products": [
@@ -73,6 +78,36 @@
             "available": "True",
             "category_id": 1,
             "user_id": 1
+        },
+        {
+            "id": 4,
+            "name": "SQLite3 Green Bite",
+            "description": "Savor the lightness of SQLite3 with sautéed brócolis atop a crispy crust. A tech-inspired, lighter choice.",
+            "price": 13.99,
+            "barcode": 4,
+            "available": "True",
+            "category_id": 1,
+            "user_id": 1
+        },
+        {
+            "id": 5,
+            "name": "SQLAlchemy Bacon Bonanza",
+            "description": "The SQLAlchemy Bacon Bonanza pizza is a techie's delight, combining the savory allure of bacon with the data management prowess of SQLAlchemy. Savor the smoky crunch of bacon while experiencing the seamless flavor coordination, reminiscent of SQLAlchemy's precision. A must-try for tech enthusiasts!",
+            "price": 17.99,
+            "barcode": 5,
+            "available": "True",
+            "category_id": 1,
+            "user_id": 1
+        },
+        {
+            "id": 6,
+            "name": "Python Power Smoothie",
+            "description": "A revitalizing 16 oz smoothie with a blend of fresh fruits and yogurt, packed with energy for tech enthusiasts.",
+            "price": 4.99,
+            "barcode": 6,
+            "available": "True",
+            "category_id": 2,
+            "user_id": 1
         }
 
     ],
@@ -91,6 +126,21 @@
             "id": 3,
             "product_id": 3,
             "image_path": "pineapple.png"
+        },
+        {
+            "id": 4,
+            "product_id": 4,
+            "image_path": "broccoli.png"
+        },
+        {
+            "id": 5,
+            "product_id": 5,
+            "image_path": "bacon.png"
+        },
+        {
+            "id": 6,
+            "product_id": 6,
+            "image_path": "smoothie.png"
         }
     ]
 }
