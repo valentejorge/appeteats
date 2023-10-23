@@ -108,6 +108,26 @@
             "available": "True",
             "category_id": 2,
             "user_id": 1
+        },
+        {
+            "id": 7,
+            "name": "Techie Tea Trio",
+            "description": "A set of three teas inspired by famous tech figures, including Alan Turing’s Tisane, John von Neumann’s Earl Grey, and Donald Knuth's Nutty Chai.",
+            "price": 2.56,
+            "barcode": 7,
+            "available": "True",
+            "category_id": 2,
+            "user_id": 1
+        },
+        {
+            "id": 8,
+            "name": "Code Cappuccino",
+            "description": "A rich cappuccino with a dusting of cocoa powder, perfect for a coding break.",
+            "price": 3.49,
+            "barcode": 8,
+            "available": "True",
+            "category_id": 2,
+            "user_id": 1
         }
 
     ],
@@ -141,6 +161,16 @@
             "id": 6,
             "product_id": 6,
             "image_path": "smoothie.png"
+        },
+        {
+            "id": 7,
+            "product_id": 7,
+            "image_path": "tea.png"
+        },
+        {
+            "id": 8,
+            "product_id": 8,
+            "image_path": "cappuccino.png"
         }
     ]
 }
