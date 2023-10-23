@@ -133,8 +133,37 @@
             "available": "True",
             "category_id": 2,
             "user_id": 1
+        },
+        {
+            "id": 9,
+            "name": "Binary Brownie Sundae",
+            "description": "A delectable brownie sundae with scoops of vanilla and chocolate ice cream, topped with binary-inspired chocolate sauce.",
+            "price": 6.99,
+            "barcode": 9,
+            "available": "True",
+            "category_id": 3,
+            "user_id": 1
+        },
+        {
+            "id": 10,
+            "name": "Flask Fudge Cake",
+            "description": "A dense and moist fudge cake inspired by Flask, served warm with chocolate top.",
+            "price": 8.99,
+            "barcode": 9,
+            "available": "True",
+            "category_id": 3,
+            "user_id": 1
+        },
+        {
+            "id": 11,
+            "name": "Vim Banana Split",
+            "description": "A delightful Vim Banana Split that's as efficient as your favorite text editor. A split banana, ice cream scoops, whipped cream and chocolate syrup. Because leaving Vim is easier when it's on your dessert plate.",
+            "price": 7.49,
+            "barcode": 9,
+            "available": "True",
+            "category_id": 3,
+            "user_id": 1
         }
-
     ],
     "product_images": [
         {
@@ -176,6 +205,21 @@
             "id": 8,
             "product_id": 8,
             "image_path": "cappuccino.png"
+        },
+        {
+            "id": 9,
+            "product_id": 9,
+            "image_path": "brownie.png"
+        },
+        {
+            "id": 10,
+            "product_id": 10,
+            "image_path": "fudge.png"
+        },
+        {
+            "id": 11,
+            "product_id": 11,
+            "image_path": "banana.png"
         }
     ]
 }
