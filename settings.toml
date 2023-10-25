@@ -5,6 +5,7 @@ EXTENSIONS = [
     "appetieats.ext.database",
     "appetieats.ext.commands",
     "appetieats.ext.error",
+    "appetieats.ext.events",
     "appetieats.routes.main",
     "appetieats.routes.menu",
     "appetieats.routes.auth",
