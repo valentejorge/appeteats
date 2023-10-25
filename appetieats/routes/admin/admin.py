@@ -36,29 +36,10 @@ def dashboard():
 
         update_product_status(product, operation)
 
-    order_data = {
-            "processing": [],
-            "cooking": [],
-            "done": []
-    }
-
-    user_id = session.get("user_id")
-
-    processing, cooking, done = (
-            get_orders(user_id, "processing"),
-            get_orders(user_id, "cooking"),
-            get_orders(user_id, "done")
-    )
-
-    order_data["processing"], order_data["cooking"], order_data["done"] = (
-            orders_to_dict(processing),
-            orders_to_dict(cooking),
-            orders_to_dict(done)
-    )
     if status:
         return redirect(f"/admin/dashboard#{status}")
 
-    return render_template("admin/dashboard.html", order_data=order_data)
+    return render_template("admin/dashboard.html")
 
 
 @admin_bp.route("/admin/dashboard/data")
