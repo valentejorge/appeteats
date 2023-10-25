@@ -3,8 +3,10 @@ from appetieats.models import (
 )
 from werkzeug.utils import secure_filename
 from appetieats.ext.database import db
+from flask_socketio import emit
 from flask import session
 import datetime
+import json
 
 
 def add_new_product(product_data, product_image):
@@ -57,7 +59,7 @@ def update_product_data(product_data, id):
     return
 
 
-def add_new_oder(customer_id, restaurant_id, total_price, order_items):
+def add_new_order(customer_id, restaurant_id, total_price, order_items):
     new_order = Orders(
             customer_id=customer_id,
             restaurant_id=restaurant_id,
@@ -67,7 +69,6 @@ def add_new_oder(customer_id, restaurant_id, total_price, order_items):
     )
     db.session.add(new_order)
     db.session.commit()
-    print(order_items)
 
     for item in order_items:
         new_item = OrderItems(
@@ -80,7 +81,16 @@ def add_new_oder(customer_id, restaurant_id, total_price, order_items):
         db.session.add(new_item)
         db.session.commit()
 
+    order_emmit = orders_to_dict(get_order(new_order.id))
+
+    emit("new_order", order_emmit, namespace="/dashboard", room=restaurant_id)
+
     return
+
+
+def get_order(id):
+    order = Orders.query.filter(Orders.id == id).all()
+    return order
 
 
 def get_orders(restaurant_id, status):

@@ -9,7 +9,7 @@ from appetieats.ext.helper.validate_inputs import (
         validate_cart, validate_user_account
 )
 from appetieats.ext.helper.cache_images import get_image
-from appetieats.ext.helper.db_tools import add_new_oder
+from appetieats.ext.helper.db_tools import add_new_order
 import json
 
 menu_bp = Blueprint('menu', __name__)
@@ -65,7 +65,7 @@ def index(restaurant_url):
 
         # TODO: add the new order in database
         customer_id = session.get("user_id")
-        add_new_oder(customer_id, restaurant_id, total, cart_dict)
+        add_new_order(customer_id, restaurant_id, total, cart_dict)
 
         flash(
             "Success: check your <a href='/customer'>orders</a>",
