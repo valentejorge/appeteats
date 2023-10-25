@@ -14,7 +14,7 @@
         <button name="cooking" class="top-button">Cooking</button>
         <button name="done" class="top-button top-button-right">Done</button>
     </div>
-    <div class="kanban-body">
+    <div class="kanban-body" id="kanban-body">
         {% for item in order_data %}
         <div class="kanban-page" id="{{ item }}">
             {% for order in order_data[item] %}
@@ -131,6 +131,10 @@
 
 </div>
 <script src="/static/js/admin/dashboard.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+<script src="/static/js/admin/socketio.js"></script>
+<script src="/static/js/admin/dashboard-build.js"></script>
 {% endblock %}
 
 {% block dashboard %}nav_link--active{% endblock %}
