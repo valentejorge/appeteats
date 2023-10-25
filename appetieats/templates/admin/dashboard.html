@@ -15,121 +15,13 @@
         <button name="done" class="top-button top-button-right">Done</button>
     </div>
     <div class="kanban-body" id="kanban-body">
-        {% for item in order_data %}
-        <div class="kanban-page" id="{{ item }}">
-            {% for order in order_data[item] %}
-            <div class="order-card mb-3">
-                <div class="d-flex justify-content-center align-items-center p-2" style="background-color: #ea0000; color: #fff; border-radius: 10px 10px 0 0;">
-                    <span class="material-icons">tag</span>
-                    <h6 class="mb-0">
-                        000{{ order.id }}
-                    </h6>
-                </div>
-                <div class="list-group-item" style="background-color: transparent;">
-                    <div class="d-flex justify-content-center align-items-center mb-1">
-                        <span class="material-icons">person</span>
-                        <h6 class="mb-0">
-                            {{ order.customer_name }}
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-start">
-                        <span class="material-icons">location_on</span>
-                        <h6 class="mb-0">
-                            {{ order.customer_address }}
-                        </h6>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-start mb-1">
-                        <h6 class="mb-0">
-                            {{ order.customer_reference }}
-                        </h6>
-                    </div>
-                </div>
+        <div class="kanban-page" id="processing"> </div>
 
-                {% for item in order['items'] %}
+        <div class="kanban-page" id="cooking"> </div>
 
-                <ul class="list-group">
-                    <li class="list-group-item cart-list">
-                        <div class="d-flex align-items-center justify-content-start w-50">
-                            <img src="/static/cache/{{ item.image_path }}" class="cart-img" style="max-width: 30px;">
-                            <h6 class="p-title mb-0">{{ item.product_name }}</h6>
-                        </div>
-                        <div>
-                            x
-                        </div>
-                        <input type="number" class="qty-input text-center" value="{{ item.quantity }}" disabled>
-                        <div>
-                            =
-                        </div>
-                        <div class="price-section">
-                            <h6 class="mb-0">$</h6>
-                            <h6 class="mb-0">{{ item.sub_total }}</h6>
-                        </div>
-                    </li>
-                </ul>
+        <div class="kanban-page" id="done"> </div>
 
-                {% endfor %}
-
-                <li class="list-group-item order-footer">
-                    <h6 class="p-title mb-0 total-text">Total: </h6>
-                    <div class="price-section">
-                        <h6 class="mb-0">$</h6>
-                        <h6 class="mb-0">{{ order.total_price }}</h6>
-                    </div>
-                </li>
-                {% if order.status == "processing" %}
-                <form action="/admin/dashboard" method="post">
-                    <input name="id" type="hidden" value="{{ order.id }}">
-                    <input name="status" type="hidden" value="{{ order.status }}">
-                    <input name="operation" type="hidden" value="next">
-                    <button type="submit" class="d-flex align-items-center justify-content-end std-button p-1 bottom-button">
-                        <span class="">Next Step</span>
-                        <span class="material-icons nav_icons">chevron_right</span>
-                    </button>
-                </form>
-                {% endif %}
-                {% if order.status == "cooking" %}
-                <div class="d-flex w-100">
-                    <form class="w-50" action="/admin/dashboard" method="post">
-                        <input name="id" type="hidden" value="{{ order.id }}">
-                        <input name="status" type="hidden" value="{{ order.status }}">
-                        <input name="operation" type="hidden" value="previous">
-                        <button type="submit" class="d-flex align-items-center justify-content-start std-button p-1 bottom-button left">
-                            <span class="material-icons nav_icons">chevron_left</span>
-                            <span class="">Previous Step</span>
-                        </button>
-                    </form>
-                    <form class="w-50" action="/admin/dashboard" method="post">
-                        <input name="id" type="hidden" value="{{ order.id }}">
-                        <input name="status" type="hidden" value="{{ order.status }}">
-                        <input name="operation" type="hidden" value="next">
-                        <button type="submit" class="d-flex align-items-center justify-content-end std-button p-1 bottom-button right">
-                            <span class="">Next Step</span>
-                            <span class="material-icons nav_icons">chevron_right</span>
-                        </button>
-                    </form>
-                </div>
-                {% endif %}
-                {% if order.status == "done" %}
-                    <form action="/admin/dashboard" method="post">
-                        <input name="id" type="hidden" value="{{ order.id }}">
-                        <input name="status" type="hidden" value="{{ order.status }}">
-                        <input name="operation" type="hidden" value="previous">
-                        <button type="submit" class="d-flex align-items-center justify-content-start std-button p-1 bottom-button">
-                            <span class="material-icons nav_icons">chevron_left</span>
-                            <span class="">Previous Step</span>
-                        </button>
-                    </form>
-                {% endif %}
-
-            </div>
-
-            {% endfor %}
-
-        </div>
-        {% endfor %}
     </div>
-
-</div>
 <script src="/static/js/admin/dashboard.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 
