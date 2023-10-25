@@ -23,8 +23,9 @@ def dashboard():
     """show dashboard page"""
     status = None
 
+    restaurant_id = session.get("user_id")
+
     if request.method == "POST":
-        restaurant_id = session.get("user_id")
         id = request.form.get("id", type=int)
         status = request.form.get("status", type=str)
         operation = request.form.get("operation", type=str)
