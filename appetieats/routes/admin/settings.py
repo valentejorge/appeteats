@@ -63,9 +63,12 @@ def delete_category():
     """Delete a category"""
     id = request.form.get("id")
     category = Categories.query.filter_by(id=id).first()
-
-    db.session.delete(category)
-    db.session.commit()
+    products = Products.query.filter_by(category_id=category.id).all()
+    if not products:
+        db.session.delete(category)
+        db.session.commit()
+    else:
+        return abort(403, "Need delete all products of this category before")
 
     return redirect("/admin/settings/manage-categories")
 
