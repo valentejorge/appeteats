@@ -19,7 +19,7 @@ def drop_db():
 
 
 def populate_database_from_json():
-    json_file = 'appetieats/ext/helper/sample_data.json'
+    json_file = 'appetieats/ext/helpers/sample_data.json'
     print(os.path.abspath(json_file))
 
     with open(json_file, 'r') as file:

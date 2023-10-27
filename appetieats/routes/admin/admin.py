@@ -2,9 +2,9 @@ from flask import (
         Blueprint, render_template, session, jsonify, request, abort, redirect
 )
 
-from appetieats.ext.helper.register_tools import login_required
+from appetieats.ext.helpers.register_tools import login_required
 from appetieats.models import Orders, OrderItems, Products, ProductImages
-from appetieats.ext.helper.db_tools import (
+from appetieats.ext.helpers.db_tools import (
     get_orders, orders_to_dict, update_product_status
 )
 

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session
 from appetieats.models import Orders, OrderItems, Products, ProductImages
-from appetieats.ext.helper.register_tools import login_required
+from appetieats.ext.helpers.register_tools import login_required
 
 customer_bp = Blueprint('customer', __name__)
 

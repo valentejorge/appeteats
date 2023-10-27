@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, session
-from appetieats.ext.helper.register_tools import (
+from appetieats.ext.helpers.register_tools import (
         register_restaurant_user, log_user, register_customer_user
 )
-from appetieats.ext.helper.get_inputs import (
+from appetieats.ext.helpers.get_inputs import (
         get_restaurant_user_data, get_opening_hours, get_customer_user_data
 )
-from appetieats.ext.helper.validate_inputs import (
+from appetieats.ext.helpers.validate_inputs import (
         validate_user_register_data, validate_credentials, validate_user_data,
         validate_user_url
 )

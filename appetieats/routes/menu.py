@@ -5,11 +5,11 @@ from flask import (
 from appetieats.models import (
         RestaurantsData, Users, Categories, Products, ProductImages
 )
-from appetieats.ext.helper.validate_inputs import (
+from appetieats.ext.helpers.validate_inputs import (
         validate_cart, validate_user_account
 )
-from appetieats.ext.helper.cache_images import get_image
-from appetieats.ext.helper.db_tools import add_new_order
+from appetieats.ext.helpers.cache_images import get_image
+from appetieats.ext.helpers.db_tools import add_new_order
 import json
 
 menu_bp = Blueprint('menu', __name__)
