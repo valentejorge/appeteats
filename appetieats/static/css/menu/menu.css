@@ -278,6 +278,7 @@
     max-width: 60px;
     flex: 1;
 }
+
 .total {
     margin-right: 1rem;
 }
@@ -299,6 +300,7 @@
     .product-width {
         width: 45% !important;
     }
+}
 @media screen and (max-width: 480px) {
     .product-width {
         width: 45% !important;

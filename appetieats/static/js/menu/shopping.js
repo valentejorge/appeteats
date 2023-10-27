@@ -26,8 +26,8 @@ async function init() {
 
 
     if (data) {
-        const products = data[0];
-        const categories = data[1];
+        const products = data[0].products;
+        const categories = data[1].categories;
 
         updateCart();
         buildMenu(products, categories)
@@ -36,10 +36,10 @@ async function init() {
 
 function buildMenu(productsData, categoriesData) {
     let html = '';
-    for (const category of categoriesData.categories) {
+    for (const category of categoriesData) {
         html += categoryConstructor(category.category_name, category.id);
 
-        for (const product of productsData.products) {
+        for (const product of productsData) {
             if (product.category_id == category.id) {
                 html += productConstructor(product.id, product.name, product.price, product.image_path)
             }
@@ -47,7 +47,7 @@ function buildMenu(productsData, categoriesData) {
         html += '</div>'
         html += overlayConstructor(category.id);
 
-        for (const product of productsData.products) {
+        for (const product of productsData) {
             if (product.category_id == category.id) {
                 html += productConstructor(product.id, product.name, product.price, product.image_path)
             }
@@ -57,9 +57,8 @@ function buildMenu(productsData, categoriesData) {
             </div>
             `
     }
-    const menuDiv = document.querySelector('#menu');
-    console.log(menuDiv);
-    menuDiv.insertAdjacentHTML('beforeend', html)
+    const menuDiv = document.querySelector('#products-menu');
+    menuDiv.innerHTML = html;
 }
 
 function categoryConstructor(categoryName, categoryId) {
@@ -174,7 +173,6 @@ function updateCartDisplay() {
     let total = 0;
     cartItemsCurrentRestaurant.forEach(item => {
         total += item.subtotal;
-        console.log(typeof(item.subtotal))
     })
     const totalDiv = document.querySelector('#total');
     const totalHtml = `<h6>Total: $ ${(total).toFixed(2)}</h6>`
@@ -242,3 +240,15 @@ function updateCartDiv() {
 }
 
 init();
+
+const searchInput = document.querySelector('#search');
+
+searchInput.addEventListener('input', function () {
+    const customerInput = searchInput.value.toLowerCase();
+
+    const filterProducts = products.filter(product => 
+        product.name.toLowerCase().includes(customerInput)
+    );
+
+    buildMenu(filterProducts, categories);
+});

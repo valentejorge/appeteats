@@ -1,5 +1,4 @@
 function incrementQty(incrementButton) {
-    console.log(incrementButton)
     const qtyGroup = incrementButton.closest(".qty-group");
     const quantityInput = qtyGroup.querySelector(".qty-input");
 
