@@ -1,6 +1,7 @@
 /appetieats/static/cache/
 /flask_session/
 pylintrc
+settings.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
