@@ -1,3 +1,5 @@
+"""Module for main routes"""
+import json
 from flask import (
         Blueprint, render_template, jsonify, request, flash, redirect,
         session, abort
@@ -10,7 +12,6 @@ from appetieats.ext.helpers.validate_inputs import (
 )
 from appetieats.ext.helpers.cache_images import get_image
 from appetieats.ext.helpers.db_tools import add_new_order
-import json
 
 menu_bp = Blueprint('menu', __name__)
 
@@ -63,7 +64,6 @@ def index(restaurant_url):
             )
             return redirect(f'/{restaurant_url}#cart')
 
-        # TODO: add the new order in database
         customer_id = session.get("user_id")
         add_new_order(customer_id, restaurant_id, total, cart_dict)
 
@@ -77,10 +77,9 @@ def index(restaurant_url):
         restaurant_info = RestaurantsData.query.join(
                 Users, RestaurantsData.user_id == Users.id
                 ).filter(Users.id == restaurant.user_id).first()
-        """
-        for value in restaurant_info.to_dict():
-            print(f'{value}')
-        """
+
+        # for value in restaurant_info.to_dict():
+        #     print(f'{value}')
 
         return render_template(
                 "menu/menu.html", restaurant_info=restaurant_info
@@ -129,4 +128,5 @@ def data(restaurant_url):
 
 
 def init_app(app):
+    """init menu blueprint"""
     app.register_blueprint(menu_bp)
