@@ -1,3 +1,4 @@
+"""Module to configure the sessions"""
 from flask_session import Session
 
 
