@@ -1,3 +1,4 @@
+"""Module for customer routes"""
 from flask import Blueprint, render_template, session
 from appetieats.models import Orders, OrderItems, Products, ProductImages
 from appetieats.ext.helpers.register_tools import login_required
@@ -54,4 +55,5 @@ def index():
 
 
 def init_app(app):
+    """int customer blueprint"""
     app.register_blueprint(customer_bp)
