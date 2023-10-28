@@ -1,3 +1,4 @@
+"""Module for auth routes"""
 from flask import Blueprint, render_template, request, redirect, session
 from appetieats.ext.helpers.register_tools import (
         register_restaurant_user, log_user, register_customer_user
@@ -94,7 +95,7 @@ def costumer_register():
         log_user(user_data["username"])
         print(session.get("user_id"), session.get("account_type"))
 
-        return redirect("/admin/dashboard")
+        return redirect("/customer")
     else:
         return render_template("auth/customer-register.html")
 
@@ -136,4 +137,5 @@ def logout():
 
 
 def init_app(app):
+    """init auth blueprin"""
     app.register_blueprint(auth_bp)
