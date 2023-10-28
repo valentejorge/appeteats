@@ -1,3 +1,4 @@
+"""Module to configure the error page"""
 from flask import render_template
 
 
