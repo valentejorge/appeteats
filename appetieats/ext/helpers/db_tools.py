@@ -1,15 +1,16 @@
+"""Module providing a tools for manipulate the database"""
+import datetime
+from flask import session
+from werkzeug.utils import secure_filename
+from flask_socketio import emit
+from appetieats.ext.database import db
 from appetieats.models import (
         Products, ProductImages, Orders, OrderItems, CustomersData
 )
-from werkzeug.utils import secure_filename
-from appetieats.ext.database import db
-from flask_socketio import emit
-from flask import session
-import datetime
-import json
 
 
 def add_new_product(product_data, product_image):
+    """add new product in database"""
     new_product = Products(
             name=product_data['name'],
             description=product_data['description'],
@@ -26,10 +27,9 @@ def add_new_product(product_data, product_image):
 
     add_image(product_image, product_id)
 
-    return
-
 
 def add_image(product_image, product_id):
+    """add product image in database"""
     image_name = secure_filename(
             f"product{product_id}.{product_image.filename.rsplit('.', 1)[1]}")
 
@@ -42,11 +42,11 @@ def add_image(product_image, product_id):
     )
     db.session.add(new_image)
     db.session.commit()
-    return
 
 
-def update_product_data(product_data, id):
-    product = Products.query.get(id)
+def update_product_data(product_data, product_id):
+    """update product data in database"""
+    product = Products.query.get(product_id)
 
     product.name = product_data["name"]
     product.description = product_data["description"]
@@ -56,10 +56,9 @@ def update_product_data(product_data, id):
 
     db.session.commit()
 
-    return
-
 
 def add_new_order(customer_id, restaurant_id, total_price, order_items):
+    """add a new order in database"""
     new_order = Orders(
             customer_id=customer_id,
             restaurant_id=restaurant_id,
@@ -85,15 +84,15 @@ def add_new_order(customer_id, restaurant_id, total_price, order_items):
 
     emit("new_order", order_emmit, namespace="/dashboard", room=restaurant_id)
 
-    return
 
-
-def get_order(id):
-    order = Orders.query.filter(Orders.id == id).all()
+def get_order(order_id):
+    """get a unique order from id"""
+    order = Orders.query.filter(Orders.id == order_id).all()
     return order
 
 
 def get_orders(restaurant_id, status):
+    """get all orders from a restaurant with a specific status"""
     orders = Orders.query.filter(
             Orders.restaurant_id == restaurant_id
             ).filter(
@@ -105,6 +104,7 @@ def get_orders(restaurant_id, status):
 
 
 def orders_to_dict(orders):
+    """put all orders into a dict"""
     order_data = []
     for order in orders:
         customer = CustomersData.query.filter(
@@ -142,6 +142,7 @@ def orders_to_dict(orders):
 
 
 def update_product_status(product, operation):
+    """update status of product"""
     match product.status, operation:
         case "processing", "next":
             product.status = "cooking"

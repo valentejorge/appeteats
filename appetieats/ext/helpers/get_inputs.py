@@ -1,7 +1,9 @@
+"""Module providing a functions for get inputs from users"""
 from flask import request
 
 
 def get_product_data_from_request():
+    """get product data from request"""
     data = {}
     fields = {
             "name": str,
@@ -19,11 +21,13 @@ def get_product_data_from_request():
 
 
 def get_product_image(name):
+    """get product image from request"""
     image = request.files[f"{name}"]
     return image
 
 
 def get_restaurant_user_data():
+    """get restaurant data from request"""
     form_data = {}
 
     fields = {
@@ -49,6 +53,7 @@ def get_restaurant_user_data():
 
 
 def get_customer_user_data():
+    """get customer data from request"""
     form_data = {}
 
     fields = {
@@ -71,6 +76,7 @@ def get_customer_user_data():
 
 
 def get_opening_hours(is_open_everyday):
+    """get opening hours data from request"""
     name_days = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
                  "friday": 4, "saturday": 5, "sunday": 6}
     if is_open_everyday is True:

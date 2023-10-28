@@ -1,11 +1,12 @@
+"""Module providing a tools for register and login users"""
+from datetime import datetime
 from functools import wraps
+from werkzeug.security import generate_password_hash
 from flask import session, abort
+from appetieats.ext.database import db
 from appetieats.models import (
         Users, RestaurantsData, RestaurantOpeningHours, CustomersData
 )
-from appetieats.ext.database import db
-from werkzeug.security import generate_password_hash
-from datetime import datetime
 
 
 def login_required(role=None):
@@ -44,6 +45,7 @@ def login_required(role=None):
 
 
 def register_restaurant_user(user_data, weekdays):
+    """register a restaurant"""
     psw_hash = generate_password_hash(user_data["password"])
     new_user = Users(
             username=user_data["username"], hash=psw_hash, role="restaurant"
@@ -80,6 +82,7 @@ def register_restaurant_user(user_data, weekdays):
 
 
 def register_customer_user(user_data):
+    """register a customer"""
     psw_hash = generate_password_hash(user_data["password"])
     new_user = Users(
             username=user_data["username"], hash=psw_hash, role="customer"
@@ -103,6 +106,7 @@ def register_customer_user(user_data):
 
 
 def log_user(username):
+    """log a user"""
     user = Users.query.filter_by(username=username).first() or abort(
             403, "fatal error")
     session["user_id"] = user.id
