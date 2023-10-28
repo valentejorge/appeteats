@@ -1,3 +1,4 @@
+"""Module for main routes"""
 from flask import Blueprint, render_template, abort
 
 main_bp = Blueprint('main', __name__)
@@ -19,4 +20,5 @@ def error():
 
 
 def init_app(app):
+    """init main blueprint"""
     app.register_blueprint(main_bp)
