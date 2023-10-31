@@ -2,7 +2,7 @@
 from flask import (
         Blueprint, render_template, request, redirect, flash, session, abort
 )
-from appetieats.models import Categories, Products
+from appetieats.models import Categories, Products, RestaurantsData
 from appetieats.ext.database import db
 
 from appetieats.ext.helpers.register_tools import login_required
@@ -111,6 +111,21 @@ def edit_product(product_id):
     return render_template(
             "admin/settings/edit-menu-form.html", product=product,
             current_category=current_category, categories=categories)
+
+
+@settings_bp.route("/admin/settings/qr-code")
+@login_required("restaurant")
+def qr_code():
+    """generate a qr code for restaurant"""
+    restaurant_id = session.get("user_id")
+    restaurant_data = RestaurantsData.query.filter_by(
+            user_id=restaurant_id).first()
+    restaurant_name = restaurant_data.name
+    restaurant_url = restaurant_data.url
+    print(restaurant_name)
+    return render_template("admin/settings/qr-code.html",
+                           restaurant_name=restaurant_name,
+                           restaurant_url=restaurant_url)
 
 
 def init_app(app):
