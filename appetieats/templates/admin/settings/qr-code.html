@@ -1,0 +1,48 @@
+{% extends "admin/admin.html" %}
+
+{% block title %}QR Code{% endblock %}
+{% block head %}
+{% endblock %}
+
+{% block main %}
+
+<div>
+    <div class="form-header">
+        <div class="title mt-5 text-center">
+            <h1>Qr Code</h1>
+        </div>
+    </div>
+
+    <div id="qr-code-container">
+        <input id="restaurant-url" type="hidden" value="{{ restaurant_url }}">
+        <h1 id="qr-code-title">
+            {{ restaurant_name }}
+        </h1>
+
+        <div id="qr-code">
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+<script>
+    function generateQRCode() {
+        const restaurantPath = document.querySelector("#restaurant-url").value;
+        const hostName = window.location.hostname;
+        const restaurantUrl = `${hostName}/${restaurantPath}`
+
+        if (restaurantUrl) {
+            const qrcodeContainer = document.querySelector("#qr-code");
+            new QRCode(qrcodeContainer, restaurantUrl);
+        } else {
+            alert("Fatal error");
+        }
+    }
+    generateQRCode();
+</script>
+
+{% endblock %}
+
+{% block edit %}{% endblock %}
