@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div id="qr-code-container">
+    <div id="qr-code-container" class="mt-5 d-flex flex-column justify-content-center align-items-center">
         <input id="restaurant-url" type="hidden" value="{{ restaurant_url }}">
         <h1 id="qr-code-title">
             {{ restaurant_name }}
@@ -30,8 +30,8 @@
 <script>
     function generateQRCode() {
         const restaurantPath = document.querySelector("#restaurant-url").value;
-        const hostName = window.location.hostname;
-        const restaurantUrl = `${hostName}/${restaurantPath}`
+        const host = window.location.host;
+        const restaurantUrl = `${host}/${restaurantPath}`
 
         if (restaurantUrl) {
             const qrcodeContainer = document.querySelector("#qr-code");
