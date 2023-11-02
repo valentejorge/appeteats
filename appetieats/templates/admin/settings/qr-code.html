@@ -19,29 +19,35 @@
             {{ restaurant_name }}
         </h1>
 
-        <div id="qr-code">
+        <div id="qrcode">
         </div>
     </div>
 </div>
-
-
-<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
 <script>
     function generateQRCode() {
         const restaurantPath = document.querySelector("#restaurant-url").value;
         const host = window.location.host;
-        const restaurantUrl = `${host}/${restaurantPath}`
+        const restaurantUrl = `${host}/${restaurantPath}`;
 
         if (restaurantUrl) {
-            const qrcodeContainer = document.querySelector("#qr-code");
-            new QRCode(qrcodeContainer, restaurantUrl);
+            const qrcodeContainer = document.querySelector("#qrcode");
+            const qrcode = qrCodeConstructor(restaurantUrl);
+
+            qrcodeContainer.innerHTML = qrcode;
         } else {
             alert("Fatal error");
         }
     }
+    function qrCodeConstructor(url) {
+        const div = `
+            <img id="qrcode" src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${url}">
+        `
+        return div;
+    }
     generateQRCode();
 </script>
+
 
 {% endblock %}
 
