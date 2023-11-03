@@ -14,40 +14,50 @@
     </div>
 
     <div id="qr-code-container" class="mt-5 d-flex flex-column justify-content-center align-items-center">
-        <input id="restaurant-url" type="hidden" value="{{ restaurant_url }}">
-        <h1 id="qr-code-title">
-            {{ restaurant_name }}
-        </h1>
+        <div>
+            <input id="restaurant-url" type="hidden" value="{{ restaurant_url }}">
+            <h1 id="qr-code-title" class="text-center">
+                {{ restaurant_name }}
+            </h1>
 
-        <div id="qrcode">
+            <div id="qrcode"></div>
+            <button id="download" class="mt-2 std-button">Download QrCode</button>
         </div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/qr-code-styling-v2@1.6.1/lib/qr-code-styling.min.js"></script>
 <script>
-    function generateQRCode() {
-        const restaurantPath = document.querySelector("#restaurant-url").value;
-        const host = window.location.host;
-        const restaurantUrl = `${host}/${restaurantPath}`;
+    const restaurantPath = document.querySelector("#restaurant-url").value;
+    const host = window.location.host;
+    const restaurantUrl = `${host}/${restaurantPath}`;
 
-        if (restaurantUrl) {
-            const qrcodeContainer = document.querySelector("#qrcode");
-            const qrcode = qrCodeConstructor(restaurantUrl);
-
-            qrcodeContainer.innerHTML = qrcode;
-        } else {
-            alert("Fatal error");
+    const qrCode = new QRCodeStyling({
+        width: 300,
+        height: 300,
+        type: "svg",
+        data: restaurantUrl,
+        image: "/static/assets/ico/favicon.ico",
+        dotsOptions: {
+            color: "#000000",
+            type: "square"
+        },
+        backgroundOptions: {
+            color: "#fff",
+        },
+        imageOptions: {
+            crossOrigin: "anonymous",
+            margin: 20
         }
-    }
-    function qrCodeConstructor(url) {
-        const div = `
-            <img id="qrcode" src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${url}">
-        `
-        return div;
-    }
-    generateQRCode();
-</script>
+    });
 
+    qrCode.append(document.querySelector("#qrcode"));
+
+    const button = document.querySelector("#download");
+    button.addEventListener("click", () => {
+        qrCode.download({ name: "qr", extension: "svg" });
+    });
+</script>
 
 {% endblock %}
 
