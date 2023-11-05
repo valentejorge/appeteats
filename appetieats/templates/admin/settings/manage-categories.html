@@ -24,7 +24,7 @@
         </div>
     </form>
 
-    <table class="mt-4">
+    <table class="table table-borderless table-hover mt-4">
         <thead>
             <tr>
                 <th>Category name</th>
@@ -37,7 +37,7 @@
                 <td>
                     <form action="/admin/settings/manage-categories/delete" method="post">
                         <input name="id" type="hidden" value="{{ category.id }}">
-                        <input type="submit" class="delete" value="Delete">
+                        <input type="submit" class="delete std-button" value="Delete">
                     </form>
                 </td>
             </tr>
