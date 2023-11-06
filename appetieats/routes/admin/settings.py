@@ -96,8 +96,8 @@ def edit_product(product_id):
 
     user_id = session.get("user_id")
 
-    product = Products.query.filter_by(user_id=user_id,
-                                        id=product_id).first()
+    product = Products.query.filter_by(user_id=user_id, id=product_id).first()
+
     if not product:
         return abort(403, "Choose a valid product")
 
@@ -120,9 +120,10 @@ def qr_code():
     restaurant_id = session.get("user_id")
     restaurant_data = RestaurantsData.query.filter_by(
             user_id=restaurant_id).first()
+
     restaurant_name = restaurant_data.name
     restaurant_url = restaurant_data.url
-    print(restaurant_name)
+
     return render_template("admin/settings/qr-code.html",
                            restaurant_name=restaurant_name,
                            restaurant_url=restaurant_url)
