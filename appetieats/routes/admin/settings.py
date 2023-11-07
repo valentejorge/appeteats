@@ -129,6 +129,14 @@ def qr_code():
                            restaurant_url=restaurant_url)
 
 
+@settings_bp.route("/admin/settings/change-password")
+@login_required("restaurant")
+def change_password():
+    """change user password"""
+
+    return render_template("admin/settings/change-password.html")
+
+
 def init_app(app):
     """init admin settings blueprint"""
     app.register_blueprint(settings_bp)
