@@ -75,6 +75,23 @@ def get_customer_user_data():
     return form_data
 
 
+def get_passwords_fields():
+    """get passwords fields from user"""
+    data = {}
+
+    fields = {
+        "current": str,
+        "new": str,
+        "confirm": str
+    }
+
+    for field, data_type in fields.items():
+        data[field] = request.form.get(field, type=data_type)
+
+    print(data)
+    return data
+
+
 def get_opening_hours(is_open_everyday):
     """get opening hours data from request"""
     name_days = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
