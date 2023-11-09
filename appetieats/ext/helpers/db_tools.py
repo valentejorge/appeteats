@@ -2,11 +2,20 @@
 import datetime
 from flask import session
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash
 from flask_socketio import emit
 from appetieats.ext.database import db
 from appetieats.models import (
-        Products, ProductImages, Orders, OrderItems, CustomersData
+        Products, ProductImages, Orders, OrderItems, CustomersData, Users
 )
+
+
+def update_user_password(user_id, new_password):
+    """update password of user"""
+    user = Users.query.get(user_id)
+    user.hash = generate_password_hash(new_password)
+
+    db.session.commit()
 
 
 def add_new_product(product_data, product_image):
