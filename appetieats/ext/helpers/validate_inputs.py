@@ -134,3 +134,22 @@ def validate_user_url(user_url):
         return abort(403, "the url dont exists, try another")
 
     return None
+
+
+def validate_passwords(user_id, passwords):
+    """validate passwords"""
+
+    for password in passwords.values():
+        print(password)
+        if not password:
+            return abort(403, "passwords fields cannot be empty")
+
+    current_hash = Users.query.get(user_id).hash
+
+    if not check_password_hash(current_hash, passwords["current"]):
+        return abort(403, "current password wrong")
+
+    if passwords["new"] != passwords["confirm"]:
+        return abort(403, "new password and confirm need be the same")
+
+    return None
