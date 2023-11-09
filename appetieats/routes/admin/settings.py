@@ -7,12 +7,14 @@ from appetieats.ext.database import db
 
 from appetieats.ext.helpers.register_tools import login_required
 from appetieats.ext.helpers.get_inputs import (
-        get_product_data_from_request, get_product_image
+        get_product_data_from_request, get_product_image, get_passwords_fields
 )
 from appetieats.ext.helpers.validate_inputs import (
-        validate_product_data, validate_product_image
+        validate_product_data, validate_product_image, validate_passwords
 )
-from appetieats.ext.helpers.db_tools import add_new_product, update_product_data
+from appetieats.ext.helpers.db_tools import (
+        add_new_product, update_product_data, update_user_password
+)
 
 settings_bp = Blueprint('settings', __name__)
 
@@ -129,10 +131,21 @@ def qr_code():
                            restaurant_url=restaurant_url)
 
 
-@settings_bp.route("/admin/settings/change-password")
+@settings_bp.route("/admin/settings/change-password", methods=["GET", "POST"])
 @login_required("restaurant")
 def change_password():
     """change user password"""
+    if request.method == "POST":
+        user_id = session.get("user_id")
+
+        passwords = get_passwords_fields()
+
+        validate_passwords(user_id, passwords)
+
+        update_user_password(user_id, passwords["new"])
+
+        flash("Changed", "success")
+        return render_template("admin/settings/change-password.html")
 
     return render_template("admin/settings/change-password.html")
 
