@@ -47,9 +47,10 @@ class RestaurantsData(db.Model, SerializerMixin):
 class RestaurantOpeningHours(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants_data.id'), nullable=False)
+    open = db.Column(db.String(5), nullable=False)
     day_of_week = db.Column(db.Integer, nullable=False)
-    opening_time = db.Column(db.Time, nullable=False)
-    closing_time = db.Column(db.Time, nullable=False)
+    opening_time = db.Column(db.Time, nullable=True)
+    closing_time = db.Column(db.Time, nullable=True)
 
 
 class CustomersData(db.Model, SerializerMixin):
