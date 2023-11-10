@@ -26,9 +26,16 @@
                 <td>{{ product.name }}</td>
                 <td>$ {{ "%0.2f" | format(product.price) }}</td>
                 <td>
-                    <a class="std-button text-decoration-none" href="/admin/settings/edit-menu/{{product.id}}">
+                    <a class="std-button bg-warning text-decoration-none" href="/admin/settings/edit-menu/{{product.id}}">
                         edit
                     </a>
+                </td>
+                <td>
+                    <form action="/admin/settings/edit-menu/{{product.id}}/delete" method="POST">
+                        <a class="std-button text-decoration-none" onclick="this.parentNode.submit()">
+                            Delete
+                        </a>
+                    </form>
                 </td>
             </tr>
             {% endfor %}
