@@ -70,6 +70,7 @@
 }
 .phone-img {
     max-height: 500px;
+    max-width: 95%;
 }
 .home-text {
     max-width: 37rem;
