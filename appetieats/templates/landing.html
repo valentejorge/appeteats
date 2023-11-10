@@ -29,6 +29,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="navbar-nav ms-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
                         <li class="nav-item"><a class="nav-link" href="#prices">Prices</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
@@ -38,7 +39,7 @@
             </div>
         </nav>
 
-        <session class="home">
+        <session id="home" class="home">
         <div class="home-text">
             <p class="text-p">An tool made for put your restaurant in other level</p>
             <h1 class="text-h1">Enhance customer experience with <span class="logo">AppetiEats</span></h1>
@@ -46,18 +47,24 @@
             <a href="/register" class="btn button mt-4">Join us</a>
         </div>
         <div class="home-img">
-            <img class="phone-img" src="/static/assets/img/phone.png" alt="appetiEats app image">
+            <img class="phone-img" src="/static/assets/img/fly_phone.png" alt="appetiEats app image">
         </div>
+        </session>
+
+        <session id="features" class="features">
+        <div class="feature">one</div>
+        <div class="feature">one</div>
+        <div class="feature">one</div>
         </session>
 
 <!--
         <main class="container-fluid py-5 text-center">
             {% block main %}{% endblock %}
         </main>
-                 <footer class="mb-5 mt-5 small text-center text-muted">
+-->
+        <footer class="mb-3 mt-3 small text-center text-muted">
             Powered by <a href="https://github.com/valentejorge/">valentejorge</a>
         </footer>
-        -->
     </body>
 
 </html>
