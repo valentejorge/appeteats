@@ -153,3 +153,12 @@ def validate_passwords(user_id, passwords):
         return abort(403, "new password and confirm need be the same")
 
     return None
+
+
+def prevents_empty_fields(data):
+    """prevents empty fields"""
+    for d in data.values():
+        if not d:
+            return abort(403, "fields cannot be empty")
+
+    return None
