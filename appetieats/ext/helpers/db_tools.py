@@ -6,7 +6,8 @@ from werkzeug.security import generate_password_hash
 from flask_socketio import emit
 from appetieats.ext.database import db
 from appetieats.models import (
-        Products, ProductImages, Orders, OrderItems, CustomersData, Users
+        Products, ProductImages, Orders, OrderItems, CustomersData, Users,
+        RestaurantsData
 )
 
 
@@ -14,6 +15,18 @@ def update_user_password(user_id, new_password):
     """update password of user"""
     user = Users.query.get(user_id)
     user.hash = generate_password_hash(new_password)
+
+    db.session.commit()
+
+
+def update_restaurant_info(restaraunt_id, new_restaurant_info):
+    """update password of user"""
+    restaurant = RestaurantsData.query.filter_by(user_id=restaraunt_id).first()
+
+    restaurant.name = new_restaurant_info["name"]
+    restaurant.address = new_restaurant_info["address"]
+    restaurant.phone = new_restaurant_info["phone"]
+    restaurant.url = new_restaurant_info["url"]
 
     db.session.commit()
 
