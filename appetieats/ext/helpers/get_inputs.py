@@ -88,7 +88,15 @@ def get_passwords_fields():
     for field, data_type in fields.items():
         data[field] = request.form.get(field, type=data_type)
 
-    print(data)
+    return data
+
+
+def get_data_from_form(argv):
+    """get data fields from form of user"""
+    data = {}
+    for arg in argv:
+        data[arg] = request.form.get(arg)
+
     return data
 
 
