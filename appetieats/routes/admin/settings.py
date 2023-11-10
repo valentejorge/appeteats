@@ -81,7 +81,6 @@ def delete_category():
 def edit_menu():
     """edit menu"""
     products = Products.query.filter_by(user_id=session.get("user_id")).all()
-    print(products)
     return render_template("admin/settings/edit-menu.html",  products=products)
 
 
@@ -113,6 +112,27 @@ def edit_product(product_id):
     return render_template(
             "admin/settings/edit-menu-form.html", product=product,
             current_category=current_category, categories=categories)
+
+
+@settings_bp.route("/admin/settings/edit-menu/<product_id>/delete", methods=["GET", "POST"])
+@login_required("restaurant")
+def delete_product(product_id):
+    """edit a product of menu"""
+    user_id = session.get("user_id")
+    if request.method == "POST":
+        product = Products.query.filter_by(
+                id=product_id).filter_by(user_id=user_id).first()
+
+        if not product:
+            return abort(403, "Choose a valid product")
+
+        db.session.delete(product)
+        db.session.commit()
+
+        flash("Deleted", "success")
+        return redirect("/admin/settings/edit-menu")
+
+    return redirect("/admin/settings/edit-menu")
 
 
 @settings_bp.route("/admin/settings/qr-code")
