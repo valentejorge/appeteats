@@ -1,11 +1,12 @@
 """Module providing a commands to flask"""
 import os
 import json
+from datetime import datetime
 from werkzeug.security import generate_password_hash
 from appetieats.ext.database import db
 from appetieats.models import (
         Users, RestaurantsData, Categories, ProductImages, Products,
-        CustomersData
+        CustomersData, RestaurantOpeningHours
 )
 
 
@@ -63,6 +64,21 @@ def populate_database_from_json():
                                 ).read()
                         )
                         db.session.add(product_image)
+                    case "open_time":
+                        opening_time = datetime.strptime(
+                                data["opening_time"], "%H:%M").time()
+                        closing_time = datetime.strptime(
+                                data["closing_time"], "%H:%M").time()
+
+                        time = RestaurantOpeningHours(
+                                id=data["id"],
+                                restaurant_id=data["restaurant_id"],
+                                open=data["open"],
+                                day_of_week=data["day_of_week"],
+                                opening_time=opening_time,
+                                closing_time=closing_time,
+                        )
+                        db.session.add(time)
 
         db.session.commit()
 
