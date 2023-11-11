@@ -20,13 +20,27 @@ def update_user_password(user_id, new_password):
 
 
 def update_restaurant_info(restaraunt_id, new_restaurant_info):
-    """update password of user"""
-    restaurant = RestaurantsData.query.filter_by(user_id=restaraunt_id).first()
+    """update restaurants info"""
+    restaurant = CustomersData.query.filter_by(user_id=restaraunt_id).first()
 
     restaurant.name = new_restaurant_info["name"]
     restaurant.address = new_restaurant_info["address"]
     restaurant.phone = new_restaurant_info["phone"]
     restaurant.url = new_restaurant_info["url"]
+
+    db.session.commit()
+
+
+def update_customer_info(customer_id, new_customer_info):
+    """update customers info"""
+    customer = CustomersData.query.filter_by(user_id=customer_id).first()
+
+    customer.first_name = new_customer_info["first"]
+    customer.last_name = new_customer_info["last"]
+    customer.phone = new_customer_info["phone"]
+    customer.address = new_customer_info["address"]
+    customer.zip_code = new_customer_info["zip"]
+    customer.reference = new_customer_info["reference"]
 
     db.session.commit()
 
@@ -163,19 +177,19 @@ def orders_to_dict(orders):
     return order_data
 
 
-def update_product_status(product, operation):
-    """update status of product"""
-    match product.status, operation:
+def update_product_status(order, operation):
+    """update status of order"""
+    match order.status, operation:
         case "processing", "next":
-            product.status = "cooking"
+            order.status = "cooking"
 
         case "cooking", "next":
-            product.status = "done"
+            order.status = "done"
 
         case "cooking", "previous":
-            product.status = "processing"
+            order.status = "processing"
 
         case "done", "previous":
-            product.status = "cooking"
+            order.status = "cooking"
 
     db.session.commit()
