@@ -7,8 +7,12 @@ from appetieats.models import (
 )
 from appetieats.ext.helpers.register_tools import login_required
 from appetieats.ext.helpers.get_inputs import get_data_from_form
-from appetieats.ext.helpers.validate_inputs import prevents_empty_fields
-from appetieats.ext.helpers.db_tools import update_customer_info
+from appetieats.ext.helpers.validate_inputs import (
+        prevents_empty_fields, validate_passwords
+)
+from appetieats.ext.helpers.db_tools import (
+        update_customer_info, update_user_password
+)
 
 customer_bp = Blueprint('customer', __name__)
 
@@ -127,6 +131,27 @@ def edit_restaurant_info():
 
     return render_template("customer/edit-customer-info.html",
                            customer=customer)
+
+
+@customer_bp.route("/customer/change-password", methods=["GET", "POST"])
+@login_required("customer")
+def change_customer_password():
+    """change customer password"""
+    if request.method == "POST":
+        user_id = session.get("user_id")
+
+        fields = ["current", "new", "confirm"]
+
+        passwords = get_data_from_form(fields)
+
+        validate_passwords(user_id, passwords)
+
+        update_user_password(user_id, passwords["new"])
+
+        flash("Changed", "success")
+        return render_template("customer/change-password.html")
+
+    return render_template("customer/change-password.html")
 
 
 def init_app(app):
