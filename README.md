@@ -11,7 +11,7 @@
 - [Structure](#structure)
 - [License](#license)
 
-## Instalation
+## Installation
 
 To set up AppetiEats, follow these steps:
 
