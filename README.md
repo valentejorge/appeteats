@@ -37,6 +37,12 @@ flask restart-db
 flask run
 ```
 
+or
+
+```bash
+flask run --host=0.0.0.0
+```
+
 2. Access the aplication through your web browser at `http://localhost:5000`
 
 3. Restaurants can sign up, log in, add their menu items, generate a restaurant QR Code, and see orders in real-time in restaurant dashboard.
