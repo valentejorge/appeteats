@@ -2,28 +2,34 @@
     background-color: #00000010;
     border-radius: 0.5rem;
 }
+
 .order-header {
     padding: 0.5rem;
 }
+
 .list-group-item {
     border: 1px solid #0000000a;
     border-radius: 0rem !important;
 }
+
 .order-footer {
     padding: .5rem 1rem;
     margin-right: 0;
     display: flex;
-    align-tems: center;
+    align-items: center;
     justify-content: end;
     background-color: transparent;
 }
+
 .total-text {
     margin-right: 1rem;
 }
+
 .qty-input {
     color: black;
 }
-.spinner-border {
+
+.spinner {
     animation-duration: 1.5s;
     margin-left: .5rem;
 }

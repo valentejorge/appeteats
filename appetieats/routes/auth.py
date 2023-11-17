@@ -4,11 +4,12 @@ from appetieats.ext.helpers.register_tools import (
         register_restaurant_user, log_user, register_customer_user
 )
 from appetieats.ext.helpers.get_inputs import (
-        get_restaurant_user_data, get_opening_hours, get_customer_user_data
+        get_restaurant_user_data, get_opening_hours, get_customer_user_data,
+        get_data_from_form
 )
 from appetieats.ext.helpers.validate_inputs import (
         validate_user_register_data, validate_credentials, validate_user_data,
-        validate_user_url
+        validate_user_url, validate_opening_time
 )
 
 auth_bp = Blueprint('auth', __name__)
@@ -31,12 +32,23 @@ def restaurant_register():
     """Register a new restaurant"""
     if request.method == "POST":
 
-        user_data = get_restaurant_user_data()
-        week_opening_time = get_opening_hours(user_data["everyday"])
+        form_fields = [
+            "name", "address", "phone", "color", "url",
+            "username", "password", "confirm", "agree", "everyday"
+        ]
+        # user_data = get_restaurant_user_data()
+
+        user_data = get_data_from_form(form_fields)
+        open_everyday = bool(user_data["everyday"])
+        user_data.pop("everyday")
+
+        opening_time = get_opening_hours(open_everyday)
 
         validate_user_url(user_data["url"])
 
         validate_user_data(user_data)
+
+        validate_opening_time(opening_time)
 
         validate_user_register_data(
                 user_data["username"],
@@ -44,7 +56,7 @@ def restaurant_register():
                 user_data["confirm"]
         )
 
-        register_restaurant_user(user_data, week_opening_time)
+        register_restaurant_user(user_data, opening_time)
 
         log_user(user_data["username"])
 

@@ -88,25 +88,34 @@ def get_passwords_fields():
     for field, data_type in fields.items():
         data[field] = request.form.get(field, type=data_type)
 
-    print(data)
     return data
 
 
-def get_opening_hours(is_open_everyday):
+def get_data_from_form(argv):
+    """get data fields from form of user"""
+    data = {}
+    for arg in argv:
+        data[arg] = request.form.get(arg)
+
+    return data
+
+
+def get_opening_hours(open_everyday):
     """get opening hours data from request"""
     name_days = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
                  "friday": 4, "saturday": 5, "sunday": 6}
-    if is_open_everyday is True:
+
+    if open_everyday is True:
         weekdays = {day_int: {
-            "is_open": request.form.get(day, type=bool),
-            "open_at": request.form.get("open_everyday", type=str),
-            "close_at": request.form.get("close_everyday", type=str)
-            } for day, day_int in name_days.items()}
+            "open": True,
+            "open_time": request.form.get("open_everyday"),
+            "close_time": request.form.get("close_everyday")
+            } for day_int in name_days.values()}
     else:
         weekdays = {day_int: {
-            "is_open": request.form.get(day, type=bool),
-            "open_at": request.form.get(f"open_{day}", type=str),
-            "close_at": request.form.get(f"close_{day}", type=str)
+            "open": bool(request.form.get(day)),
+            "open_time": request.form.get(f"open_{day}"),
+            "close_time": request.form.get(f"close_{day}")
             } for day, day_int in name_days.items()}
 
     return weekdays

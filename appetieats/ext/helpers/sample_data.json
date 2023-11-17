@@ -221,5 +221,63 @@
             "product_id": 11,
             "image_path": "banana.png"
         }
+    ],
+    "open_time": [
+        {
+            "id": 1,
+            "restaurant_id": 1,
+            "open": 1,
+            "day_of_week": 0,
+            "opening_time": "12:00",
+            "closing_time": "00:00"
+        },
+        {
+            "id": 2,
+            "restaurant_id": 1,
+            "open": 1,
+            "day_of_week": 1,
+            "opening_time": "12:00",
+            "closing_time": "00:00"
+        },
+        {
+            "id": 3,
+            "restaurant_id": 1,
+            "open": 1,
+            "day_of_week": 2,
+            "opening_time": "12:00",
+            "closing_time": "00:00"
+        },
+        {
+            "id": 4,
+            "restaurant_id": 1,
+            "open": 1,
+            "day_of_week": 3,
+            "opening_time": "12:00",
+            "closing_time": "00:00"
+        },
+        {
+            "id": 5,
+            "restaurant_id": 1,
+            "open": 1,
+            "day_of_week": 4,
+            "opening_time": "12:00",
+            "closing_time": "00:00"
+        },
+        {
+            "id": 6,
+            "restaurant_id": 1,
+            "open": 1,
+            "day_of_week": 5,
+            "opening_time": "12:00",
+            "closing_time": "00:00"
+        },
+        {
+            "id": 7,
+            "restaurant_id": 1,
+            "open": 1,
+            "day_of_week": 6,
+            "opening_time": "12:00",
+            "closing_time": "00:00"
+        }
     ]
 }

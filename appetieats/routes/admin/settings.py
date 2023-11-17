@@ -7,13 +7,15 @@ from appetieats.ext.database import db
 
 from appetieats.ext.helpers.register_tools import login_required
 from appetieats.ext.helpers.get_inputs import (
-        get_product_data_from_request, get_product_image, get_passwords_fields
+        get_product_data_from_request, get_product_image, get_data_from_form
 )
 from appetieats.ext.helpers.validate_inputs import (
-        validate_product_data, validate_product_image, validate_passwords
+        validate_product_data, validate_product_image, validate_passwords,
+        prevents_empty_fields
 )
 from appetieats.ext.helpers.db_tools import (
-        add_new_product, update_product_data, update_user_password
+        add_new_product, update_product_data, update_user_password,
+        update_restaurant_info
 )
 
 settings_bp = Blueprint('settings', __name__)
@@ -45,19 +47,33 @@ def add():
 @login_required("restaurant")
 def manage_categories():
     """Manage categories"""
+    restaurant_id = session.get("user_id")
     if request.method == "POST":
-        category = request.form.get("category", type=str)
+        form_fields = ["category"]
+
+        data = get_data_from_form(form_fields)
+
+        prevents_empty_fields(data)
+
+        category = data["category"]
+
+        search_category_name = Categories.query.filter_by(
+                user_id=restaurant_id, category_name=category).first()
+
+        if search_category_name:
+            return abort(403, "the name of category already exists")
+
         new_category = Categories(category_name=category,
-                                  user_id=session.get("user_id"))
+                                  user_id=restaurant_id)
 
         db.session.add(new_category)
         db.session.commit()
 
         return redirect("/admin/settings/manage-categories")
-    else:
-        categories = Categories.query.filter_by(user_id=session.get("user_id"))
-        return render_template("admin/settings/manage-categories.html",
-                               categories=categories)
+
+    categories = Categories.query.filter_by(user_id=restaurant_id)
+    return render_template("admin/settings/manage-categories.html",
+                           categories=categories)
 
 
 @settings_bp.route("/admin/settings/manage-categories/delete", methods=["POST"])
@@ -67,9 +83,11 @@ def delete_category():
     category_id = request.form.get("id")
     category = Categories.query.filter_by(id=category_id).first()
     products = Products.query.filter_by(category_id=category.id).all()
+
     if not products:
         db.session.delete(category)
         db.session.commit()
+
     else:
         return abort(403, "Need delete all products of this category before")
 
@@ -81,7 +99,6 @@ def delete_category():
 def edit_menu():
     """edit menu"""
     products = Products.query.filter_by(user_id=session.get("user_id")).all()
-    print(products)
     return render_template("admin/settings/edit-menu.html",  products=products)
 
 
@@ -103,8 +120,7 @@ def edit_product(product_id):
     if not product:
         return abort(403, "Choose a valid product")
 
-    current_category = Categories.query.filter_by(
-            id=product.category_id).first()
+    current_category = Categories.query.get(product.category_id)
 
     categories = Categories.query.filter(
             Categories.user_id == user_id,
@@ -113,6 +129,27 @@ def edit_product(product_id):
     return render_template(
             "admin/settings/edit-menu-form.html", product=product,
             current_category=current_category, categories=categories)
+
+
+@settings_bp.route("/admin/settings/edit-menu/<product_id>/delete", methods=["GET", "POST"])
+@login_required("restaurant")
+def delete_product(product_id):
+    """edit a product of menu"""
+    user_id = session.get("user_id")
+    if request.method == "POST":
+        product = Products.query.filter_by(
+                id=product_id, user_id=user_id).first()
+
+        if not product:
+            return abort(403, "Choose a valid product")
+
+        db.session.delete(product)
+        db.session.commit()
+
+        flash("Deleted", "success")
+        return redirect("/admin/settings/edit-menu")
+
+    return redirect("/admin/settings/edit-menu")
 
 
 @settings_bp.route("/admin/settings/qr-code")
@@ -131,6 +168,31 @@ def qr_code():
                            restaurant_url=restaurant_url)
 
 
+@settings_bp.route("/admin/settings/edit-restaurant-info", methods=["GET", "POST"])
+@login_required("restaurant")
+def edit_restaurant_info():
+    """change user password"""
+    restaurant_id = session.get("user_id")
+    restaurant = RestaurantsData.query.filter_by(user_id=restaurant_id).first()
+
+    if request.method == "POST":
+
+        fields = ["name", "address", "phone", "url"]
+
+        new_restaurant_info = get_data_from_form(fields)
+        print(new_restaurant_info)
+
+        prevents_empty_fields(new_restaurant_info)
+
+        update_restaurant_info(restaurant_id, new_restaurant_info)
+
+        flash("Changed", "success")
+        return redirect("/admin/settings/edit-restaurant-info")
+
+    return render_template("admin/settings/edit-restaurant-info.html",
+                           restaurant=restaurant)
+
+
 @settings_bp.route("/admin/settings/change-password", methods=["GET", "POST"])
 @login_required("restaurant")
 def change_password():
@@ -138,7 +200,9 @@ def change_password():
     if request.method == "POST":
         user_id = session.get("user_id")
 
-        passwords = get_passwords_fields()
+        fields = ["current", "new", "confirm"]
+
+        passwords = get_data_from_form(fields)
 
         validate_passwords(user_id, passwords)
 

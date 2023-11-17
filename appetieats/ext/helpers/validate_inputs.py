@@ -91,7 +91,7 @@ def validate_credentials(username, password, account_type):
 
 def validate_user_data(user_data):
     """validate all inputs from user form"""
-    for field, value in user_data.items():
+    for value in user_data.values():
         if not value:
             return abort(
                     403,
@@ -131,7 +131,7 @@ def validate_user_url(user_url):
     url = RestaurantsData.query.filter_by(url=user_url).first()
 
     if url:
-        return abort(403, "the url dont exists, try another")
+        return abort(403, "the url already exists, try another")
 
     return None
 
@@ -152,4 +152,20 @@ def validate_passwords(user_id, passwords):
     if passwords["new"] != passwords["confirm"]:
         return abort(403, "new password and confirm need be the same")
 
+    return None
+
+
+def prevents_empty_fields(data):
+    """prevents empty fields"""
+    for d in data.values():
+        if not d:
+            return abort(403, "fields cannot be empty")
+
+
+def validate_opening_time(weekdays_time_data):
+    """validate opening time values"""
+    for day in weekdays_time_data.values():
+        if day["open"]:
+            if not day["open_time"] or not day["close_time"]:
+                return abort(403, "a marked time field cannot be empty")
     return None

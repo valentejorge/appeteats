@@ -3,6 +3,8 @@ from flask import (
         Blueprint, render_template, session, jsonify, request, abort, redirect
 )
 
+from flask_socketio import emit
+
 from appetieats.ext.helpers.register_tools import login_required
 from appetieats.models import Orders
 from appetieats.ext.helpers.db_tools import (
@@ -31,12 +33,15 @@ def dashboard():
         product_id = request.form.get("id", type=int)
         status = request.form.get("status", type=str)
         operation = request.form.get("operation", type=str)
-        product = Orders.query.filter_by(id=product_id).filter_by(
+        order = Orders.query.filter_by(id=product_id).filter_by(
                 status=status).filter_by(restaurant_id=restaurant_id).first()
-        if not product:
+        if not order:
             abort(403, "Fatal Error: Product not found")
 
-        update_product_status(product, operation)
+        print(order.customer_id)
+        emit("update_customer_view",
+             namespace="/customer", room=order.customer_id)
+        update_product_status(order, operation)
 
     if status:
         return redirect(f"/admin/dashboard#{status}")

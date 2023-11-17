@@ -44,7 +44,7 @@ def login_required(role=None):
     return decorator
 
 
-def register_restaurant_user(user_data, weekdays):
+def register_restaurant_user(user_data, weekdays_data):
     """register a restaurant"""
     psw_hash = generate_password_hash(user_data["password"])
     new_user = Users(
@@ -66,17 +66,30 @@ def register_restaurant_user(user_data, weekdays):
     db.session.add(restaurant)
     db.session.commit()
 
-    for i, hours in weekdays.items():
-        if hours["is_open"]:
-            opening_time = datetime.strptime(hours["open_at"], "%H:%M").time()
-            closing_time = datetime.strptime(hours["close_at"], "%H:%M").time()
+    for i, time in weekdays_data.items():
+        if time["open"]:
+            opening_time = datetime.strptime(
+                     time["open_time"], "%H:%M").time()
+
+            closing_time = datetime.strptime(
+                     time["close_time"], "%H:%M").time()
 
             opening_hours = RestaurantOpeningHours(
                     restaurant_id=restaurant.id,
                     day_of_week=i,
+                    open=True,
                     opening_time=opening_time,
                     closing_time=closing_time
-                    )
+            )
+            db.session.add(opening_hours)
+            db.session.commit()
+
+        if not time["open"]:
+            opening_hours = RestaurantOpeningHours(
+                    restaurant_id=restaurant.id,
+                    day_of_week=i,
+                    open=False
+            )
             db.session.add(opening_hours)
             db.session.commit()
 
