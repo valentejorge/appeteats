@@ -1,59 +1,64 @@
+:root {
+    --main-red: #ff0000;
+    --main-white: #ffffff;
+    --main-dark-red: #cc0000;
+}
 .container-fluid {
     padding: 0 5%;
 }
 .button {
-    background-color: #ff0000;
+    background-color: var(--main-red);
     font-size: 1rem;
-    color: #fff !important;
+    color: var(--main-white) !important;
     border-radius: 10px;
-    border-color: #ff0000;
+    border-color: var(--main-red);
     transition: all 0.3s;
     outline: none;
 }
 .button:hover {
-    color: #fff;
-    background-color: #cc0000;
-    border-color: #cc0000;
+    color: var(--main-white);
+    background-color: var(--main-red);
+    border-color: var(--main-dark-red);
 }
 .button:focus,
 .button.focus {
-    color: #fff;
-    background-color: #cc0000;
-    border-color: #cc0000;
+    color: var(--main-white);
+    background-color: var(--main-dark-red);
+    border-color: var(--main-dark-red);
     box-shadow: 0 0 0 0.2rem rgba(204, 0, 0, 0.5);
 }
 .button-s {
-    background-color: #fff;
-    color: #ff0000 !important;
+background-color: var(--main-white);
+    color: var(--main-red) !important;
     border-radius: 10px;
-    border-color: #ff0000;
+    border-color: var(--main-red);
     transition: all 0.3s;
     border: 1px solid;
     font-size: 1rem;
     outline: none;
 }
 .button-s:hover {
-    color: #fff;
+    color: var(--main-white);
     background-color: rgba(255, 0, 0, 0.1);
     /*border-color: rgba(255, 0, 0, 0.1);*/
 }
 .button-s:focus,
 .button-s.focus {
-    color: #fff;
+    color: var(--main-white);
     background-color: rgba(255, 0, 0, 0.1);
-    background-color: #fff;
-    border-color: #ee0000;
+    background-color: var(--main-white);
+    border-color: var(--main-red);
     box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.3);
 }
 
 .navbar-red {
     background-color: #ffffff;
-    color: #ff0000 !important;
+    color: var(--main-red) !important;
     border: none;
     text-decoration: none;
 }
 .navbar-brand {
-    color: #ff0000 !important;
+    color: var(--main-red) !important;
 }
 .home {
     width: 100%;
@@ -66,7 +71,7 @@
 }
 .logo {
     font-weight: 500;
-    color: #ff0000;
+    color: var(--main-red);
 }
 .phone-img {
     max-height: 500px;
