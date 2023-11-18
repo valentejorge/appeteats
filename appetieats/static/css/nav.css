@@ -67,17 +67,17 @@ a:hover {
     border-color: #ced4da;
     box-shadow: none;
 }
-.border_left_none {
+.border-left-none {
     border-left: none;
 }
-.border_right_none {
+.border-right-none {
     border-right: none;
 }
-.border_left_round {
+.border-left-round {
     border-radius: 20px;
     border-width: 1px;
 }
-.border_right_round {
+.border-right-round {
     border-radius: 20px;
     border-width: 1px;
 }
