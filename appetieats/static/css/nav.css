@@ -52,7 +52,7 @@ a:hover {
     font-size: 22px;
 }
 
-.main_box {
+.main-box {
     display: flex;
     justify-content: center;
     align-items: center;
