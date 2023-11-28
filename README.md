@@ -1,7 +1,9 @@
 # AppetiEats
 #### Video Demo: <URL>
 #### Description: ApppetiEats is an Online Delivery Web Application that simplifies the gastronomic experience by allowing restaurants to display their menus and allowing their customers to place orders in an easy and intuitive way.
-<img src="https://github.com/valentejorge/appetieats/blob/develop/logo.png" alt="Harvard Logo" width="700"/>
+
+<img src="https://github.com/valentejorge/appetieats/blob/master/logo.png" alt="Harvard Logo" width="700"/>
+
 ### This is my CS50 final project
 
 ## Table of Contents
