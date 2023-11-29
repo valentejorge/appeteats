@@ -53,12 +53,12 @@ function buildMenu(productsData, categoriesData) {
 
 function categoryConstructor(categoryName, categoryId) {
     const div = `
-            <button class="view-all-button d-flex justify-content-between align-items-start" onclick="showCategory(${categoryId})">
+            <a class="view-all-button d-flex justify-content-between align-items-start" href="#menu?category_id=${categoryId}">
                 <h3>${categoryName}</h3>
                 <span class="material-icons nav_icons">
                     arrow_forward_ios
                 </span>
-            </button>
+            </a>
         <div class="products-line mb-3">
     `
     return div;
@@ -68,7 +68,7 @@ function productConstructor(productId, productName, productPrice, productImage) 
     const div = `
         <div class="product-width">
             <div class="product-details" >
-                <div class="card" onclick=showProductDetails(${productId})>
+                <a class="card" href="#menu?product_id=${productId}">
                     <img src="/static/cache/${productImage}" class="card-img-top mt-0" alt="${productName}">
                     <div onclick="addToCart(${productId})" class="add-to-cart-button">
                         <span class="material-icons nav_icons">add</span>
@@ -77,7 +77,7 @@ function productConstructor(productId, productName, productPrice, productImage) 
                         <h6 class="p-title mb-2">${productName}</h6>
                         <h6 class="price mt-auto mb-0">$ ${productPrice.toFixed(2)}</h6>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     `
