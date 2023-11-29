@@ -1,37 +1,3 @@
-/*
-function toggleOverlay() {
-    const overlayBg = document.querySelector("#overlay-bg")
-    const products = this.parentElement.nextElementSibling;
-    console.log(products)
-    products.classList.toggle('overlay');
-    overlayBg.classList.toggle('hide-important');
-}
-
-const viewAllButtons = document.querySelectorAll('.view-all-button');
-
-viewAllButtons.forEach(button => {
-    button.addEventListener('click', toggleOverlay);
-});
-*/
-
-/*
-const newCartView = document.querySelector('#new-cart-view');
-
-newCartView.addEventListener('click', (event) => {
-    const target = event.target;
-    if (target.classList.contains('view-all-button')) {
-        const categoryId = target.getAttribute('category');
-        const overlay = document.querySelector(`[data-category="${categoryId}"]`);
-        overlay.classList.add('active');
-    }
-    else if (target.classList.contains('back-button')) {
-        const overlay = target.closest('.overlay');
-
-        overlay.classList.remove('active');
-    }
-});
-*/
-
 function showOverlay(overlayId) {
     const overlay = document.querySelector(`[data-category="${overlayId}"]`)
     overlay.classList.add('active');
@@ -66,7 +32,33 @@ function showProductDetails(productId) {
     const overlay = document.querySelector('#product-overlay')
     overlay.classList.add('active');
 }
+
 function hideProductDetails() {
     const overlay = document.querySelector('#product-overlay')
     overlay.classList.remove('active');
 }
+function hideCategoryDetails() {
+    const overlay = document.querySelector('#category-overlay')
+    overlay.classList.remove('active');
+}
+
+function showCategory(categoryId) {
+    const categoryProducts = products.filter(p => p.category_id === categoryId)
+    console.log(categoryProducts)
+
+    let html = ''
+    for (const product of categoryProducts) {
+        html += productConstructor(product.id, product.name, product.price, product.image_path)
+    }
+    const productOverlay = document.querySelector('#category-details');
+    productOverlay.innerHTML = html;
+    const overlay = document.querySelector('#category-overlay')
+    overlay.classList.add('active');
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+sleep(2000).then(() => { console.log(showCategory(1)); });
+document.addEventListener("DOMContentLoaded", showCategory(1))
+showCategory(1)

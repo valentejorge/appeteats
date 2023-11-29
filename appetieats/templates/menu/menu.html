@@ -29,8 +29,19 @@
                 </span>
             </div>
         </div>
+
         <div id="products-menu">
         </div>
+
+        <div class="product-overlay" id="category-overlay">
+            <div class="back-button d-flex align-items-center justify-content-start" onclick="hideCategoryDetails()">
+                <span class="material-icons nav_icons">chevron_left</span>
+                <span class="flex-grow-1 text-start">Back</span>
+            </div>
+            <div id="category-details" class="main-overlay">
+            </div>
+        </div>
+
         <div class="product-overlay" id="product-overlay">
             <div class="back-button d-flex align-items-center justify-content-start" onclick="hideProductDetails()">
                 <span class="material-icons nav_icons">chevron_left</span>
@@ -40,6 +51,7 @@
                 <div id="product-details"></div>
             </div>
         </div>
+
     </div>
 
     <div name="page" class="cart" id="cart">
