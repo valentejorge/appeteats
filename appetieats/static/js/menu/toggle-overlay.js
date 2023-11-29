@@ -1,13 +1,3 @@
-function showOverlay(overlayId) {
-    const overlay = document.querySelector(`[data-category="${overlayId}"]`)
-    overlay.classList.add('active');
-}
-
-function hideOverlay(overlayId) {
-    const overlay = document.querySelector(`[data-category="${overlayId}"]`)
-    overlay.classList.remove('active');
-}
-
 function showProductDetails(productId) {
     event.stopPropagation();
     const product = products.find(p => p.id === productId)
@@ -37,6 +27,7 @@ function hideProductDetails() {
     const overlay = document.querySelector('#product-overlay')
     overlay.classList.remove('active');
 }
+
 function hideCategoryDetails() {
     const overlay = document.querySelector('#category-overlay')
     overlay.classList.remove('active');
@@ -44,21 +35,15 @@ function hideCategoryDetails() {
 
 function showCategory(categoryId) {
     const categoryProducts = products.filter(p => p.category_id === categoryId)
-    console.log(categoryProducts)
 
     let html = ''
     for (const product of categoryProducts) {
         html += productConstructor(product.id, product.name, product.price, product.image_path)
     }
+
     const productOverlay = document.querySelector('#category-details');
     productOverlay.innerHTML = html;
+
     const overlay = document.querySelector('#category-overlay')
     overlay.classList.add('active');
 }
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-sleep(2000).then(() => { console.log(showCategory(1)); });
-document.addEventListener("DOMContentLoaded", showCategory(1))
-showCategory(1)

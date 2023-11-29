@@ -44,18 +44,8 @@ function buildMenu(productsData, categoriesData) {
                 html += productConstructor(product.id, product.name, product.price, product.image_path)
             }
         }
-        html += '</div>'
-        html += overlayConstructor(category.id);
 
-        for (const product of productsData) {
-            if (product.category_id == category.id) {
-                html += productConstructor(product.id, product.name, product.price, product.image_path)
-            }
-        }
-        html += `
-            </div>
-            </div>
-            `
+        html += '</div>'
     }
     const menuDiv = document.querySelector('#products-menu');
     menuDiv.innerHTML = html;
@@ -63,7 +53,7 @@ function buildMenu(productsData, categoriesData) {
 
 function categoryConstructor(categoryName, categoryId) {
     const div = `
-            <button class="view-all-button d-flex justify-content-between align-items-start" onclick="showOverlay(${categoryId})">
+            <button class="view-all-button d-flex justify-content-between align-items-start" onclick="showCategory(${categoryId})">
                 <h3>${categoryName}</h3>
                 <span class="material-icons nav_icons">
                     arrow_forward_ios
@@ -92,21 +82,6 @@ function productConstructor(productId, productName, productPrice, productImage) 
         </div>
     `
     return div;
-}
-
-function overlayConstructor(categoryId) {
-    const div = `
-        <div class="overlay" data-category="${categoryId}">
-            <button class="back-button d-flex align-items-center justify-content-start" onclick="hideOverlay(${categoryId})">
-                <span class="material-icons nav_icons">chevron_left</span>
-                <span class="flex-grow-1 text-start">
-                    Back
-                </span>
-
-            </button>
-        <div class="main-overlay">
-    `
-    return div
 }
 
 function addToCart(productId) {
