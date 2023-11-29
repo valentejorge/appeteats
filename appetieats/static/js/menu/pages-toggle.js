@@ -16,7 +16,6 @@ function changePageState() {
 
     const item = path.split('?')[1];
 
-
     if (!page && !item || page && !item) {
        hideProductDetails();
        hideCategoryDetails();
@@ -53,7 +52,6 @@ function changePageState() {
     if (page) {
         showPage(page)
     }
-
 }
 
 window.addEventListener("hashchange", changePageState);
