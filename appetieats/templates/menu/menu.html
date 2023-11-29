@@ -18,6 +18,9 @@
             <a class="mb-0" href="/customer">
                 <span class="material-icons nav_icon">account_circle</span>
             </a>
+            <a class="mb-0" id="teste" href="#menu?category_id=2" >
+                <span class="material-icons nav_icon">account_circle</span>
+            </a >
         </div>
         <div class="mx-auto search">
             <div class="input-group mb-4 mt-2">
@@ -34,7 +37,7 @@
         </div>
 
         <div class="product-overlay" id="category-overlay">
-            <div class="back-button d-flex align-items-center justify-content-start" onclick="hideCategoryDetails()">
+            <div class="back-button d-flex align-items-center justify-content-start" onclick="history.back()">
                 <span class="material-icons nav_icons">chevron_left</span>
                 <span class="flex-grow-1 text-start">Back</span>
             </div>
@@ -43,7 +46,7 @@
         </div>
 
         <div class="product-overlay" id="product-overlay">
-            <div class="back-button d-flex align-items-center justify-content-start" onclick="hideProductDetails()">
+            <div class="back-button d-flex align-items-center justify-content-start" onclick="history.back()">
                 <span class="material-icons nav_icons">chevron_left</span>
                 <span class="flex-grow-1 text-start">Back</span>
             </div>
