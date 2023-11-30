@@ -20,9 +20,9 @@ def drop_db():
     db.drop_all()
 
 
-def populate_database_from_json():
+def populate_database_from_json(path_context):
     """populate db from a json file"""
-    json_path = "appetieats/ext/helpers/sample_data.json"
+    json_path = f"{path_context}appetieats/ext/helpers/sample_data.json"
     print(os.path.abspath(json_path))
 
     with open(json_path, "r", encoding="utf-8") as file:
@@ -60,7 +60,7 @@ def populate_database_from_json():
                             product_id=product_id,
                             image_path=image_path,
                             image_data=open(
-                                f"appetieats/static/sample_data/{image_path}", "rb"
+                                f"{path_context}appetieats/static/sample_data/{image_path}", "rb"
                                 ).read()
                         )
                         db.session.add(product_image)
@@ -92,7 +92,18 @@ def restart_db():
     """restart database"""
     drop_db()
     create_db()
-    populate_database_from_json()
+    path_context = ""
+    populate_database_from_json(path_context)
+
+
+def restart_testing_db(method):
+    """restart database for tests"""
+    drop_db()
+    create_db()
+
+    if method == "complete":
+        path_context = "../"
+        populate_database_from_json(path_context)
 
 
 def init_app(app):
