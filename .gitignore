@@ -1,5 +1,6 @@
 /appetieats/static/cache/
 /flask_session/
+/tests/flask_session/
 pylintrc
 settings.json
 
