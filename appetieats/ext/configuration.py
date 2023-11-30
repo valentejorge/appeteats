@@ -10,6 +10,6 @@ def load_extensions(app):
         mod.init_app(app)
 
 
-def init_app(app):
+def init_app(app, **config):
     """init dynaconf"""
-    FlaskDynaconf(app)
+    FlaskDynaconf(app, **config)
