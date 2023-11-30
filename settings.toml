@@ -13,3 +13,6 @@ EXTENSIONS = [
     "appetieats.routes.admin.settings",
     "appetieats.routes.customer"
 ]
+
+[testing]
+SQLALCHEMY_DATABASE_URI = 'sqlite:///testing.db'
