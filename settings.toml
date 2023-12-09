@@ -13,6 +13,11 @@ EXTENSIONS = [
     "appetieats.routes.admin.settings",
     "appetieats.routes.customer"
 ]
+CACHE_PATH = 'appetieats/static/cache'
+JSON_DATA_PATH = 'appetieats/ext/helpers/sample_data.json'
+
 
 [testing]
+CACHE_PATH = '../static/cache'
 SQLALCHEMY_DATABASE_URI = 'sqlite:///testing.db'
+JSON_DATA_PATH = '../ext/helpers/sample_data.json'
