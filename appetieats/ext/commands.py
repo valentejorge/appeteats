@@ -8,6 +8,7 @@ from appetieats.models import (
         Users, RestaurantsData, Categories, ProductImages, Products,
         CustomersData, RestaurantOpeningHours
 )
+from flask import current_app
 
 
 def create_db():
@@ -20,10 +21,15 @@ def drop_db():
     db.drop_all()
 
 
-def populate_database_from_json(path_context):
+def populate_database_from_json(json_path):
     """populate db from a json file"""
-    json_path = f"{path_context}appetieats/ext/helpers/sample_data.json"
     print(os.path.abspath(json_path))
+    # print(current_app.config.get("TESTING"))
+    # print(settings.JSON_DATA_PATH)
+    if json_path[0] == '.':
+        path_context = '../'
+    else:
+        path_context = 'appetieats/'
 
     with open(json_path, "r", encoding="utf-8") as file:
         json_file = json.load(file)
@@ -60,7 +66,7 @@ def populate_database_from_json(path_context):
                             product_id=product_id,
                             image_path=image_path,
                             image_data=open(
-                                f"{path_context}appetieats/static/sample_data/{image_path}", "rb"
+                                f"{path_context}/static/sample_data/{image_path}", "rb"
                                 ).read()
                         )
                         db.session.add(product_image)
@@ -85,25 +91,29 @@ def populate_database_from_json(path_context):
 
 def hello_commands():
     """says hello"""
-    print("hello commands")
+    hello = "hello commands"
+    print(hello)
+    return hello
 
 
 def restart_db():
     """restart database"""
     drop_db()
     create_db()
-    path_context = ""
-    populate_database_from_json(path_context)
+
+    # path = "appetieats/ext/helpers/sample_data.json"
+    path = current_app.config.get("JSON_DATA_PATH")
+    populate_database_from_json(path)
 
 
-def restart_testing_db(method):
+def restart_testing_db():
     """restart database for tests"""
     drop_db()
     create_db()
 
-    if method == "complete":
-        path_context = "../"
-        populate_database_from_json(path_context)
+    # path = "../ext/helpers/test_sample_data.json"
+    path = current_app.config.get("JSON_DATA_PATH")
+    populate_database_from_json(path)
 
 
 def init_app(app):
