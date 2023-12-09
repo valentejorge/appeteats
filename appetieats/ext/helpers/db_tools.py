@@ -160,8 +160,10 @@ def orders_to_dict(orders):
                 OrderItems.order_id == order.id).all()
 
         for item in order_items:
-            products = Products.query.get(item.product_id)
-            image = ProductImages.query.get(item.product_id)
+            products = Products.query.filter(
+                    item.product_id == Products.id).first()
+            image = ProductImages.query.filter(
+                    item.product_id == ProductImages.id).first()
 
             item_dict = {
                 "product_name": products.name,
