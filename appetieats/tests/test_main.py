@@ -31,7 +31,7 @@ def test_menu(client):
 
 def test_menu_data(client):
     response = client.get("/python-pizza/data")
-    assert b'products:' in response.data
+    assert b'"products":' in response.data
 
 
 def test_login(client):
