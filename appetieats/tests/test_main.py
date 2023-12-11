@@ -17,7 +17,6 @@ def test_menu_order(client):
     })
 
     response3 = client.get("/customer")
-    print(response3)
 
     assert b'target URL: <a href="/customer">' in response.data
     assert b'target URL: <a href="/python-pizza#cart">' in response2.data
