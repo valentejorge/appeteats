@@ -106,16 +106,6 @@ def restart_db():
     populate_database_from_json(path)
 
 
-def restart_testing_db():
-    """restart database for tests"""
-    drop_db()
-    create_db()
-
-    # path = "../ext/helpers/test_sample_data.json"
-    path = current_app.config.get("JSON_DATA_PATH")
-    populate_database_from_json(path)
-
-
 def init_app(app):
     """add multiple commands in a bulk"""
     for command in [create_db,
