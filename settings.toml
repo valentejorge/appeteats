@@ -20,4 +20,4 @@ JSON_DATA_PATH = 'appetieats/ext/helpers/sample_data.json'
 [testing]
 CACHE_PATH = '../static/cache'
 SQLALCHEMY_DATABASE_URI = 'sqlite:///testing.db'
-JSON_DATA_PATH = '../ext/helpers/sample_data.json'
+JSON_DATA_PATH = '../ext/helpers/test_sample_data.json'
