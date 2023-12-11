@@ -1,7 +1,7 @@
 import pytest
 
 from appetieats.app import create_app
-from appetieats.ext.commands import restart_testing_db
+from appetieats.ext.commands import restart_db
 from appetieats.ext.database import db
 
 
@@ -10,7 +10,7 @@ def app():
     app = create_app(FORCE_ENV_FOR_DYNACONF="testing")
 
     with app.app_context():
-        restart_testing_db()
+        restart_db()
 
         yield app
         db.drop_all()
