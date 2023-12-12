@@ -127,6 +127,28 @@ def data(restaurant_url):
     )
 
 
+@menu_bp.route("/<restaurant_url>/landing")
+def landing(restaurant_url):
+    """Show the restaurant landing page"""
+    restaurant = RestaurantsData.query.filter_by(url=restaurant_url).first()
+
+    if not restaurant:
+        return abort(404, "restaurant not found, check the url")
+
+    session["last_restaurant"] = restaurant_url
+
+    restaurant_info = RestaurantsData.query.join(
+            Users, RestaurantsData.user_id == Users.id
+            ).filter(Users.id == restaurant.user_id).first()
+
+    for value in restaurant_info.to_dict():
+        print(f'{value}')
+
+    return render_template(
+            "menu/landing-menu.html", restaurant_info=restaurant_info
+    )
+
+
 def init_app(app):
     """init menu blueprint"""
     app.register_blueprint(menu_bp)
