@@ -75,6 +75,18 @@ textarea {
     color: #fff;
 }
 
+.std-button-secondary {
+    background-color: #fff;
+    color: var(--std-red);
+    border: 1.5px solid var(--std-red);
+}
+
+.std-button-secondary:hover {
+    transition: ease-in-out 0.3s;
+    background-color: #ffeded;
+    color: var(--std-red);
+}
+
 .form-header {
     margin-bottom: 1rem;
     display: flex;
