@@ -47,16 +47,7 @@
             </div>
         </main>
 
-        <nav class="nav">
-            <a name="menu" id="menuBtn" href="#menu" class="nav_link nav_link--active">
-                <span class="material-icons nav_icon">restaurant_menu</span>
-                <span class="nav_text">Menu</span>
-            </a>
-            <a name="cart" id="cartBtn" href="#cart" class="nav_link">
-                <span class="material-icons nav_icon">shopping_basket</span>
-                <span class="nav_text">Cart</span>
-            </a>
-        </nav>
+        {% block nav %}{% endblock %}
         <script src="/static/js/nav-click.js"></script>
         <script src="/static/js/menu/cart.js"></script>
         <script src="/static/js/menu/pages-toggle.js"></script>
