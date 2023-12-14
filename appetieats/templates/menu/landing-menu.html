@@ -1,0 +1,41 @@
+{% extends "menu/menu-layout.html" %}
+
+{% block title %}{{ restaurant_info.name }}{% endblock %}
+{% block head %}
+<link href="/static/css/menu/menu.css" rel="stylesheet">
+<link href="/static/css/menu/menu-landing.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block main %}
+<div class="top-app mt-3 mb-3">
+    <div class="form-header">
+        <div class="title">
+            <h1 class="title-open mb-0">{{restaurant_info.name}}
+            </h1>
+            <span class="badge badge-pill badge-success badge-open">is Open</span> 
+        </div>
+    </div>
+</div>
+
+<div class="d-flex flex-column justify-content-center">
+    <div class="d-flex justify-content-center">
+        <img src="/static/assets/img/undraw_welcome_cats_thqn.svg" class="mt-5 welcome-img" alt="welcome image">
+    </div>
+    <div>
+        <span class="badge badge-success">Open</span>
+    </div>
+
+    <h3 class="mt-3">the {{restaurant_info.name}} is open right now and waiting your order!</h3>
+    <div class="d-flex w-100 gap-2">
+        <a href="/{{restaurant_info.url}}" class="w-100">
+                <button class="std-button std-button-secondary mt-3">See opening hours</button>
+        </a>
+        <a href="/{{restaurant_info.url}}" class="w-100">
+            <button class="std-button mt-3">Go to menu</button>
+        </a>
+    </div>
+</div>
+
+
+{% endblock %}

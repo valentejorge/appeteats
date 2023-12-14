@@ -1,0 +1,22 @@
+.welcome-img {
+    width: 100%;
+    max-width: 450px;
+}
+
+.badge-open {
+    font-size: .9rem;
+}
+
+.title {
+    display: flex;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-pill {
+    padding-right: .6em;
+    padding-left: .6em;
+    border-radius: 10rem;
+}
