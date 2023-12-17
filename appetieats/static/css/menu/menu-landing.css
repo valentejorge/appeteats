@@ -28,3 +28,9 @@
 .modal-content {
     border-radius: 10px;
 }
+
+@media screen and (max-width: 576px) {
+    .action-buttons{
+        display: block !important;
+    }
+}
