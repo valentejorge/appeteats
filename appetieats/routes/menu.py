@@ -5,7 +5,8 @@ from flask import (
         session, abort
 )
 from appetieats.models import (
-        RestaurantsData, Users, Categories, Products, ProductImages
+        RestaurantsData, Users, Categories, Products, ProductImages,
+        RestaurantOpeningHours
 )
 from appetieats.ext.helpers.validate_inputs import (
         validate_cart, validate_user_account
@@ -141,8 +142,13 @@ def landing(restaurant_url):
             Users, RestaurantsData.user_id == Users.id
             ).filter(Users.id == restaurant.user_id).first()
 
-    for value in restaurant_info.to_dict():
-        print(f'{value}')
+    restaurant_time = RestaurantOpeningHours.query.join(
+            Users, RestaurantOpeningHours.restaurant_id == Users.id
+            ).filter(Users.id == restaurant.user_id).first()
+
+    print(restaurant_info.to_dict())
+
+    print(restaurant_time.to_dict())
 
     return render_template(
             "menu/landing-menu.html", restaurant_info=restaurant_info
