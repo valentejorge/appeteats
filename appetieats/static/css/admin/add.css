@@ -67,6 +67,7 @@ textarea {
     border-radius: 10px;
     cursor: pointer;
     color: #fff;
+    border: 1.5px solid var(--std-red);
 }
 
 .std-button:hover {
