@@ -142,14 +142,41 @@ def landing(restaurant_url):
             Users, RestaurantsData.user_id == Users.id
             ).filter(Users.id == restaurant.user_id).first()
 
-    restaurant_time = RestaurantOpeningHours.query.join(
+    restaurant_time_query = RestaurantOpeningHours.query.join(
             Users, RestaurantOpeningHours.restaurant_id == Users.id
-            ).filter(Users.id == restaurant.user_id).first()
+            ).filter(Users.id == restaurant.user_id).all()
 
     print(restaurant_info.to_dict())
 
-    print(restaurant_time.to_dict())
+    opening_hours_list = []
 
+    for item in restaurant_time_query:
+        day = item.to_dict()
+        opening_hours_list.append(day)
+
+    restaurant_time = {}
+
+    print("opening")
+    print(opening_hours_list)
+
+    week = {
+        0: "monday", 1: "tuesday", 2: "wednesday",
+        3: "thursday", 4: "friday", 5: "saturday", 6: "sunday"
+    }
+
+    for key in week:
+        print(week[key])
+        print(opening_hours_list[key])
+        restaurant_time[key] = opening_hours_list[key]
+
+    # restaurant_time = (dict(day) for day in restaurant_time_query)
+    # restaurant_time = restaurant_time_query.to_dict()
+
+    # for item in restaurant_time:
+        # day = item["day_of_week"]
+        # restaurant_time[day] = item
+
+    print(restaurant_time)
     return render_template(
             "menu/landing-menu.html", restaurant_info=restaurant_info
     )
