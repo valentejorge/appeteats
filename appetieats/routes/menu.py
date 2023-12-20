@@ -141,6 +141,19 @@ def landing(restaurant_url):
     restaurant_info = RestaurantsData.query.filter(
             Users.id == restaurant.user_id).first()
 
+    return render_template(
+            "menu/landing-menu.html", restaurant_info=restaurant_info
+    )
+
+
+@menu_bp.route("/<restaurant_url>/landing/data")
+def landing_data(restaurant_url):
+    """Return a json of restaurant opening hours"""
+    restaurant = RestaurantsData.query.filter_by(url=restaurant_url).first()
+
+    if not restaurant:
+        return abort(404, "restaurant not found, check the url")
+
     restaurant_time_query = RestaurantOpeningHours.query.filter(
             RestaurantOpeningHours.restaurant_id == restaurant.user_id).all()
 
@@ -155,11 +168,7 @@ def landing(restaurant_url):
         day = restaurant_time_query[i].to_dict()
         restaurant_time[week[day["day_of_week"]]] = day
 
-    print(restaurant_time)
-    print(restaurant_info)
-    return render_template(
-            "menu/landing-menu.html", restaurant_info=restaurant_info
-    )
+    return jsonify(restaurant_time)
 
 
 def init_app(app):
