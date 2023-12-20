@@ -9,7 +9,7 @@ def format_opening_hours(data):
     for day in data:
         f = {
                 "open": day.open,
-                "day_of_week": week[day.day_of_week],
+                "day_of_week": week[day.day_of_week].capitalize(),
                 "opening_time": day.opening_time.strftime("%H:%M"),
                 "closing_time": day.closing_time.strftime("%H:%M")
             }
