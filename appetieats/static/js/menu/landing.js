@@ -2,34 +2,31 @@ async function takeData() {
     const URL = window.location.pathname +  '/data';
 
     const response = await fetch(URL);
-    const data = await response.json()
+    const data = await response.json();
 
-    return data
+    return data;
 }
 
 async function init() {
     const data = await takeData();
 
-    buildOpening(data)
+    buildOpening(data);
 }
 
 function buildOpening(data) {
     const container = document.querySelector('#opening-container')
     container.innerHTML = data[0]
-    console.log(container)
-    console.log(data)
-    console.log(typeof(data))
+    let html = '';
     for (const day of data) {
-        console.log(day)
-        console.log(day.id)
+        html += buildDay(day.day_of_week, day.open, day.opening_time, day.closing_time);
     }
-    buildDay(1,1,1,1)
+    container.innerHTML = html;
 }
 
 function buildDay(dayName, isOpen, openTime, closeTime) {
     if (isOpen === false) {
-        openTime = 'closed'
-        closeTime = 'closed'
+        openTime = 'closed';
+        closeTime = 'closed';
     }
     const html = `
         <div class="d-flex justify-content-between mb-1">
@@ -41,7 +38,7 @@ function buildDay(dayName, isOpen, openTime, closeTime) {
             </div>
         </div>
         `
-    return html
+    return html;
 }
 
-init()
+init();
