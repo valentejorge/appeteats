@@ -13,6 +13,7 @@ from appetieats.ext.helpers.validate_inputs import (
 )
 from appetieats.ext.helpers.cache_images import get_image
 from appetieats.ext.helpers.db_tools import add_new_order
+from appetieats.ext.helpers.format_data import format_opening_hours
 
 menu_bp = Blueprint('menu', __name__)
 
@@ -155,20 +156,10 @@ def landing_data(restaurant_url):
         return abort(404, "restaurant not found, check the url")
 
     restaurant_time_query = RestaurantOpeningHours.query.filter(
-            RestaurantOpeningHours.restaurant_id == restaurant.user_id).all()
+            RestaurantOpeningHours.restaurant_id == restaurant.user_id
+    ).all()
 
-    restaurant_time = {}
-
-    week = {
-        0: "monday", 1: "tuesday", 2: "wednesday",
-        3: "thursday", 4: "friday", 5: "saturday", 6: "sunday"
-    }
-
-    for i in range(len(restaurant_time_query)):
-        day = restaurant_time_query[i].to_dict()
-        restaurant_time[week[day["day_of_week"]]] = day
-
-    return jsonify(restaurant_time)
+    return jsonify(format_opening_hours(restaurant_time_query))
 
 
 def init_app(app):
