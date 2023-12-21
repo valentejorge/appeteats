@@ -15,6 +15,10 @@
     background-color: #28a745;
 }
 
+.badge-danger {
+    background-color: #dc3545;
+}
+
 .badge-pill {
     padding-right: .6em;
     padding-left: .6em;
