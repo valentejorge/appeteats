@@ -13,7 +13,9 @@ from appetieats.ext.helpers.validate_inputs import (
 )
 from appetieats.ext.helpers.cache_images import get_image
 from appetieats.ext.helpers.db_tools import add_new_order
-from appetieats.ext.helpers.format_data import format_opening_hours
+from appetieats.ext.helpers.format_data import (
+        format_opening_hours, restaurant_is_open
+)
 
 menu_bp = Blueprint('menu', __name__)
 
@@ -139,8 +141,9 @@ def landing(restaurant_url):
 
     session["last_restaurant"] = restaurant_url
 
-    restaurant_info = RestaurantsData.query.filter(
-            Users.id == restaurant.user_id).first()
+    restaurant_info = RestaurantsData.query.join(
+            Users, RestaurantsData.user_id == Users.id
+            ).filter(Users.id == restaurant.user_id).first()
 
     return render_template(
             "menu/landing-menu.html", restaurant_info=restaurant_info
@@ -156,10 +159,12 @@ def landing_data(restaurant_url):
         return abort(404, "restaurant not found, check the url")
 
     restaurant_time_query = RestaurantOpeningHours.query.filter(
-            RestaurantOpeningHours.restaurant_id == restaurant.user_id
+            RestaurantOpeningHours.restaurant_id == restaurant.id
     ).all()
 
-    return jsonify(format_opening_hours(restaurant_time_query))
+    state = restaurant_is_open(restaurant_time_query)
+
+    return jsonify(format_opening_hours(restaurant_time_query), state)
 
 
 def init_app(app):
