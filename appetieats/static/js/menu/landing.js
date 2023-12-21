@@ -10,12 +10,12 @@ async function takeData() {
 async function init() {
     const data = await takeData();
 
-    buildOpening(data);
+    buildOpening(data[0]);
+    buildIsOpen(data[1])
 }
 
 function buildOpening(data) {
     const container = document.querySelector('#opening-container')
-    container.innerHTML = data[0]
     let html = '';
     for (const day of data) {
         html += buildDay(day.day_of_week, day.open, day.opening_time, day.closing_time);
@@ -24,7 +24,7 @@ function buildOpening(data) {
 }
 
 function buildDay(dayName, isOpen, openTime, closeTime) {
-    if (isOpen === false) {
+    if (isOpen == false) {
         openTime = 'closed';
         closeTime = 'closed';
     }
@@ -40,5 +40,22 @@ function buildDay(dayName, isOpen, openTime, closeTime) {
         `
     return html;
 }
+
+function buildIsOpen(state) {
+    let status = 'is Closed'
+    let color = 'danger'
+
+    if (state) {
+        status = 'is Open'
+        color = 'success'
+    }
+
+    const html = `
+        <span class="badge badge-pill badge-${color} badge-open">${status}</span> 
+    `
+    const div = document.querySelector('#open-sign')
+
+    div.innerHTML = html
+} 
 
 init();
