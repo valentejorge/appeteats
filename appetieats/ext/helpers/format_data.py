@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 def format_opening_hours(data):
     restaurant_time = []
 
@@ -7,12 +10,46 @@ def format_opening_hours(data):
     }
 
     for day in data:
-        f = {
+        if day.opening_time is not None or day.closing_time is not None:
+            formatted_day = {
                 "open": day.open,
                 "day_of_week": week[day.day_of_week].capitalize(),
                 "opening_time": day.opening_time.strftime("%H:%M"),
                 "closing_time": day.closing_time.strftime("%H:%M")
             }
-        restaurant_time.append(f)
+        else:
+            formatted_day = {
+                "open": day.open,
+                "day_of_week": week[day.day_of_week].capitalize(),
+                "opening_time": '00:00',
+                "closing_time": '00:00'
+            }
+        restaurant_time.append(formatted_day)
 
     return restaurant_time
+
+
+def restaurant_is_open(day_time_data):
+    def time_to_seconds(t):
+        return t.hour * 3600 + t.minute * 60 + t.second
+
+    date = datetime.now()
+    hours = date.time()
+    weekday = date.weekday()
+
+    today = day_time_data[weekday]
+
+    if today.opening_time is None or today.closing_time is None:
+        return False
+
+    open = time_to_seconds(today.opening_time)
+    close = time_to_seconds(today.closing_time)
+    hours = time_to_seconds(hours)
+
+    if close < open:
+        close += 24 * 3600
+
+    if open <= hours <= close:
+        return True
+
+    return False
