@@ -31,6 +31,13 @@
     -->
 
     <h3 class="mt-3 text-center">{{restaurant_info.name}} is open right now and waiting your order!</h3>
+    <div class="mt-0 d-flex justify-content-center align-items-center">
+        <span class="material-icons text-muted">location_on</span>
+        <p class="text-center text-muted mb-0">
+            {{restaurant_info.address}}
+        </p>
+    </div>
+
     <div class="action-buttons d-flex w-100 gap-2">
         <div class="w-100">
             <button class="std-button std-button-secondary mt-3" data-bs-toggle="modal" data-bs-target="#time-modal">View opening hours</button>
