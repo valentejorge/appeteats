@@ -44,18 +44,25 @@ function buildDay(dayName, isOpen, openTime, closeTime) {
 function buildIsOpen(state) {
     let status = 'is Closed'
     let color = 'danger'
+    let phrase = 'is closed right now, check the opening hours!'
 
     if (state) {
         status = 'is Open'
         color = 'success'
+        phrase = 'is open right now and waiting your order!'
     }
 
     const html = `
         <span class="badge badge-pill badge-${color} badge-open">${status}</span> 
     `
-    const div = document.querySelector('#open-sign')
+    const openSign = document.querySelector('#open-sign')
+    const openPhrase = document.querySelector('#open-phrase')
 
-    div.innerHTML = html
+    const restaurantName = openPhrase.innerHTML
+
+    openPhrase.innerHTML = `${restaurantName} ${phrase}`
+
+    openSign.innerHTML = html
 } 
 
 init();
