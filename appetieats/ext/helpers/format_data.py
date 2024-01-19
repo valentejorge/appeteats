@@ -30,6 +30,7 @@ def format_opening_hours(data):
 
 
 def restaurant_is_open(day_time_data):
+    """check if the restaurant is opening"""
     def time_to_seconds(t):
         return t.hour * 3600 + t.minute * 60 + t.second
 
@@ -47,7 +48,7 @@ def restaurant_is_open(day_time_data):
     hours = time_to_seconds(hours)
 
     if close_time < open_time:
-        close += 24 * 3600
+        close_time += 24 * 3600
 
     if open_time <= hours <= close_time:
         return True
