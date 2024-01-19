@@ -42,14 +42,14 @@ def restaurant_is_open(day_time_data):
     if today.opening_time is None or today.closing_time is None:
         return False
 
-    open = time_to_seconds(today.opening_time)
-    close = time_to_seconds(today.closing_time)
+    open_time = time_to_seconds(today.opening_time)
+    close_time = time_to_seconds(today.closing_time)
     hours = time_to_seconds(hours)
 
-    if close < open:
+    if close_time < open_time:
         close += 24 * 3600
 
-    if open <= hours <= close:
+    if open_time <= hours <= close_time:
         return True
 
     return False
