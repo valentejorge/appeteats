@@ -1,7 +1,9 @@
+"""Module providing a format data from database"""
 from datetime import datetime
 
 
 def format_opening_hours(data):
+    """format date from database"""
     restaurant_time = []
 
     week = {
