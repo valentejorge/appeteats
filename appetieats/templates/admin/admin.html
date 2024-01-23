@@ -53,24 +53,24 @@
 
         <main>
             <div class="main-box">
-                <div class="main_content">
+                <div class="main-content">
                     {% block main %}{% endblock %}
                 </div>
             </div>
         </main>
 
         <nav class="nav">
-            <a href="/admin/dashboard" class="nav_link {% block dashboard %}{% endblock %}">
-                <span class="material-icons nav_icon">dashboard</span>
-                <span class="nav_text">Dashboard</span>
+            <a href="/admin/dashboard" class="nav-link {% block dashboard %}{% endblock %}">
+                <span class="material-icons nav-icon">dashboard</span>
+                <span class="nav-text">Dashboard</span>
             </a>
-            <a href="/admin/settings/edit-menu" class="nav_link {% block edit %}{% endblock %}">
-                <span class="material-icons nav_icon">restaurant_menu</span>
-                <span class="nav_text">Edit Menu</span>
+            <a href="/admin/settings/edit-menu" class="nav-link {% block edit %}{% endblock %}">
+                <span class="material-icons nav-icon">restaurant_menu</span>
+                <span class="nav-text">Edit Menu</span>
             </a>
-            <a href="/admin/settings" class="nav_link {% block settings %}{% endblock %}">
-                <span class="material-icons nav_icon">settings</span>
-                <span class="nav_text">Settings</span>
+            <a href="/admin/settings" class="nav-link {% block settings %}{% endblock %}">
+                <span class="material-icons nav-icon">settings</span>
+                <span class="nav-text">Settings</span>
             </a>
         </nav>
         <script src="/static/js/nav-click.js"></script>
