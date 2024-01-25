@@ -128,7 +128,7 @@ function buildCardFooter(id, status) {
                     <input name="operation" type="hidden" value="next">
                     <button type="submit" class="d-flex align-items-center justify-content-end std-button p-1 bottom-button">
                         <span class="">Next Step</span>
-                        <span class="material-icons nav_icons">chevron_right</span>
+                        <span class="material-icons nav-icons">chevron_right</span>
                     </button>
                 </form>
             </div>
@@ -142,7 +142,7 @@ function buildCardFooter(id, status) {
                         <input name="status" type="hidden" value="${status}">
                         <input name="operation" type="hidden" value="previous">
                         <button type="submit" class="d-flex align-items-center justify-content-start std-button p-1 bottom-button left">
-                            <span class="material-icons nav_icons">chevron_left</span>
+                            <span class="material-icons nav-icons">chevron_left</span>
                             <span class="">Previous Step</span>
                         </button>
                     </form>
@@ -152,7 +152,7 @@ function buildCardFooter(id, status) {
                         <input name="operation" type="hidden" value="next">
                         <button type="submit" class="d-flex align-items-center justify-content-end std-button p-1 bottom-button right">
                             <span class="">Next Step</span>
-                            <span class="material-icons nav_icons">chevron_right</span>
+                            <span class="material-icons nav-icons">chevron_right</span>
                         </button>
                     </form>
                 </div>
@@ -166,7 +166,7 @@ function buildCardFooter(id, status) {
                     <input name="status" type="hidden" value="${status}">
                     <input name="operation" type="hidden" value="previous">
                     <button type="submit" class="d-flex align-items-center justify-content-start std-button p-1 bottom-button">
-                        <span class="material-icons nav_icons">chevron_left</span>
+                        <span class="material-icons nav-icons">chevron_left</span>
                         <span class="">Previous Step</span>
                     </button>
                 </form>

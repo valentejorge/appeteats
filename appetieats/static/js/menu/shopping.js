@@ -55,7 +55,7 @@ function categoryConstructor(categoryName, categoryId) {
     const div = `
             <a class="view-all-button d-flex justify-content-between align-items-start" href="#menu?category_id=${categoryId}">
                 <h3>${categoryName}</h3>
-                <span class="material-icons nav_icons">
+                <span class="material-icons nav-icons">
                     arrow_forward_ios
                 </span>
             </a>
@@ -71,7 +71,7 @@ function productConstructor(productId, productName, productPrice, productImage) 
                 <a class="card" href="#menu?product_id=${productId}">
                     <img src="/static/cache/${productImage}" class="card-img-top mt-0" alt="${productName}">
                     <div onclick="addToCart(${productId})" class="add-to-cart-button">
-                        <span class="material-icons nav_icons">add</span>
+                        <span class="material-icons nav-icons">add</span>
                     </div>
                     <div class="card-body p-2 d-flex flex-column align-items-start">
                         <h6 class="p-title mb-2">${productName}</h6>
@@ -129,11 +129,11 @@ function updateCartDisplay() {
                 <div class="d-flex align-items-center justify-content-between w-50">
                     <div class="qty-group">
                         <button onclick="updateQty(this, ${item.id})" class="qty-button decrement">
-                            <span class="material-icons nav_icons decrement">remove</span>
+                            <span class="material-icons nav-icons decrement">remove</span>
                         </button>
                         <input type="number" min="1" class="qty-input text-center" value="${item.quantity}" disabled>
                         <button onclick="updateQty(this, ${item.id})" class="qty-button increment">
-                            <span class="material-icons nav_icons">add</span>
+                            <span class="material-icons nav-icons">add</span>
                         </button>
                     </div>
                     <div class="price-section">

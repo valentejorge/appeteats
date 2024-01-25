@@ -70,7 +70,7 @@ function buildStatus(status) {
         case 'cooking':
             return `<div class="spinner spinner-grow spinner-grow-sm" role="status"></div>`
         case 'done':
-            return `<span class="spinner material-icons nav_icons text-success">check</span>`
+            return `<span class="spinner material-icons nav-icons text-success">check</span>`
     }
 }
 
