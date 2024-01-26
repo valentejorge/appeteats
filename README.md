@@ -63,6 +63,7 @@ flask run --host=0.0.0.0
 - **Order History**: Customers and restaurants can view their order history.
 - **Qr Code Generator**: Restaurants can generate a qr code that directs costumers to the restaurant's landing page.
 - **Responsive Design**: The application was developed so that the user has the best use, both on mobile devices and desktops
+- **Real Time Notifications**: Customer order notifications arrive in real time on the restaurant's dashboard, and a convenient bell sounds, notifying the new order, preventing the restaurant from having to reload the page to check new orders.
 
 ## Project Structure
 
@@ -121,6 +122,9 @@ flask run --host=0.0.0.0
 │   │       ├── bacon.png
 │   │       ├── ...
 │   │       └── ...
+│   ├── tests (TESTS FOLDER)
+│   │   ├── conftest.py (CONFIG TESTS)
+│   │   └── ...
 │   └── templates (APP TEMPLATES)
 │       ├── admin
 │       │   ├── dashboard.html (RESTAURANT DASHBOARD)
@@ -141,6 +145,8 @@ flask run --host=0.0.0.0
 ├── settings.toml (APP SETTINGS)
 └── README.md
 ```
+
+I followed Flask's factory architecture (see more in documentation)
 
 ## License 
 
