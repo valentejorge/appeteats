@@ -1,5 +1,5 @@
 # AppetiEats
-#### Video Demo: <URL>
+#### Video Demo: https://www.youtube.com/watch?v=ulIYjXS80oE
 #### Description: ApppetiEats is an Online Delivery Web Application that simplifies the gastronomic experience by allowing restaurants to display their menus and allowing their customers to place orders in an easy and intuitive way.
 
 <img src="https://github.com/valentejorge/appetieats/blob/master/logo.png" alt="Harvard Logo" width="700"/>
@@ -55,10 +55,14 @@ flask run --host=0.0.0.0
 ## Features
 
 - **Restaurant Registration**: Restaurants can sign up and create accounts to showcase their menus.
+- **Secure Passwords Storage**: Passwords are storage using hash and salt approach, following the good pratices of security information.
 - **Menu Management**: Restaurants can add, edit, or remove items from their menus through an intuitive dashboard.
+- **Dishes Images**: Restaurants can put images for they dishes, and rescale before upload images.
 - **Customer Orders**: Customers can access a restaurant menus, place orders, and track their order status in real-time.
 - **User Authentication**: Secure user authentication for both restaurants and customers.
 - **Order History**: Customers and restaurants can view their order history.
+- **Qr Code Generator**: Restaurants can generate a qr code that directs costumers to the restaurant's landing page.
+- **Responsive Design**: The application was developed so that the user has the best use, both on mobile devices and desktops
 
 ## Project Structure
 
