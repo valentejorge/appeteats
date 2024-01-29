@@ -14,32 +14,27 @@ Images Resources:
     Graphics Source: https://github.com/twitter/twemoji/blob/master/assets/svg/1f35d.svg
     Graphics License: CC-BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
 
-2.  Image Name: Spaghetti
+2.  Image Name: Phone
     Image Title: Free Flying iPhone Mockup (PSD)
     Image Path: /appetieats/appetieats/static/assets/img/fly_phone.png
     Source: https://unblast.com/free-flying-iphone-mockup-psd/
 
-3.  Image Name: Spaghetti
-    Image Title: Free Flying iPhone Mockup (PSD)
-    Image Path: /appetieats/appetieats/static/assets/img/fly_phone.png
-    Source: https://unblast.com/free-flying-iphone-mockup-psd/
-
-4.  Image Name: Cooking
+3.  Image Name: Cooking
     Image Path: /appetieats/appetieats/static/assets/img/undraw_cooking_p7m1.svg
     Source: https://undraw.co/search
     Query: cooking
 
-5.  Image Name: Pizza Sharing
+4.  Image Name: Pizza Sharing
     Image Path: /appetieats/appetieats/static/assets/img/undraw_pizza_sharing_wxop.svg
     Source: https://undraw.co/search
     Query: pizza
 
-6.  Image Name: Void
+5.  Image Name: Void
     Image Path: /appetieats/appetieats/static/assets/img/undraw_void_-3-ggu.svg
     Source: https://undraw.co/search
     Query: void
 
-7.  Image Name: Welcome Cats
+6.  Image Name: Welcome Cats
     Image Path: /appetieats/appetieats/static/assets/img/undraw_welcome_cats_thqn.svg
     Source: https://undraw.co/search
     Query: welcome
