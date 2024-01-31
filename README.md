@@ -146,7 +146,7 @@ flask run --host=0.0.0.0
 └── README.md
 ```
 
-I followed Flask's factory architecture (see more in documentation)[https://flask.palletsprojects.com/en/3.0.x/patterns/appfactories/]
+I followed Flask's factory architecture [(see more in documentation)](https://flask.palletsprojects.com/en/3.0.x/patterns/appfactories/)
 
 ## License 
 
