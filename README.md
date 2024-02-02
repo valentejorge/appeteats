@@ -147,7 +147,7 @@ flask run --host=0.0.0.0
 └── README.md
 ```
 
-I followed Flask's factory architecture [(see more in documentation)](https://flask.palletsprojects.com/en/3.0.x/patterns/appfactories/)
+I followed Flask's factory architecture [(see more in documentation)](https://flask.palletsprojects.com/en/3.0.x/patterns/appfactories/) so I modularized my project, because after working on it a little and seeing that there were already too many lines and I couldn't find it, it became very difficult to make any progress, as I would first need to understand where things were and then implement a new functionality.
 
 ## License 
 
