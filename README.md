@@ -140,6 +140,7 @@ flask run --host=0.0.0.0
 │       └── menu
 │           └── ...
 ├── instance (FLASK INSTANCE)
+│   ├── test.db
 │   └── database.db
 ├── LICENSE
 ├── settings.toml (APP SETTINGS)
