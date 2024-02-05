@@ -151,6 +151,7 @@ I followed Flask's factory architecture [(see more in documentation)](https://fl
 
 So I searched a lot for how to format in the best way, always trying to apply good practices (most of the time), I learned a lot about architecture and design patterns, [(this video helped me a lot with that, thank you Bruno Rocha)](https://www.youtube.com/watch?v=-qWySnuoaTM), and after modularizing you can notice that inside the module there are 5 directories: extensions, routes, statics, tests, models and in the root you can find the canonical flask files such as app.py, requirements.py...
 
+### Extensions
 
 ## License 
 
