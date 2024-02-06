@@ -5,7 +5,7 @@ from flask_session import Session
 def init_app(app):
     """
     Ensure templates are auto-reloaded
-    and config session to use filesystem 
+    and config session to use filesystem
     (instead of signed cookies)
     """
 
