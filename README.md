@@ -176,6 +176,12 @@ In the ext dir we can find the:
 .
     - `register_tools.py` as responsible for provide tools for register and login the users.
 
+    - `sample_data.json` as responsible for provide a json data for populate a database with flask commands such `flask restart-db`.
+
+    - `test_sample_data.json` as responsible for provide a json file only for tests enviroment.
+
+    - `validate_inputs.py` as responsible for provide tools for check user inputs and if it is incorrect returns specific error message.
+
 
 ## License 
 
