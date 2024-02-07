@@ -166,15 +166,15 @@ In the ext dir we can find the:
 
 - `/helpers` initialy was a unique file call `helper.py` but, because the i needed more help, it became a dir with multiple files inside divided by domain, so inside of `/helpers` we can find:
 
- - `cache_images.py` as responsible for verify if image exists in cache, and create the cache of image if not exists
+    - `cache_images.py` as responsible for verify if image exists in cache, and create the cache of image if not exists.
 
- - `db_tools.py` as responsible for provide tools for manipulate database and make more easy and reusable many commands of database
+    - `db_tools.py` as responsible for provide tools for manipulate database and make more easy and reusable many commands of database.
 
- - `format_data.py` as responsible for format the data from database, is very usefull and makes it easier to know if the restaurant is open
+    - `format_data.py` as responsible for format the data from database, is very usefull and makes it easier to know if the restaurant is open.
 
- - `get_inputs.py` as responsible for provide tools for get inputs from user and make more easy and reusable many functions for get data
-
- - `register_tools.py` as responsible for 
+    - `get_inputs.py` as responsible for provide tools for get inputs from user and make more easy and reusable many functions for get data
+.
+    - `register_tools.py` as responsible for provide tools for register and login the users.
 
 
 ## License 
