@@ -151,8 +151,8 @@ I followed Flask's factory architecture [(see more in documentation)](https://fl
 
 So I searched a lot for how to format in the best way, always trying to apply good practices (most of the time), I learned a lot about architecture and design patterns, [(this video helped me a lot with that, thank you Bruno Rocha)](https://www.youtube.com/watch?v=-qWySnuoaTM), and after modularizing you can notice that inside the module there are 5 directories: extensions, routes, statics, tests, models and in the root you can find the canonical flask files such as app.py, requirements.py...
 
-### Extensions 
-In the extensions we can find the:
+### Extensions (/ext)
+In the ext dir we can find the:
 
 - `comands.py` as responsible for flask commands, such create, restart and drop database, and populate database from a json file.
 
@@ -163,6 +163,18 @@ In the extensions we can find the:
 - `socketio.py` as responsible for configure the webhooks and rooms using [Flask SocketIO](https://flask-socketio.readthedocs.io/en/latest/getting_started.html#rooms)
 
 - `sesssions.py` as responsible for configure the sessions
+
+- `/helpers` initialy was a unique file call `helper.py` but, because the i needed more help, it became a dir with multiple files inside divided by domain, so inside of `/helpers` we can find:
+
+ - `cache_images.py` as responsible for verify if image exists in cache, and create the cache of image if not exists
+
+ - `db_tools.py` as responsible for provide tools for manipulate database and make more easy and reusable many commands of database
+
+ - `format_data.py` as responsible for format the data from database, is very usefull and makes it easier to know if the restaurant is open
+
+ - `get_inputs.py` as responsible for provide tools for get inputs from user and make more easy and reusable many functions for get data
+
+ - `register_tools.py` as responsible for 
 
 
 ## License 
