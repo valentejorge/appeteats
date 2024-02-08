@@ -199,7 +199,9 @@ In the routes dir we can find files of flask routes divides for domains and resp
 
 ### Static Files (/static)
 
-In the static dir we can find the static files such css, javascript, images, sounds...
+In the static directory we can find static files such as css, javascript, images, sounds and I want to highlight some such as:
+
+- `/static/js/menu/shopping.js` as a file responsible for everything related to the restaurant menu purchase page, to dynamically obtain data from an 'api' that returns restaurant data, build the page with this data, dividing the products into their respective categories, updating the cart items and searching for products in the menu.
 
 ## License 
 
