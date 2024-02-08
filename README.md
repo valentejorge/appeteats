@@ -183,6 +183,24 @@ In the ext dir we can find the:
     - `validate_inputs.py` as responsible for provide tools for check user inputs and if it is incorrect returns specific error message.
 
 
+### Routes (/routes)
+
+In the routes dir we can find files of flask routes divides for domains and responsability, such:
+
+- `auth.py` for routes of authentication, such `/login/customer` or `/register/restaurant`...
+
+- `customer.py` for routes of customer pages, such `/customer/change-password`.
+
+- `main.py` for commom routes of application, such landing page and a error.
+
+- `menu.py` for routes of landing page and menu page of restaurants.
+
+- `/admin` as a subdirectory with `admin.py` and `settings.py` for routes to admin stuff and restaurant settings respectively.
+
+### Static Files (/static)
+
+In the static dir we can find the static files such css, javascript, images, sounds...
+
 ## License 
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
