@@ -201,8 +201,15 @@ In the routes dir we can find files of flask routes divides for domains and resp
 
 In the static directory we can find static files such as css, javascript, images, sounds and I want to highlight some such as:
 
-- `/static/js/menu/shopping.js` as a file responsible for everything related to the restaurant menu purchase page, to dynamically obtain data from an 'api' that returns restaurant data, build the page with this data, dividing the products into their respective categories, updating the cart items and searching for products in the menu.
+- `/static/js/menu/shopping.js` as a file responsible for everything related to the restaurant menu purchase page, to dynamically obtain data from an api that returns restaurant data, build the page with this data, dividing the products into their respective categories, updating the cart items and searching for products in the menu.
 
+- `/static/js/menu/landing.js` as file responsible for get the data from an api located at `/[restaurant_name]/landing/data` and display if the restaurant is open, all restaurant's opening hours, and redirect to restaurant menu page.
+
+### Templates (/templates)
+
+In the template directory we can find all the templates that will be displayed when accessing most routes, I worked hard and dedicated myself as much as I could to make the templates look pleasant and have a great UX, and responsive to the most varied screen sizes. And here are some examples:
+
+---
 ## License 
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
