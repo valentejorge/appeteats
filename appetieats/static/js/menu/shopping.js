@@ -85,7 +85,7 @@ function productConstructor(productId, productName, productPrice, productImage) 
 }
 
 function addToCart(productId) {
-    event.stopPropagation(); // for not showProductDetails too
+    event.preventDefault(); // for not showProductDetails too
     const product = products.find(p => p.id === productId);
     if (!product) {
         console.error('Product not found.');
