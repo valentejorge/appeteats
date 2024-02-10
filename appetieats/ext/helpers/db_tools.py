@@ -21,7 +21,7 @@ def update_user_password(user_id, new_password):
 
 def update_restaurant_info(restaraunt_id, new_restaurant_info):
     """update restaurants info"""
-    restaurant = CustomersData.query.filter_by(user_id=restaraunt_id).first()
+    restaurant = RestaurantsData.query.filter_by(user_id=restaraunt_id).first()
 
     restaurant.name = new_restaurant_info["name"]
     restaurant.address = new_restaurant_info["address"]
