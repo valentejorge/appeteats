@@ -212,6 +212,9 @@ In the template directory we can find all the templates that will be displayed w
 ![plot](./sources/register.gif)
 the register page
 
+![plot](./sources/order.gif)
+the restaurant page, the orders page, and the dashboard page and their responsiveness
+
 ---
 ## License 
 
