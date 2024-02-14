@@ -209,11 +209,11 @@ In the static directory we can find static files such as css, javascript, images
 
 In the template directory we can find all the templates that will be displayed when accessing most routes, I worked hard and dedicated myself as much as I could to make the templates look pleasant and have a great UX, and responsive to the most varied screen sizes. And here are some examples:
 
-![plot](./sources/register.gif)
+<img src="./sources/register.gif" width="100%"/>
 the register page
 
-![plot](./sources/order.gif)
-the restaurant page, the orders page, and the dashboard page and their responsiveness
+<img src="./sources/order.gif" width="100%"/>
+the restaurant page, the orders page, and the dashboard page and their responsiveness and the real time approach
 
 ---
 ## License 
