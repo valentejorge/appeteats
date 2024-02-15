@@ -5,9 +5,9 @@ from flask import (
 
 from flask_socketio import emit
 
-from appetieats.ext.helpers.register_tools import login_required
-from appetieats.models import Orders
-from appetieats.ext.helpers.db_tools import (
+from appeteats.ext.helpers.register_tools import login_required
+from appeteats.models import Orders
+from appeteats.ext.helpers.db_tools import (
     get_orders, orders_to_dict, update_product_status
 )
 

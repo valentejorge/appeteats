@@ -2,18 +2,18 @@
 from flask import (
         Blueprint, render_template, request, redirect, flash, session, abort
 )
-from appetieats.models import Categories, Products, RestaurantsData
-from appetieats.ext.database import db
+from appeteats.models import Categories, Products, RestaurantsData
+from appeteats.ext.database import db
 
-from appetieats.ext.helpers.register_tools import login_required
-from appetieats.ext.helpers.get_inputs import (
+from appeteats.ext.helpers.register_tools import login_required
+from appeteats.ext.helpers.get_inputs import (
         get_product_data_from_request, get_product_image, get_data_from_form
 )
-from appetieats.ext.helpers.validate_inputs import (
+from appeteats.ext.helpers.validate_inputs import (
         validate_product_data, validate_product_image, validate_passwords,
         prevents_empty_fields
 )
-from appetieats.ext.helpers.db_tools import (
+from appeteats.ext.helpers.db_tools import (
         add_new_product, update_product_data, update_user_password,
         update_restaurant_info
 )

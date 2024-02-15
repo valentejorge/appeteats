@@ -1,5 +1,5 @@
-from appetieats.models import Users
-from appetieats.ext.commands import hello_commands
+from appeteats.models import Users
+from appeteats.ext.commands import hello_commands
 
 
 def test_home(client):

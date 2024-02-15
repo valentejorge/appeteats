@@ -4,8 +4,8 @@ from flask import session
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash
 from flask_socketio import emit
-from appetieats.ext.database import db
-from appetieats.models import (
+from appeteats.ext.database import db
+from appeteats.models import (
         Products, ProductImages, Orders, OrderItems, CustomersData, Users,
         RestaurantsData
 )

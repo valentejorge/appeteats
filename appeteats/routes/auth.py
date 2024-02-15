@@ -1,13 +1,13 @@
 """Module for auth routes"""
 from flask import Blueprint, render_template, request, redirect, session
-from appetieats.ext.helpers.register_tools import (
+from appeteats.ext.helpers.register_tools import (
         register_restaurant_user, log_user, register_customer_user
 )
-from appetieats.ext.helpers.get_inputs import (
+from appeteats.ext.helpers.get_inputs import (
         get_restaurant_user_data, get_opening_hours, get_customer_user_data,
         get_data_from_form
 )
-from appetieats.ext.helpers.validate_inputs import (
+from appeteats.ext.helpers.validate_inputs import (
         validate_user_register_data, validate_credentials, validate_user_data,
         validate_user_url, validate_opening_time
 )

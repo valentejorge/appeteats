@@ -3,8 +3,8 @@ import os
 import json
 from datetime import datetime
 from werkzeug.security import generate_password_hash
-from appetieats.ext.database import db
-from appetieats.models import (
+from appeteats.ext.database import db
+from appeteats.models import (
         Users, RestaurantsData, Categories, ProductImages, Products,
         CustomersData, RestaurantOpeningHours
 )
@@ -29,7 +29,7 @@ def populate_database_from_json(json_path):
     if json_path[0] == '.':
         path_context = '../'
     else:
-        path_context = 'appetieats/'
+        path_context = 'appeteats/'
 
     with open(json_path, "r", encoding="utf-8") as file:
         json_file = json.load(file)
@@ -101,7 +101,7 @@ def restart_db():
     drop_db()
     create_db()
 
-    # path = "appetieats/ext/helpers/sample_data.json"
+    # path = "appeteats/ext/helpers/sample_data.json"
     path = current_app.config.get("JSON_DATA_PATH")
     populate_database_from_json(path)
 

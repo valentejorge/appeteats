@@ -1,8 +1,8 @@
 import pytest
 
-from appetieats.app import create_app
-from appetieats.ext.commands import restart_db
-from appetieats.ext.database import db
+from appeteats.app import create_app
+from appeteats.ext.commands import restart_db
+from appeteats.ext.database import db
 
 
 @pytest.fixture(scope="session")

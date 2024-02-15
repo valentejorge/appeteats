@@ -1,5 +1,5 @@
 from flask import Flask
-from appetieats.ext import configuration
+from appeteats.ext import configuration
 
 
 def create_app(**config):

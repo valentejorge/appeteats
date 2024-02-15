@@ -1,6 +1,6 @@
 # AppetEats
 #### Video Demo: https://www.youtube.com/watch?v=ulIYjXS80oE
-#### Description: ApppetiEats is an Online Delivery Web Application that simplifies the gastronomic experience by allowing restaurants to display their menus and allowing their customers to place orders in an easy and intuitive way.
+#### Description: ApppetEats is an Online Delivery Web Application that simplifies the gastronomic experience by allowing restaurants to display their menus and allowing their customers to place orders in an easy and intuitive way.
 
 ![plot](./sources/logo.png)
 
@@ -16,14 +16,14 @@
 
 ## Installation
 
-To set up AppetiEats, follow these steps:
+To set up AppetEats, follow these steps:
 
 ```bash
 # Clone the repository
-git clone https://github.com/valentejorge/appetieats/
+git clone https://github.com/valentejorge/appeteats/
 
 # Navigate to the project directory
-cd AppetiEats
+cd appeteats
 
 # Install required dependencies
 pip install -r requirements.txt
@@ -69,7 +69,7 @@ flask run --host=0.0.0.0
 
 ```bash
 .
-├── appetieats (MAIN PACKAGE)
+├── appeteats (MAIN PACKAGE)
 │   ├── app.py (APP FACTORIES)
 │   ├── models.py (DATABASE MODELS)
 │   ├── requirements.py (APP REQUIREMENTS)

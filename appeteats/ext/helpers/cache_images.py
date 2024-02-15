@@ -1,12 +1,12 @@
 """Module to cache images from the database"""
 import os
-from appetieats.models import ProductImages
+from appeteats.models import ProductImages
 from flask import current_app
 
 
 def get_image(image_name, image_id):
     """put a image from db into a cache dir"""
-    # cache_dir_path = "appetieats/static/cache"
+    # cache_dir_path = "appeteats/static/cache"
     cache_dir_path = current_app.config.get("CACHE_PATH")
 
     print(cache_dir_path)

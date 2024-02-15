@@ -1,20 +1,20 @@
 [default]
 SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
 EXTENSIONS = [
-    "appetieats.ext.sesssion",
-    "appetieats.ext.database",
-    "appetieats.ext.commands",
-    "appetieats.ext.error",
-    "appetieats.ext.events",
-    "appetieats.routes.main",
-    "appetieats.routes.menu",
-    "appetieats.routes.auth",
-    "appetieats.routes.admin.admin",
-    "appetieats.routes.admin.settings",
-    "appetieats.routes.customer"
+    "appeteats.ext.sesssion",
+    "appeteats.ext.database",
+    "appeteats.ext.commands",
+    "appeteats.ext.error",
+    "appeteats.ext.events",
+    "appeteats.routes.main",
+    "appeteats.routes.menu",
+    "appeteats.routes.auth",
+    "appeteats.routes.admin.admin",
+    "appeteats.routes.admin.settings",
+    "appeteats.routes.customer"
 ]
-CACHE_PATH = 'appetieats/static/cache'
-JSON_DATA_PATH = 'appetieats/ext/helpers/sample_data.json'
+CACHE_PATH = 'appeteats/static/cache'
+JSON_DATA_PATH = 'appeteats/ext/helpers/sample_data.json'
 
 
 [testing]

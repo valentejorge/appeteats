@@ -3,8 +3,8 @@ from datetime import datetime
 from functools import wraps
 from werkzeug.security import generate_password_hash
 from flask import session, abort
-from appetieats.ext.database import db
-from appetieats.models import (
+from appeteats.ext.database import db
+from appeteats.models import (
         Users, RestaurantsData, RestaurantOpeningHours, CustomersData
 )
 

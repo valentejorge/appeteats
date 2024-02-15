@@ -4,16 +4,16 @@ from flask import (
         Blueprint, render_template, jsonify, request, flash, redirect,
         session, abort
 )
-from appetieats.models import (
+from appeteats.models import (
         RestaurantsData, Users, Categories, Products, ProductImages,
         RestaurantOpeningHours
 )
-from appetieats.ext.helpers.validate_inputs import (
+from appeteats.ext.helpers.validate_inputs import (
         validate_cart, validate_user_account
 )
-from appetieats.ext.helpers.cache_images import get_image
-from appetieats.ext.helpers.db_tools import add_new_order
-from appetieats.ext.helpers.format_data import (
+from appeteats.ext.helpers.cache_images import get_image
+from appeteats.ext.helpers.db_tools import add_new_order
+from appeteats.ext.helpers.format_data import (
         format_opening_hours, restaurant_is_open
 )
 

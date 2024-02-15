@@ -1,7 +1,7 @@
 """Module providing a tools for validate user inputs"""
 from flask import abort, session
 from werkzeug.security import check_password_hash
-from appetieats.models import Categories, Users, RestaurantsData
+from appeteats.models import Categories, Users, RestaurantsData
 
 
 def validate_product_data(product_data):
