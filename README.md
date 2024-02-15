@@ -219,6 +219,10 @@ In the template directory we can find all the templates that will be displayed w
 
 <img src="./sources/order.gif" width="100%"/>
 
+3. *the add products page*
+
+<img src="./sources/add.gif" width="100%"/>
+
 ---
 ## License 
 
