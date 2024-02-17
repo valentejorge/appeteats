@@ -32,7 +32,7 @@
 }
 
 .button-s {
-background-color: var(--main-white);
+    background-color: var(--main-white);
     color: var(--main-red) !important;
     border-radius: 10px;
     border-color: var(--main-red);
@@ -75,7 +75,6 @@ background-color: var(--main-white);
     align-items: center;
     justify-content: center;
     justify-content: space-between;
-    padding: 0px 10%;
 }
 
 .logo {
@@ -112,7 +111,6 @@ background-color: var(--main-white);
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0px 10%;
 }
 
 .feature {
@@ -134,6 +132,28 @@ background-color: var(--main-white);
     color: #f10000 !important;
 }
 
+.session {
+    padding: 0px 10%;
+}
+
+.about {
+    color: var(--main-red);
+}
+
+.faq {
+    border: 1px solid rgba(255, 0, 0, .250);
+    color: var(--main-red);
+}
+
+.faq:hover {
+    color: var(--main-red);
+    background-color: rgba(255, 0, 0, .05);
+}
+
+.faq:active {
+    color: var(--main-red);
+    background-color: rgba(255, 0, 0, .05);
+}
 
 @media (max-width:768px) {
     .home {
