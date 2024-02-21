@@ -34,7 +34,6 @@
                     <ul class="navbar-nav ms-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#prices">Prices</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link btn button login" href="/login">Login</a></li>
                     </ul>
@@ -90,7 +89,7 @@
         </div>
         </session>
 
-        <session id="about" class="about mt-5" style="display: block; width: 50%; margin: auto;">
+        <session id="about" class="about mt-5">
             <h1 class="h1">About</h1>
             <p class="mb-4">
             ApppetEats is an Online Delivery Web Application that simplifies the gastronomic experience by allowing restaurants to display their menus and allowing their customers to place orders in an easy and intuitive way.
@@ -114,6 +113,19 @@
             </div>
         </session>
 
+        <session id="cta" class="cta mt-5">
+            <div class="cta-content">
+                <h1 class="h1">Elevate Your Customer Experience Now!</h1>
+                <p class="mb-2">
+                Take your customer journey to the next level with AppetEats. Discover exclusive features and make the most out of every interaction.
+                </p>
+                <div>
+                    <a href="/python-pizza" class="btn button-s">Try it</a>
+                    <a href="/register" class="btn button">Join us</a>
+                </div>
+            </div>
+        </session>
+
 
 
 <!--
@@ -121,7 +133,7 @@
             {% block main %}{% endblock %}
         </main>
 -->
-        <footer class="mb-3 mt-3 small text-center text-muted">
+        <footer class="mb-3 mt-5 small text-center text-muted">
             Powered by <a href="https://github.com/valentejorge/">valentejorge</a>
         </footer>
     </body>
