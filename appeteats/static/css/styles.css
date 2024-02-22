@@ -138,6 +138,9 @@
 
 .about {
     color: var(--main-red);
+    display: block;
+    width: 40%;
+    margin: auto;
 }
 
 .faq {
@@ -153,6 +156,20 @@
 .faq:active {
     color: var(--main-red);
     background-color: rgba(255, 0, 0, .05);
+}
+
+.cta {
+    color: var(--main-red);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cta-content {
+    width: 80%;
 }
 
 @media (max-width:768px) {
@@ -186,8 +203,8 @@
     }
 
     .login {
-        padding: 0.25rem 0.25rem !important;
-        margin-left: -0.25rem;
+        padding: 0.50rem 0.50rem !important;
+        margin-left: 0.25rem;
     }
 
     .features {
@@ -205,5 +222,15 @@
         text-align: justify;
         max-width: 95%;
         width: 95%;
+    }
+    .about {
+        width: 80%;
+    }
+}
+
+@media (max-width:575px) {
+    .login {
+        padding: 0.25rem 0.25rem !important;
+        margin-left: -0.25rem;
     }
 }
