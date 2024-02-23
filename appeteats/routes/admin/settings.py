@@ -111,6 +111,7 @@ def edit_product(product_id):
 
         update_product_data(product_data, product_id)
 
+        flash("Edited", "success")
         return redirect(f"/admin/settings/edit-menu/{product_id}")
 
     user_id = session.get("user_id")
