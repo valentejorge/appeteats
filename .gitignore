@@ -1,4 +1,4 @@
-/appeteats/static/cache/
+/appeteats/static/cache/*.png
 /flask_session/
 /tests/flask_session/
 appeteats/tests/flask_session/
